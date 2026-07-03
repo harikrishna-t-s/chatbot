@@ -1,0 +1,1112 @@
+/* ==========================================================================
+   COLOR PALETTE & FUNDAMENTAL DESIGN SYSTEM (Stanford-Inspired)
+   ========================================================================== */
+:root {
+    --stanford-cardinal: #8C1515;
+    --stanford-dark-cardinal: #5c0f0f;
+    --warm-white: #fcfaf8;
+    --card-white: #ffffff;
+    --dark-charcoal: #2e2e2e;
+    --warm-gray: #f3f0ec;
+    --border-gray: #e6e0d8;
+    --soft-green: #28a745;
+    --gold-progress: #d2a100;
+    --font-serif: "Source Serif Pro", Georgia, Times, serif;
+    --font-sans: "Source Sans Pro", Helvetica, Arial, sans-serif;
+}
+
+/* Base Document Overrides */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--warm-white);
+    color: var(--dark-charcoal);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    padding-top: 80px; /* Header spacing offset */
+}
+
+/* Global Sticky Header Elements */
+.global-header {
+    background-color: var(--card-white);
+    border-bottom: 2px solid var(--border-gray);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-icon {
+    font-size: 2rem;
+}
+
+.logo-text h1 {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    color: var(--stanford-cardinal);
+    font-weight: 800;
+}
+
+.logo-text p {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #6e6e6e;
+}
+
+/* Concept Search */
+.search-container input {
+    padding: 8px 16px;
+    border: 1px solid var(--border-gray);
+    border-radius: 4px;
+    width: 280px;
+    background-color: var(--warm-white);
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.search-container input:focus {
+    outline: none;
+    border-color: var(--stanford-cardinal);
+    background-color: var(--card-white);
+}
+
+/* User Profile Statistics */
+.user-stats {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #8e8e8e;
+    letter-spacing: 0.5px;
+}
+
+.stat-value {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--dark-charcoal);
+}
+
+.stat-sub {
+    font-size: 0.7rem;
+    color: var(--stanford-cardinal);
+    font-weight: bold;
+}
+
+.xp-bar-container {
+    width: 100px;
+    height: 6px;
+    background-color: var(--warm-gray);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 4px;
+}
+
+.xp-progress-bar {
+    height: 100%;
+    background-color: var(--gold-progress);
+    width: 0%;
+    transition: width 0.4s ease;
+}
+
+.scroll-progress-container {
+    width: 100%;
+    height: 4px;
+    background-color: transparent;
+}
+
+.scroll-indicator-bar {
+    height: 100%;
+    background-color: var(--stanford-cardinal);
+    width: 0%;
+}
+
+/* ==========================================================================
+   LAYOUT ARCHITECTURE (Split Sidebar and Stream)
+   ========================================================================== */
+.main-layout {
+    max-width: 1400px;
+    margin: 20px auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 32px;
+}
+
+/* Sticky Sidebar */
+.sidebar-nav {
+    position: sticky;
+    top: 100px;
+    height: calc(100vh - 140px);
+    overflow-y: auto;
+    background-color: var(--card-white);
+    border: 1px solid var(--border-gray);
+    border-radius: 6px;
+    padding: 20px;
+}
+
+.sidebar-section {
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--warm-gray);
+}
+
+.sidebar-section h3, .world-links-nav h3 {
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+    color: var(--stanford-cardinal);
+}
+
+/* Radial Progress Overlay */
+.overall-progress-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.progress-circle-radial {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, white 79%, transparent 80% 100%),
+                conic-gradient(var(--stanford-cardinal) 0%, var(--warm-gray) 0%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.9rem;
+}
+
+#progress-text-summary {
+    font-size: 0.85rem;
+    color: #5e5e5e;
+}
+
+/* Learning Map Links */
+.world-links-nav ul {
+    list-style: none;
+}
+
+.world-nav-item {
+    padding: 8px 12px;
+    margin-bottom: 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.88rem;
+    display: flex;
+    justify-content: space-between;
+    transition: all 0.2s ease;
+    background-color: var(--warm-white);
+    border-left: 3px solid #ccc;
+}
+
+.world-nav-item.unlocked {
+    border-left-color: var(--gold-progress);
+    font-weight: 600;
+}
+
+.world-nav-item.active-target {
+    background-color: var(--stanford-cardinal);
+    color: var(--card-white);
+    border-left-color: var(--card-white);
+}
+
+.world-nav-item.locked {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Skill Tree Widgets */
+.skill-tree-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.skill-node {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    background-color: var(--warm-gray);
+    border: 1px solid var(--border-gray);
+    border-radius: 4px;
+    color: #7e7e7e;
+}
+
+.skill-node.active {
+    background-color: #e8f5e9;
+    border-color: var(--soft-green);
+    color: var(--soft-green);
+    font-weight: bold;
+}
+
+/* ==========================================================================
+   CONTENT STREAM & PROGRESSIVE CARDS
+   ========================================================================== */
+.content-stream {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding-bottom: 100px;
+}
+
+.world-card {
+    background-color: var(--card-white);
+    border: 1px solid var(--border-gray);
+    border-radius: 8px;
+    padding: 32px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+}
+
+.world-card.locked {
+    opacity: 0.35;
+    pointer-events: none;
+    transform: scale(0.99);
+}
+
+.world-header {
+    border-bottom: 2px solid var(--warm-gray);
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+}
+
+.world-tag {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: var(--stanford-cardinal);
+    letter-spacing: 1px;
+}
+
+.world-header h2 {
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    color: var(--dark-charcoal);
+    margin-top: 4px;
+}
+
+/* Mission Brief Blocks */
+.mission-brief {
+    background-color: var(--warm-gray);
+    border-left: 4px solid var(--stanford-cardinal);
+    padding: 16px;
+    border-radius: 0 4px 4px 0;
+    margin-bottom: 24px;
+}
+
+.mission-brief h4 {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: var(--stanford-cardinal);
+    margin-bottom: 6px;
+}
+
+/* Learning Objectives Block */
+.learning-objectives {
+    margin-bottom: 24px;
+}
+
+.learning-objectives h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.learning-objectives ul {
+    margin-left: 20px;
+    font-size: 0.95rem;
+}
+
+/* Interactive Explanations & Content Styles */
+.interactive-content p {
+    font-size: 1.05rem;
+    margin-bottom: 16px;
+    color: #3a3a3a;
+}
+
+.analogy-box {
+    background-color: #faf8f5;
+    border: 1px dashed #d2c8bc;
+    padding: 16px;
+    border-radius: 6px;
+    margin: 20px 0;
+}
+
+.analogy-box h5 {
+    font-family: var(--font-serif);
+    color: #7c5329;
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+}
+
+.chatbot-connection {
+    background-color: #f4f7f9;
+    border-left: 4px solid #007cba;
+    padding: 12px 16px;
+    margin: 20px 0;
+    border-radius: 0 4px 4px 0;
+}
+
+.chatbot-connection h5 {
+    color: #005a87;
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+}
+
+/* Academic Tables */
+.academic-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 0.95rem;
+}
+
+.academic-table th, .academic-table td {
+    border: 1px solid var(--border-gray);
+    padding: 12px;
+    text-align: left;
+}
+
+.academic-table th {
+    background-color: var(--warm-gray);
+    font-weight: 700;
+}
+
+/* Code Syntax Render Blocks */
+.code-view {
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+    padding: 16px;
+    border-radius: 6px;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 0.88rem;
+    overflow-x: auto;
+    margin: 16px 0;
+}
+
+/* Blockquotes */
+blockquote {
+    border-left: 4px solid var(--stanford-cardinal);
+    padding-left: 16px;
+    font-style: italic;
+    color: #555;
+    margin: 20px 0;
+}
+
+/* Inline Graphic Elements */
+.diagram-container {
+    text-align: center;
+    background: white;
+    border: 1px solid var(--border-gray);
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 6px;
+}
+
+.inline-svg-diagram {
+    max-width: 100%;
+    height: auto;
+}
+
+.diagram-caption {
+    font-size: 0.8rem;
+    color: #6e6e6e;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+/* ==========================================================================
+   INTERACTIVE WIDGET COMPONENTS
+   ========================================================================== */
+.interactive-widget {
+    background-color: var(--warm-white);
+    border: 1px solid var(--border-gray);
+    border-radius: 6px;
+    padding: 20px;
+    margin: 24px 0;
+}
+
+.interactive-widget h4 {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    margin-bottom: 12px;
+}
+
+/* Buttons */
+.action-btn {
+    background-color: var(--stanford-cardinal);
+    color: var(--card-white);
+    border: none;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.action-btn:hover {
+    background-color: var(--stanford-dark-cardinal);
+}
+
+.action-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.action-btn.secondary {
+    background-color: transparent;
+    color: var(--stanford-cardinal);
+    border: 1px solid var(--stanford-cardinal);
+}
+
+.action-btn.secondary:hover {
+    background-color: var(--warm-gray);
+}
+
+/* Matching Drag Zones */
+.matching-container {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.match-card {
+    background-color: var(--card-white);
+    border: 1px solid #b5b5b5;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: grab;
+    font-size: 0.88rem;
+    user-select: none;
+}
+
+.drop-zones {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 16px;
+}
+
+.drop-zone {
+    flex: 1;
+    min-height: 80px;
+    background-color: #f0ede9;
+    border: 2px dashed #bbb;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    gap: 6px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.drop-zone.hovered {
+    background-color: #e3ded8;
+    border-color: var(--stanford-cardinal);
+}
+
+/* Sortable lists */
+.sortable-list {
+    list-style: none;
+    margin-bottom: 16px;
+}
+
+.sortable-list li {
+    background-color: var(--card-white);
+    border: 1px solid var(--border-gray);
+    padding: 10px 14px;
+    margin-bottom: 6px;
+    border-radius: 4px;
+    cursor: grab;
+    font-size: 0.9rem;
+}
+
+/* Visual Sandbox Layer Widget */
+.sandbox-controls {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+
+.sandbox-preview-box {
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+/* Condition classes injected by JS */
+.sandbox-preview-box.unstyled {
+    background-color: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+}
+.sandbox-preview-box.unstyled .dummy-chat-window {
+    background: transparent !important;
+    border: none !important;
+    color: inherit !important;
+}
+.sandbox-preview-box.unstyled button {
+    background: none !important;
+    color: inherit !important;
+    border: 1px solid black !important;
+    padding: 0 !important;
+}
+
+.dummy-chat-window {
+    background: #f0f0f0;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.sandbox-preview-box.styled .dummy-chat-window {
+    background: #e8f0fe;
+    border-left: 4px solid var(--stanford-cardinal);
+}
+
+/* Flashcards */
+.flashcard {
+    width: 280px;
+    height: 140px;
+    perspective: 1000px;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+.flashcard-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    border: 1px solid var(--border-gray);
+    border-radius: 6px;
+}
+
+.flashcard.flipped .flashcard-inner {
+    transform: rotateY(180deg);
+}
+
+.flashcard-front, .flashcard-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.flashcard-front {
+    background-color: var(--card-white);
+    color: var(--dark-charcoal);
+}
+
+.flashcard-back {
+    background-color: var(--stanford-cardinal);
+    color: white;
+    transform: rotateY(180deg);
+    font-size: 0.85rem;
+    font-weight: 400;
+}
+
+/* API Flow Nodes */
+.flow-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.flow-node {
+    background-color: var(--card-white);
+    border: 1px solid var(--border-gray);
+    padding: 10px;
+    border-radius: 4px;
+    cursor: grab;
+    font-size: 0.88rem;
+}
+
+/* True False Elements */
+.tf-question {
+    margin-top: 10px;
+}
+
+.tf-btn {
+    padding: 6px 16px;
+    margin-right: 8px;
+    border: 1px solid var(--border-gray);
+    background-color: white;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.tf-btn.selected-true {
+    background-color: #ffebee;
+    border-color: var(--stanford-cardinal);
+}
+
+.tf-btn.selected-false {
+    background-color: #e8f5e9;
+    border-color: var(--soft-green);
+}
+
+.tf-feedback {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+/* Temperature Engine Output display box */
+.sentence-prediction-box {
+    background: #2e2e2e;
+    color: #00ff66;
+    padding: 12px;
+    border-radius: 4px;
+    font-family: monospace;
+    margin-top: 12px;
+}
+
+/* Accordions for File system display */
+.accordion-item {
+    border: 1px solid var(--border-gray);
+    border-radius: 4px;
+    margin-bottom: 8px;
+    overflow: hidden;
+}
+
+.accordion-trigger {
+    width: 100%;
+    text-align: left;
+    padding: 12px 16px;
+    background-color: var(--warm-gray);
+    border: none;
+    font-size: 0.95rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: var(--dark-charcoal);
+    display: flex;
+    justify-content: space-between;
+}
+
+.accordion-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: white;
+    padding: 0 16px;
+}
+
+/* Pipeline Step Markers */
+.pipeline-track {
+    margin-top: 16px;
+    padding: 12px;
+    background-color: #eef2f5;
+    border-radius: 4px;
+    font-family: monospace;
+    display: flex;
+    gap: 8px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.pipe-step {
+    padding: 4px 8px;
+    background-color: white;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    transition: all 0.3s ease;
+}
+
+.pipe-step.active-node {
+    background-color: var(--stanford-cardinal);
+    color: white;
+    border-color: var(--stanford-cardinal);
+    transform: scale(1.05);
+}
+
+/* Timeline stoppages */
+.roadmap-timeline {
+    border-left: 2px solid var(--border-gray);
+    padding-left: 20px;
+    margin: 20px 0;
+}
+
+.timeline-stop {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.timeline-stop::before {
+    content: "";
+    position: absolute;
+    left: -27px;
+    top: 4px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--stanford-cardinal);
+}
+
+/* Certificate Layout block */
+.certificate-box {
+    border: 4px double var(--border-gray);
+    padding: 30px;
+    background-color: #fffcf7;
+    text-align: center;
+    margin-top: 32px;
+    border-radius: 4px;
+    transition: opacity 0.3s ease;
+}
+
+.certificate-box.locked-cert {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.cert-signature-line {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    border-top: 1px solid #ccc;
+    padding-top: 8px;
+    font-size: 0.8rem;
+}
+
+/* ==========================================================================
+   QUIZ COMPONENT ENGINE BLOCKS
+   ========================================================================== */
+.quiz-block {
+    margin-top: 32px;
+    border-top: 2px dashed var(--border-gray);
+    padding-top: 24px;
+}
+
+.quiz-block h3 {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    color: var(--dark-charcoal);
+    margin-bottom: 12px;
+}
+
+.quiz-question {
+    background-color: #fafafa;
+    padding: 16px;
+    border: 1px solid var(--border-gray);
+    border-radius: 6px;
+    margin-bottom: 16px;
+}
+
+.quiz-question p {
+    font-size: 1rem;
+    margin-bottom: 12px;
+}
+
+.quiz-option {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+
+.quiz-option input {
+    margin-right: 8px;
+}
+
+.submit-quiz-btn {
+    background-color: var(--dark-charcoal);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.submit-quiz-btn:hover {
+    background-color: black;
+}
+
+.quiz-feedback {
+    margin-top: 12px;
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.quiz-feedback.correct {
+    background-color: #e8f5e9;
+    color: var(--soft-green);
+    border: 1px solid #c8e6c9;
+}
+
+.quiz-feedback.incorrect {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #ffcdd2;
+}
+
+/* Global Floating Toast Alert */
+.achievement-toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: var(--dark-charcoal);
+    color: white;
+    padding: 16px 24px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 2000;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s;
+}
+
+.achievement-toast.hidden {
+    opacity: 0;
+    transform: translateY(50px);
+    pointer-events: none;
+}
+
+.toast-icon {
+    font-size: 1.5rem;
+}
+
+.toast-title {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--gold-progress);
+    font-weight: 800;
+}
+
+#toast-badge-name {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+/* Global Utility Filter Hiders */
+.hidden-search-node {
+    display: none !important;
+}
+
+/* Global Footer Styles */
+.global-footer {
+    text-align: center;
+    padding: 40px;
+    background-color: var(--card-white);
+    border-top: 1px solid var(--border-gray);
+    font-size: 0.85rem;
+    color: #6e6e6e;
+    margin-top: 80px;
+}
+
+/* ==========================================================================
+   PYTHON LAB ACTIVITY WIDGET SYSTEM
+   ========================================================================== */
+
+/* Lab badge tag shown at top of each lab widget */
+.lab-tag {
+    display: inline-block;
+    background: linear-gradient(135deg, #2d8a4e, #1e6b39);
+    color: #fff;
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+/* Dark wrapper for the whole lab section */
+.python-lab {
+    background: #1c1c1e;
+    border: 1px solid #3a3a3c;
+    border-radius: 12px;
+    padding: 22px 24px 20px;
+    margin-top: 16px;
+}
+
+.python-lab h4 {
+    color: #f0f0f0;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.python-lab > p {
+    color: #a0a0a0;
+    font-size: 0.9rem;
+    margin-bottom: 14px;
+    line-height: 1.55;
+}
+
+/* Inner container that holds editor + controls + output */
+.lab-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* The editable code textarea */
+.python-editor {
+    width: 100%;
+    font-family: 'Courier New', 'Consolas', 'Menlo', monospace;
+    font-size: 0.82rem;
+    line-height: 1.65;
+    background: #111113;
+    color: #c9d1d9;
+    border: 1px solid #444;
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    padding: 16px 18px;
+    resize: vertical;
+    tab-size: 4;
+    outline: none;
+    min-height: 220px;
+    transition: border-color 0.2s;
+    caret-color: #58a6ff;
+}
+
+.python-editor:focus {
+    border-color: #2d8a4e;
+    box-shadow: 0 0 0 2px rgba(45, 138, 78, 0.15);
+}
+
+/* Controls row: Run + Reset buttons */
+.lab-controls {
+    display: flex;
+    gap: 10px;
+    background: #1a1a1c;
+    border-left: 1px solid #444;
+    border-right: 1px solid #444;
+    padding: 10px 14px;
+    align-items: center;
+}
+
+/* Green Run button */
+.run-btn {
+    background: linear-gradient(135deg, #2d8a4e, #1e6b39);
+    color: #fff;
+    border: none;
+    padding: 8px 22px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.88rem;
+    letter-spacing: 0.3px;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.run-btn:hover {
+    background: linear-gradient(135deg, #38a85f, #2a7a45);
+    transform: translateY(-1px);
+}
+
+.run-btn:active {
+    transform: translateY(0px);
+}
+
+/* Gray Reset button */
+.reset-btn {
+    background: #3a3a3c;
+    color: #c0c0c0;
+    border: 1px solid #555;
+    padding: 8px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background 0.2s, color 0.2s;
+}
+
+.reset-btn:hover {
+    background: #48484a;
+    color: #f0f0f0;
+}
+
+/* Terminal-style output panel */
+.python-output {
+    background: #0d0d0f;
+    color: #39d98a;
+    font-family: 'Courier New', 'Consolas', 'Menlo', monospace;
+    font-size: 0.82rem;
+    line-height: 1.7;
+    padding: 16px 18px;
+    border: 1px solid #444;
+    border-top: 2px solid #2d8a4e;
+    border-radius: 0 0 8px 8px;
+    min-height: 80px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    transition: border-color 0.2s;
+}
+
+/* Dim placeholder before code runs */
+.output-placeholder {
+    color: #555;
+    font-style: italic;
+    font-size: 0.8rem;
+}
+
+/* Running indicator */
+.output-running {
+    color: #f0a500;
+    font-style: italic;
+    animation: pulse-text 1s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-text {
+    from { opacity: 0.6; }
+    to   { opacity: 1.0; }
+}
+
+/* Red error text for tracebacks */
+.error-text {
+    color: #ff6b6b;
+    display: block;
+    margin-top: 4px;
+}

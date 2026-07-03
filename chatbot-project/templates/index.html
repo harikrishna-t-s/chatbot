@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cardinal Chat — Simple AI Chatbot</title>
+
+    <!--
+        This links our CSS file. Flask automatically serves anything
+        inside the "static" folder at the URL path "/static/...".
+    -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <!-- Google Fonts for premium typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Main chat container: everything the user sees lives inside here -->
+    <div class="chat-container">
+
+        <!-- Header -->
+        <header class="chat-header">
+            <div class="header-top">
+                <span class="logo-mark">⛩️</span>
+                <h1>Cardinal Chat</h1>
+                <button id="clear-button" class="btn-clear" title="Clear chat history">Clear</button>
+            </div>
+            <p class="subtitle">Your conversational AI guide</p>
+        </header>
+
+        <!-- This is where chat messages (both user and AI) will appear -->
+        <div id="chat-history" class="chat-history">
+            <!-- A friendly starter message so the chat isn't empty -->
+            <div class="message bot-message">
+                <p>Hi! I'm your AI assistant. How can I help you today? I'll remember our conversation context as long as this session is active.</p>
+            </div>
+        </div>
+
+        <!-- Typing indicator shown while waiting for the AI's reply -->
+        <div id="typing-indicator" class="typing-indicator hidden">
+            <span></span><span></span><span></span>
+        </div>
+
+        <!-- Input area: text box + send button -->
+        <div class="chat-input-area">
+            <input
+                type="text"
+                id="user-input"
+                placeholder="Type a message..."
+                autocomplete="off"
+            />
+            <button id="send-button">Send</button>
+        </div>
+
+    </div>
+
+    <!--
+        This links our JavaScript file. It must come at the end of the
+        body so the HTML elements above already exist when the script runs.
+    -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

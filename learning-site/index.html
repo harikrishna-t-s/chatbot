@@ -1,0 +1,1908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chatbot Adventure: Learn Computer Science from Scratch</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Skulpt: Python interpreter compiled to JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+</head>
+<body>
+    <header class="global-header">
+        <div class="header-container">
+            <div class="logo">
+                <span class="logo-icon">🏰</span>
+                <div class="logo-text">
+                    <h1>Chatbot Adventure</h1>
+                    <p>Stanford-Inspired CS Lab</p>
+                </div>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" id="global-search" placeholder="Search concepts (e.g., API, Flask)..." aria-label="Search concepts">
+            </div>
+
+            <div class="user-stats">
+                <div class="stat-item" id="stat-level-container">
+                    <span class="stat-label">LVL</span>
+                    <span id="user-level" class="stat-value">0</span>
+                    <span id="user-title" class="stat-sub">Explorer</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">XP</span>
+                    <span id="user-xp" class="stat-value">0</span>
+                    <div class="xp-bar-container">
+                        <div id="xp-progress" class="xp-progress-bar" style="width: 0%;"></div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">BADGES</span>
+                    <span id="badge-count" class="stat-value">0/12</span>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-progress-container">
+            <div id="scroll-indicator" class="scroll-indicator-bar"></div>
+        </div>
+    </header>
+
+    <div class="main-layout">
+        <aside class="sidebar-nav">
+            <div class="sidebar-section">
+                <h3>Your Progress</h3>
+                <div class="overall-progress-wrapper">
+                    <div class="progress-circle-radial">
+                        <span id="radial-percentage">0%</span>
+                    </div>
+                    <p id="progress-text-summary">0 of 13 Worlds Unlocked</p>
+                </div>
+            </div>
+
+            <nav class="world-links-nav" aria-label="World Navigation">
+                <h3>Learning Map</h3>
+                <ul id="sidebar-world-list">
+                    </ul>
+            </nav>
+
+            <div class="sidebar-section">
+                <h3>Unlocked Skill Tree</h3>
+                <div class="skill-tree-grid" id="skill-tree-display">
+                    </div>
+            </div>
+        </aside>
+
+        <main class="content-stream" id="content-main">
+            
+            <div id="achievement-toast" class="achievement-toast hidden" role="alert">
+                <div class="toast-icon">🏆</div>
+                <div class="toast-content">
+                    <span class="toast-title">Achievement Unlocked!</span>
+                    <p id="toast-badge-name">Explorer</p>
+                </div>
+            </div>
+
+            <section id="world-1" class="world-card activated">
+                <div class="world-header">
+                    <span class="world-tag">World 1</span>
+                    <h2>Welcome Explorer</h2>
+                </div>
+                <div class="world-body">
+                    <div class="mission-brief">
+                        <h4>🎯 Mission Brief</h4>
+                        <p>Welcome to the beginning of your Computer Science journey. Today, you are stepping into a world where lines of words turn into living, breathing applications. Your ultimate destination is building and understanding a complete AI Chatbot from absolute first principles.</p>
+                    </div>
+
+                    <div class="learning-objectives">
+                        <h4>Learning Objectives</h4>
+                        <ul>
+                            <li>Understand the mindset of a computer scientist.</li>
+                            <li>Demystify code as an empowering creative tool.</li>
+                            <li>Explore how this adventure game functions.</li>
+                        </ul>
+                    </div>
+
+                    <div class="interactive-content">
+                        <h3>Your Computational Adventure Awaits</h3>
+                        <p>Many people think computer science is only for math geniuses. That is a myth. Computer science is simply the study of <strong>recipes for solving problems</strong>. Code is the language we use to write down those recipes so a machine can execute them for us.</p>
+                        
+                        <div class="analogy-box">
+                            <h5>🧩 Real-World Analogy</h5>
+                            <p>Think of computer science like architecture. You don't start by carrying massive marble columns; you start by understanding space, structure, and materials. In this guide, your material is data, and your structure is software.</p>
+                        </div>
+
+                        <p>Throughout this journey, you will accumulate Experience Points (XP) and earn academic badges. Completing a world unlocks the gateway to the next layer of technology.</p>
+
+                        <h3>What is an Algorithm?</h3>
+                        <p>At the heart of every program is an <strong>algorithm</strong> — a finite, ordered sequence of well-defined steps that transforms an input into a desired output. Algorithms are language-independent: you can describe them in plain English, draw them as flowcharts, or write them as code.</p>
+
+                        <table class="academic-table">
+                            <thead>
+                                <tr>
+                                    <th>Term</th>
+                                    <th>Plain-English Meaning</th>
+                                    <th>Example</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Algorithm</strong></td>
+                                    <td>A step-by-step recipe for solving a problem.</td>
+                                    <td>Sort a list of names alphabetically.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Program</strong></td>
+                                    <td>An algorithm written in a language a computer can run.</td>
+                                    <td>A Python script that sorts names.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Bug</strong></td>
+                                    <td>An error in the recipe that produces wrong results.</td>
+                                    <td>Forgetting to handle an empty list.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Debug</strong></td>
+                                    <td>The process of finding and fixing bugs.</td>
+                                    <td>Adding print statements to trace logic.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="analogy-box">
+                            <h5>💡 Key Insight: Decomposition</h5>
+                            <p>Great computer scientists break big, scary problems into smaller, manageable sub-problems. This technique is called <strong>decomposition</strong>. Building a chatbot sounds huge — but decomposed, it is simply: (1) accept input, (2) send to AI, (3) display reply. Each step is achievable on its own.</p>
+                        </div>
+
+                        <h3>The Four Pillars of Computational Thinking</h3>
+                        <p>Before writing a single line of code, skilled programmers think about problems in four structured ways:</p>
+                        <table class="academic-table">
+                            <thead>
+                                <tr><th>Pillar</th><th>Description</th><th>Chatbot Example</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><strong>Decomposition</strong></td><td>Break the problem into smaller parts.</td><td>Split chatbot into: UI, server, AI call.</td></tr>
+                                <tr><td><strong>Pattern Recognition</strong></td><td>Find similarities across sub-problems.</td><td>Every user message follows the same send → receive flow.</td></tr>
+                                <tr><td><strong>Abstraction</strong></td><td>Focus on essential details, ignore the rest.</td><td>Use an API instead of training your own AI model.</td></tr>
+                                <tr><td><strong>Algorithm Design</strong></td><td>Create the step-by-step solution.</td><td>Write the Flask route that handles a chat request.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="interactive-widget">
+                        <h4>Interactive Checkpoint: Claim Your Passport</h4>
+                        <p>Click below to sign your academic explorer records and begin your system initialization.</p>
+                        <button class="action-btn" id="btn-claim-passport">Sign Passport & Claim 50 XP</button>
+                    </div>
+
+                    <div class="quiz-block" id="quiz-w1">
+                        <h3>Knowledge Checkpoint</h3>
+                        <div class="quiz-question">
+                            <p><strong>Question:</strong> What is the core philosophy of Computer Science as presented in this adventure?</p>
+                            <label class="quiz-option"><input type="radio" name="q1" value="a"> Memorizing every complex function line-by-line.</label>
+                            <label class="quiz-option"><input type="radio" name="q1" value="b"> Writing recipes to solve problems step-by-step.</label>
+                            <label class="quiz-option"><input type="radio" name="q1" value="c"> Requiring expensive hardware before starting.</label>
+                        </div>
+                        <button class="submit-quiz-btn" data-world="1">Verify Solution</button>
+                        <div class="quiz-feedback hidden"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="world-2" class="world-card locked">
+                <div class="world-header">
+                    <span class="world-tag">World 2</span>
+                    <h2>Understanding Computers</h2>
+                </div>
+                <div class="world-body">
+                    <div class="mission-brief">
+                        <h4>🎯 Mission Brief</h4>
+                        <p>Peel back the metal and plastic. Your mission is to master the core engine of our modern era: how computer memory, storage, files, and programs actually interface.</p>
+                    </div>
+
+                    <div class="learning-objectives">
+                        <h4>Learning Objectives</h4>
+                        <ul>
+                            <li>Differentiate between Hardware and Software.</li>
+                            <li>Understand the difference between temporary Memory (RAM) and long-term Storage (Hard Drives).</li>
+                            <li>See how files and folders structure complex systems.</li>
+                        </ul>
+                    </div>
+
+                    <div class="interactive-content">
+                        <h3>The Anatomy of a Machine</h3>
+                        <p>A computer consists of two primary layers: <strong>Hardware</strong> (the physical atoms you can touch) and <strong>Software</strong> (the digital configuration and instructions that run inside the hardware).</p>
+
+                        <table class="academic-table">
+                            <thead>
+                                <tr><th>Component</th><th>Type</th><th>Role</th><th>Speed</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>CPU (Processor)</td><td>Hardware</td><td>Executes instructions one by one at billions of operations per second.</td><td>Extremely fast</td></tr>
+                                <tr><td>RAM (Memory)</td><td>Hardware</td><td>Holds currently running programs and active data temporarily.</td><td>Very fast, volatile</td></tr>
+                                <tr><td>SSD / HDD (Storage)</td><td>Hardware</td><td>Stores files and programs permanently even when powered off.</td><td>Slower, persistent</td></tr>
+                                <tr><td>Operating System</td><td>Software</td><td>Manages hardware resources and lets apps communicate with hardware.</td><td>Always running</td></tr>
+                                <tr><td>Application (e.g., Python)</td><td>Software</td><td>Programs that run on top of the OS to perform specific tasks.</td><td>User-controlled</td></tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="diagram-container">
+                            <svg viewBox="0 0 600 200" class="inline-svg-diagram" aria-label="Hardware Architecture Diagram">
+                                <rect x="20" y="40" width="160" height="120" rx="10" fill="#fcfaf8" stroke="#8C1515" stroke-width="2"/>
+                                <text x="100" y="105" text-anchor="middle" fill="#2e2e2e" font-weight="bold">Storage (Hard Drive)</text>
+                                <text x="100" y="130" text-anchor="middle" fill="#6e6e6e" font-size="12">Persistent / Files Saved</text>
+
+                                <path d="M 180 100 L 240 100" stroke="#8C1515" stroke-width="2" marker-end="url(#arrow)"/>
+
+                                <rect x="240" y="40" width="140" height="120" rx="10" fill="#fcfaf8" stroke="#8C1515" stroke-width="2"/>
+                                <text x="310" y="105" text-anchor="middle" fill="#2e2e2e" font-weight="bold">Memory (RAM)</text>
+                                <text x="310" y="130" text-anchor="middle" fill="#6e6e6e" font-size="12">Temporary / Fast</text>
+
+                                <path d="M 380 100 L 440 100" stroke="#8C1515" stroke-width="2" marker-end="url(#arrow)"/>
+
+                                <rect x="440" y="40" width="140" height="120" rx="10" fill="#8C1515"/>
+                                <text x="510" y="105" text-anchor="middle" fill="#ffffff" font-weight="bold">Processor (CPU)</text>
+                                <text x="510" y="130" text-anchor="middle" fill="#fcfaf8" font-size="12">Execution Engine</text>
+
+                                <defs>
+                                    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#8C1515"/>
+                                    </marker>
+                                </defs>
+                            </svg>
+                            <p class="diagram-caption">Data moves from long-term Storage into fast temporary Memory so the Central Processing Unit can run it.</p>
+                        </div>
+
+                        <div class="analogy-box">
+                            <h5>🧩 Real-World Analogy</h5>
+                            <p>Imagine you are baking a cake. Your kitchen <strong>Storage cabinets</strong> hold all ingredients long-term. Your <strong>Countertop space</strong> is RAM memory; it can only hold what you are working on right now. The <strong>Chef</strong> is the CPU executing instructions.</p>
+                        </div>
+
+                        <div class="chatbot-connection">
+                            <h5>🤖 Connection to Chatbot</h5>
+                            <p>When our chatbot is not running, its entire blueprint sits as inert files on your storage drive. The moment you start the application, those files are read into fast system memory so the computer can execute the chatbot's code live.</p>
+                        </div>
+
+                        <h3>Understanding File Systems</h3>
+                        <p>Files are how software and data are stored persistently on disk. A <strong>file system</strong> organizes files into a hierarchical tree of <strong>folders (directories)</strong>. Think of it like a filing cabinet: the cabinet is your hard drive, the drawers are top-level folders, and documents inside are files.</p>
+
+                        <div class="analogy-box">
+                            <h5>📁 File Paths Explained</h5>
+                            <p>A <strong>file path</strong> is the complete address of a file on your system. On Linux/Mac it looks like <code>/home/user/projects/chatbot/app.py</code>. On Windows it looks like <code>C:\Users\user\projects\chatbot\app.py</code>. The slashes separate folder levels, just like floors in a building.</p>
+                        </div>
+
+                        <h3>How a Program Runs: Step by Step</h3>
+                        <p>When you type <code>python app.py</code> in the terminal, here is exactly what happens behind the scenes:</p>
+                        <table class="academic-table">
+                            <thead><tr><th>Step</th><th>What Happens</th><th>Hardware Involved</th></tr></thead>
+                            <tbody>
+                                <tr><td>1. OS locates the file</td><td>The OS finds <code>app.py</code> on the storage disk.</td><td>SSD/HDD</td></tr>
+                                <tr><td>2. File loaded into RAM</td><td>The Python interpreter code and your script are copied into fast memory.</td><td>RAM</td></tr>
+                                <tr><td>3. CPU executes instructions</td><td>The CPU reads each instruction from RAM and runs it.</td><td>CPU + RAM</td></tr>
+                                <tr><td>4. Output to screen</td><td>Results are sent to your monitor or terminal display.</td><td>GPU / Display</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="interactive-widget">
+                        <h4>Interactive Simulator: System Assembly</h4>
+                        <p>Match the item to its fundamental classification category:</p>
+                        <div class="matching-container">
+                            <div class="match-card" draggable="true" data-type="hw">Physical Keyboard</div>
+                            <div class="match-card" draggable="true" data-type="sw">Python Application File</div>
+                            <div class="match-card" draggable="true" data-type="hw">Silicon RAM Chip</div>
+                            <div class="match-card" draggable="true" data-type="sw">Web Browser</div>
+                        </div>
+                        <div class="drop-zones">
+                            <div class="drop-zone" data-target="hw">Hardware Zone</div>
+                            <div class="drop-zone" data-target="sw">Software Zone</div>
+                        </div>
+                        <button class="action-btn secondary" id="btn-check-matching">Evaluate Assembly</button>
+                    </div>
+
+                    <div class="quiz-block" id="quiz-w2">
+                        <h3>Knowledge Checkpoint</h3>
+                        <div class="quiz-question">
+                            <p><strong>Question:</strong> What happens to information stored in a computer's temporary Memory (RAM) when the power turns off completely?</p>
+                            <label class="quiz-option"><input type="radio" name="q2" value="a"> It remains securely written forever.</label>
+                            <label class="quiz-option"><input type="radio" name="q2" value="b"> It is erased immediately.</label>
+                            <label class="quiz-option"><input type="radio" name="q2" value="c"> It turns physically into hardware components.</label>
+                        </div>
+                        <button class="submit-quiz-btn" data-world="2">Verify Solution</button>
+                        <div class="quiz-feedback hidden"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="world-3" class="world-card locked">
+                <div class="world-header">
+                    <span class="world-tag">World 3</span>
+                    <h2>Learning to Speak to Computers</h2>
+                </div>
+                <div class="world-body">
+                    <div class="mission-brief">
+                        <h4>🎯 Mission Brief</h4>
+                        <p>Uncover the truth behind programming. Computers don't speak human languages natively. Discover how interpreters translate high-level readable concepts down to raw machine operations.</p>
+                    </div>
+
+                    <div class="learning-objectives">
+                        <h4>Learning Objectives</h4>
+                        <ul>
+                            <li>Understand programming as exact, rule-bound documentation.</li>
+                            <li>Learn how source code transforms into binary execution.</li>
+                            <li>Discover why syntax and order are critical for software logic.</li>
+                        </ul>
+                    </div>
+
+                    <div class="interactive-content">
+                        <h3>Breaking Code Down to Rules</h3>
+                        <p>A programming language is a specialized system of vocabulary and syntax rules. Computers do not understand nuance, sarcasm, or context. They execute instructions exactly as written—even if those instructions contain a logical flaw.</p>
+                        
+                        <div class="analogy-box">
+                            <h5>🧩 Real-World Analogy</h5>
+                            <p>Imagine trying to direct a completely literal-minded robot to make a peanut butter sandwich. If you say "put the knife in the jar," it might drop the handle, blade, and your fingers right in, because you didn't explicitly instruct it to "open the lid" or "hold the handle." Execution is absolute.</p>
+                        </div>
+
+                        <div class="chatbot-connection">
+                            <h5>🤖 Connection to Chatbot</h5>
+                            <p>Your chatbot will process raw text strings typed by a user. If we miss a single punctuation mark or colon inside our server file (<code>app.py</code>), the interpreter will crash immediately because the translation bridge breaks completely.</p>
+                        </div>
+
+                        <h3>Types of Programming Languages</h3>
+                        <p>Not all languages work the same way. They differ in how close they are to the machine and how they are translated into runnable code:</p>
+                        <table class="academic-table">
+                            <thead><tr><th>Type</th><th>Examples</th><th>How It Runs</th><th>Best For</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>High-Level</strong></td><td>Python, JavaScript</td><td>Interpreted line-by-line at runtime.</td><td>Web apps, AI scripts, beginners.</td></tr>
+                                <tr><td><strong>Compiled</strong></td><td>C, C++, Rust</td><td>Translated to machine code before running.</td><td>Games, operating systems, performance tools.</td></tr>
+                                <tr><td><strong>Bytecode</strong></td><td>Java, Python (.pyc)</td><td>Compiled to intermediate code, then interpreted by a virtual machine.</td><td>Cross-platform enterprise software.</td></tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Python Basics: Your First Building Blocks</h3>
+                        <p>Python is the language powering our chatbot's backend. Here are the core building blocks you need to recognize:</p>
+
+                        <pre class="code-view"><code># This is a comment — the interpreter ignores it
+
+# Variables: storing data in named containers
+name = "Alice"          # A string (text)
+age  = 21              # An integer (whole number)
+temp = 0.7             # A float (decimal)
+
+# Conditional logic: making decisions
+if age >= 18:
+    print("Access granted")   # Only runs when condition is True
+else:
+    print("Access denied")
+
+# Loops: repeating actions
+for i in range(3):
+    print(f"Round {i + 1}")
+
+# Functions: reusable named blocks of logic
+def greet(person_name):
+    return f"Hello, {person_name}!"
+
+result = greet("Alice")   # Call the function
+print(result)             # Output: Hello, Alice!</code></pre>
+
+                        <div class="analogy-box">
+                            <h5>🔑 Why Indentation Matters in Python</h5>
+                            <p>Unlike most languages that use curly braces <code>{}</code> to group code, Python uses <strong>indentation</strong> (spaces or tabs at the start of a line) to define code blocks. If your indentation is wrong, Python raises an <code>IndentationError</code> immediately. Always use 4 spaces per level — never mix tabs and spaces.</p>
+                        </div>
+                    </div>
+
+                    <div class="interactive-widget">
+                        <h4>Interactive Challenge: Sequence the Code Script</h4>
+                        <p>Arrange the following conceptual logic steps in the exact order required to process an interaction safely:</p>
+                        <ol class="sortable-list" id="sortable-w3">
+                            <li draggable="true" data-order="3">Analyze text meaning using an AI structure</li>
+                            <li draggable="true" data-order="1">Listen continuously for a user's typed submission</li>
+                            <li draggable="true" data-order="2">Capture incoming text characters into memory variables</li>
+                            <li draggable="true" data-order="4">Render the computed reply bubbles smoothly onto the screen</li>
+                        </ol>
+                        <button class="action-btn" id="btn-verify-sort">Verify Order Sequence</button>
+                    </div>
+
+                    <div class="interactive-widget python-lab">
+                        <span class="lab-tag">🐍 Python Lab</span>
+                        <h4>Lab Activity: Python Fundamentals in Action</h4>
+                        <p>The code below covers every concept taught in this world — variables, conditions, loops, and functions. <strong>Edit any value and click Run</strong> to see instant output. Try changing <code>name</code>, adjusting the loop range, or writing a new function!</p>
+                        <div class="lab-container">
+                            <textarea class="python-editor" id="code-w3" rows="22"># ============================================
+# WORLD 3 LAB: Python Fundamentals
+# Edit the code and click Run!
+# ============================================
+
+# --- Variables (named containers for data) ---
+name = "Explorer"
+score = 100
+is_ready = True
+
+# --- Conditional Logic (making decisions) ---
+if is_ready:
+    print(f"Welcome, {name}! Your score is {score} XP.")
+else:
+    print("System not ready. Please try again.")
+
+# --- Loops (repeating actions) ---
+print("\n--- Countdown Sequence ---")
+for i in range(5, 0, -1):
+    print(f"  {i}...")
+print("Blast off! 🚀")
+
+# --- Functions (reusable named blocks of logic) ---
+def earn_xp(current_score, bonus):
+    """Awards bonus XP and returns the new total."""
+    new_total = current_score + bonus
+    return new_total
+
+# Call the function and store the result
+updated_score = earn_xp(score, 50)
+print(f"\nAfter earning 50 XP, new total: {updated_score}")
+
+# CHALLENGE: Write your own function below!
+# def double_score(s):
+#     return s * 2
+# print(double_score(updated_score))</textarea>
+                            <div class="lab-controls">
+                                <button class="run-btn" onclick="runPythonLab('code-w3', 'output-w3')">▶ Run Code</button>
+                                <button class="reset-btn" onclick="resetPythonLab('code-w3')">↺ Reset</button>
+                            </div>
+                            <div class="python-output" id="output-w3"><span class="output-placeholder">Output will appear here after you click Run...</span></div>
+                        </div>
+                    </div>
+
+                    <div class="quiz-block" id="quiz-w3">
+                        <h3>Knowledge Checkpoint</h3>
+                        <div class="quiz-question">
+                            <p><strong>Question:</strong> Why do programming languages enforce incredibly strict syntax rules?</p>
+                            <label class="quiz-option"><input type="radio" name="q3" value="a"> To challenge users for academic amusement.</label>
+                            <label class="quiz-option"><input type="radio" name="q3" value="b"> Because computers require absolute precision to execute logic reliably without guessing.</label>
+                            <label class="quiz-option"><input type="radio" name="q3" value="c"> To slow down execution speeds across older web systems.</label>
+                        </div>
+                        <button class="submit-quiz-btn" data-world="3">Verify Solution</button>
+                        <div class="quiz-feedback hidden"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="world-4" class="world-card locked">
+                <div class="world-header">
+                    <span class="world-tag">World 4</span>
+                    <h2>Building Websites (The Holy Trinity)</h2>
+                </div>
+                <div class="world-body">
+                    <div class="mission-brief">
+                        <h4>🎯 Mission Brief</h4>
+                        <p>Deconstruct the client browser environment. Master the distinct roles played by HTML, CSS, and JavaScript in shaping everything you experience online.</p>
+                    </div>
+
+                    <div class="learning-objectives">
+                        <h4>Learning Objectives</h4>
+                        <ul>
+                            <li>Isolate HTML as structural bone framing.</li>
+                            <li>Map CSS as the presentation skin layer.</li>
+                            <li>Identify JavaScript as the muscle engine driving behavioral changes.</li>
+                        </ul>
+                    </div>
+
+                    <div class="interactive-content">
+                        <h3>The Visual Core Architecture</h3>
+                        <p>Every website you load relies on three core languages operating in unison inside your local web browser engine:</p>
+                        
+                        <table class="academic-table">
+                            <thead>
+                                <tr>
+                                    <th>Technology</th>
+                                    <th>Core Purpose</th>
+                                    <th>Real-World Analogy</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>HTML</strong></td>
+                                    <td>Defines text structural boxes and document layout.</td>
+                                    <td>The skeletal wood frames of a house.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>CSS</strong></td>
+                                    <td>Applies layout paint, margins, colors, and aesthetics.</td>
+                                    <td>The exterior paint and interior wallpapers.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>JavaScript</strong></td>
+                                    <td>Breathes execution lifecycles, click response, and animation.</td>
+                                    <td>The electrical wiring and motorized automated doors.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="chatbot-connection">
+                            <h5>🤖 Connection to Chatbot</h5>
+                            <p>In our final system blueprint, HTML sets up the message input container box, CSS styles the incoming bubble backgrounds, and JavaScript catches your physical clicks to send text outward over network nodes.</p>
+                        </div>
+
+                        <h3>HTML Deep Dive: Tags, Elements & Attributes</h3>
+                        <p>HTML is built from <strong>tags</strong> — keywords wrapped in angle brackets. Most tags come in pairs: an opening tag and a closing tag. Everything between them is the element's <em>content</em>.</p>
+
+                        <pre class="code-view"><code>&lt;!-- Basic HTML structure --&gt;
+&lt;!DOCTYPE html&gt;               &lt;!-- Tells browser this is HTML5 --&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;title&gt;My Chatbot&lt;/title&gt;  &lt;!-- Tab title in the browser --&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;  &lt;!-- Attach CSS --&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Welcome&lt;/h1&gt;            &lt;!-- Heading (biggest = h1, smallest = h6) --&gt;
+    &lt;p&gt;Type your message:&lt;/p&gt;  &lt;!-- Paragraph --&gt;
+    &lt;input type="text" id="user-input" placeholder="Ask me anything..."&gt;
+    &lt;button id="send-btn"&gt;Send&lt;/button&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+                        <h3>CSS Deep Dive: Selectors & the Box Model</h3>
+                        <p>CSS works by <strong>selecting</strong> HTML elements and applying visual rules to them. Every HTML element is treated as a rectangular box with four layers: content, padding, border, and margin.</p>
+
+                        <pre class="code-view"><code>/* Select by element type */
+p { color: #333; }
+
+/* Select by class name (dot prefix) */
+.chat-bubble { background-color: #8C1515; color: white; }
+
+/* Select by unique ID (hash prefix) */
+#send-btn {
+    background: #8C1515;
+    color: white;
+    padding: 10px 20px;  /* Inner space: top/bottom left/right */
+    border: none;
+    border-radius: 6px;  /* Rounded corners */
+    cursor: pointer;     /* Shows hand icon on hover */
+}
+
+/* Pseudo-class: apply only on hover */
+#send-btn:hover {
+    background: #5c0f0f;  /* Darken on mouse-over */
+}</code></pre>
+
+                        <h3>JavaScript Deep Dive: Variables, Functions & Events</h3>
+                        <p>JavaScript makes pages <em>interactive</em>. It runs directly in the browser and can respond to user actions in real time without reloading the page.</p>
+
+                        <pre class="code-view"><code>// Grab a reference to an HTML element using its id
+const sendBtn   = document.getElementById("send-btn");
+const inputField = document.getElementById("user-input");
+
+// Add an event listener: run a function when button is clicked
+sendBtn.addEventListener("click", function() {
+    const message = inputField.value;  // Read the user's text
+    console.log("User said:", message); // Log it (visible in DevTools)
+    inputField.value = "";             // Clear the input box
+});
+
+// Arrow function syntax (modern shorthand)
+sendBtn.addEventListener("click", () => {
+    alert("Button clicked!");
+});</code></pre>
+                    </div>
+
+                    <div class="interactive-widget sandbox-widget">
+                        <h4>Interactive Visual Sandbox: The Layer Toggler</h4>
+                        <p>Toggle the engine layers below to witness how a web element alters dramatically:</p>
+                        <div class="sandbox-controls">
+                            <label><input type="checkbox" id="chk-html" checked disabled> HTML Layer Active</label>
+                            <label><input type="checkbox" id="chk-css" checked> CSS Presentation Layer</label>
+                            <label><input type="checkbox" id="chk-js" checked> JavaScript Execution Engine</label>
+                        </div>
+                        <div id="sandbox-preview" class="sandbox-preview-box styled dynamic-active">
+                            <div class="dummy-chat-window">
+                                <span class="dummy-bot-label">AI Agent</span>
+                                <p class="dummy-msg">Hello, I am a container block element.</p>
+                            </div>
+                            <button id="sandbox-interact-btn">Interact With Box</button>
+                        </div>
+                    </div>
+
+                    <div class="quiz-block" id="quiz-w4">
+                        <h3>Knowledge Checkpoint</h3>
+                        <div class="quiz-question">
+                            <p><strong>Question:</strong> Which file format is primarily responsible for changing font weights and background colors on a website?</p>
+                            <label class="quiz-option"><input type="radio" name="q4" value="a"> index.html</label>
+                            <label class="quiz-option"><input type="radio" name="q4" value="b"> style.css</label>
+                            <label class="quiz-option"><input type="radio" name="q4" value="c"> script.js</label>
+                        </div>
+                        <button class="submit-quiz-btn" data-world="4">Verify Solution</button>
+                        <div class="quiz-feedback hidden"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="world-5" class="world-card locked">
+                <div class="world-header">
+                    <span class="world-tag">World 5</span>
+                    <h2>Frontend Adventure</h2>
+                </div>
+                <div class="world-body">
+                    <div class="mission-brief">
+                        <h4>🎯 Mission Brief</h4>
+                        <p>Explore the DOM tree. Learn how user interface interaction triggers modern browser events, and how code responds dynamically to updates.</p>
+                    </div>
+
+                    <div class="learning-objectives">
+                        <h4>Learning Objectives</h4>
+                        <ul>
+                            <li>Understand the Document Object Model (DOM).</li>
+                            <li>Capture UI click events using input intercept hooks.</li>
+                            <li>Update display views without refreshing the entire web document.</li>
+                        </ul>
+                    </div>
+
+                    <div class="interactive-content">
+                        <h3>What Is the DOM?</h3>
+                        <p>When a browser loads an HTML document, it builds a tree structure in memory called the <strong>Document Object Model (DOM)</strong>. JavaScript can access this tree structure to change text content or modify styles on the fly.</p>
+                        
+                        <div class="analogy-box">
+                            <h5>🧩 Real-World Analogy</h5>
+                            <p>Think of the DOM like an internal map of an office building. If a receptionist needs to change the nameplate on Room 204, they locate Room 204 on their map, walk over, and swap the text plate. JavaScript does exactly this when targeting a specific element ID.</p>
+                        </div>
+
+                        <div class="chatbot-connection">
+                            <h5>🤖 Connection to Chatbot</h5>
+                            <p>When you click the send button, our JavaScript code targets the input element box, extracts the text you typed, and appends a new message bubble directly into the conversation history container on your page.</p>
+                        </div>
+
+                        <h3>The DOM Tree: Visualizing Your HTML</h3>
+                        <p>The browser parses your HTML file and creates a parent-child tree. Every tag becomes a <strong>node</strong> in this tree. Here is how our chatbot's HTML maps to a DOM tree:</p>
+
+                        <pre class="code-view"><code>document
+└── html
+    ├── head
+    │   └── title  ("Local AI Assistant")
+    └── body
+        └── div.chat-container
+            ├── div#chat-box          ← Where bubbles appear
+            └── div.input-area
+                ├── input#user-input  ← Text field
+                └── button#send-btn   ← Click trigger</code></pre>
+
+                        <h3>Essential DOM Methods Every Developer Must Know</h3>
+                        <table class="academic-table">
+                            <thead><tr><th>Method / Property</th><th>What It Does</th><th>Example</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>getElementById(id)</code></td><td>Returns the element with the given ID.</td><td><code>document.getElementById("send-btn")</code></td></tr>
+                                <tr><td><code>querySelector(selector)</code></td><td>Returns the first element matching a CSS selector.</td><td><code>document.querySelector(".chat-box")</code></td></tr>
+                                <tr><td><code>createElement(tag)</code></td><td>Creates a brand new HTML element in memory.</td><td><code>document.createElement("div")</code></td></tr>
+                                <tr><td><code>appendChild(child)</code></td><td>Adds a child element inside a parent node.</td><td><code>chatBox.appendChild(newBubble)</code></td></tr>
+                                <tr><td><code>innerText</code></td><td>Gets or sets the visible text of an element.</td><td><code>bubble.innerText = "Hello!"</code></td></tr>
+                                <tr><td><code>classList.add(name)</code></td><td>Adds a CSS class to an element.</td><td><code>bubble.classList.add("user")</code></td></tr>
+                                <tr><td><code>addEventListener(event, fn)</code></td><td>Registers a function to run on a specific event.</td><td><code>btn.addEventListener("click", send)</code></td></tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Async JavaScript & the Fetch API</h3>
+                        <p>Modern web apps often need to retrieve data from servers <em>without</em> refreshing the page. This is done using <strong>asynchronous</strong> JavaScript. The <code>fetch()</code> function sends a network request and returns a <strong>Promise</strong> — a placeholder for a value that will arrive in the future.</p>
+
+                        <pre class="code-view"><code>// async/await makes Promises readable — it "pauses" until the result arrives
+async function sendMessage() {
+    const text = document.getElementById("user-input").value;
+
+    // fetch() sends the request; await pauses until the server responds
+    const response = await fetch("/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: text })  // Convert JS object → JSON string
+    });
+
+    const data = await response.json();   // Parse the JSON response body
+    console.log(data.reply);              // Display the AI's reply
+}</code></pre>
+                    </div>
+
+                    <div class="interactive-widget">
+                        <h4>Interactive Flashcards: Click to Flip</h4>
+                        <div class="flashcard" id="fc-dom">
+                            <div class="flashcard-inner">
+                                <div class="flashcard-front">What is an Event Listener?</div>
+                                <div class="flashcard-back">A JavaScript mechanism that watches an element for a specific action (like a click or a keypress) and runs a function when it happens.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="interactive-widget python-lab">
+                        <span class="lab-tag">🐍 Python Lab</span>
+                        <h4>Lab Activity: Lists & Dictionaries (Simulating the DOM)</h4>
+                        <p>In the browser, the DOM is a tree of objects. In Python, we use <strong>lists</strong> and <strong>dictionaries</strong> to represent the same kind of structured data. Run this simulation of a chat history — then try adding your own messages!</p>
+                        <div class="lab-container">
+                            <textarea class="python-editor" id="code-w5" rows="26"># ============================================
+# WORLD 5 LAB: Lists & Dicts as DOM Stand-ins
+# ============================================
+
+# A list acts like a collection of DOM elements
+chat_history = []
+
+def add_message(sender, text):
+    """Appends a new message dict to the chat list."""
+    message = {"sender": sender, "text": text}
+    chat_history.append(message)  # like appendChild() in the DOM
+
+def display_chat():
+    """Prints all messages — like rendering the DOM to the screen."""
+    print("=" * 38)
+    print("       CHAT HISTORY")
+    print("=" * 38)
+    for i, msg in enumerate(chat_history):
+        label = "  YOU" if msg["sender"] == "user" else "  BOT"
+        print(f"{label}: {msg['text']}")
+    print("=" * 38)
+    print(f"Total messages in DOM: {len(chat_history)}")
+
+# Add messages (like JavaScript's appendBubble())
+add_message("user", "Hello there!")
+add_message("bot",  "Hi! I am your AI assistant.")
+add_message("user", "What is Python?")
+add_message("bot",  "Python is a high-level programming language!")
+add_message("user", "Can I build a chatbot with it?")
+add_message("bot",  "Absolutely! That is exactly what this course is about.")
+
+display_chat()
+
+# CHALLENGE: Add your own message below!
+# add_message("user", "Your message here")
+# display_chat()</textarea>
+                            <div class="lab-controls">
+                                <button class="run-btn" onclick="runPythonLab('code-w5', 'output-w5')">▶ Run Code</button>
+                                <button class="reset-btn" onclick="resetPythonLab('code-w5')">↺ Reset</button>
+                            </div>
+                            <div class="python-output" id="output-w5"><span class="output-placeholder">Output will appear here after you click Run...</span></div>
+                        </div>
+                    </div>
+
+                    <div class="quiz-block" id="quiz-w5">
+                        <h3>Knowledge Checkpoint</h3>
+                        <div class="quiz-question">
+                            <p><strong>Question:</strong> What does JavaScript use to target and change a specific HTML element dynamically?</p>
+                            <label class="quiz-option"><input type="radio" name="q5" value="a"> The terminal hard drive subsystem.</label>
+                            <label class="quiz-option"><input type="radio" name="q5" value="b"> The Document Object Model (DOM) memory tree.</label>
+                            <label class="quiz-option"><input type="radio" name="q5" value="c"> A localized database table lookup.</label>
+                        </div>
+                        <button class="submit-quiz-btn" data-world="5">Verify Solution</button>
+                        <div class="quiz-feedback hidden"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="world-6" class="world-card locked">
+                <div class="world-header">
+                    <span class="world-tag">World 6</span>
+                    <h2>Backend Fortress</h2>
+                </div>
+                <div class="world-body">
+                    <div class="mission-brief">
+                        <h4>🎯 Mission Brief</h4>
+                        <p>Step outside the visual browser environment. Journey into the backend to learn how servers run code, manage applications, and route secure requests.</p>
+                    </div>
+
+                    <div class="learning-objectives">
+                        <h4>Learning Objectives</h4>
+                        <ul>
+                            <li>Understand what a server actually does.</li>
+                            <li>Learn the role of Python and the Flask web framework.</li>
+                            <li>Define app routing and data payloads (JSON).</li>
+                        </ul>
+                    </div>
+
+                    <div class="interactive-content">
+                        <h3>The Dark Room Behind the Counter</h3>
+                        <p>The <strong>frontend</strong> runs on your screen. The <strong>backend</strong> runs on a remote machine (or a hidden server background on your local computer) that handles database access, runs secure business logic, and talks to external services securely.</p>
+                        
+                        <p><strong>Flask</strong> is a lightweight Python framework that lets us listen for incoming web requests and define specific URLs (called <strong>routes</strong>) that perform tasks behind the scenes.</p>
+
+                        <div class="analogy-box">
+                            <h5>🧩 Real-World Analogy</h5>
+                            <p>Imagine visiting a restaurant. The dining area with menus and tables is the <strong>Frontend</strong>. The kitchen staff cooking the meal out of sight is the <strong>Backend</strong>. You don't walk into the kitchen yourself; you place an order with a waiter, who brings back your food.</p>
+                        </div>
+
+                        <div class="chatbot-connection">
+                            <h5>🤖 Connection to Chatbot</h5>
+                            <p>Our Flask application script (<code>app.py</code>) defines a route named <code>/chat</code>. When our frontend JavaScript sends a request to <code>/chat</code>, Flask receives the payload, passes it along to our AI models, and sends the response back safely.</p>
+                        </div>
+
+                        <h3>Frontend vs. Backend: Side-by-Side Comparison</h3>
+                        <table class="academic-table">
+                            <thead><tr><th>Dimension</th><th>Frontend</th><th>Backend</th></tr></thead>
+                            <tbody>
+                                <tr><td>Where it runs</td><td>Inside the user's browser</td><td>On a server (local or cloud)</td></tr>
+                                <tr><td>Languages</td><td>HTML, CSS, JavaScript</td><td>Python, Node.js, Java, Go…</td></tr>
+                                <tr><td>User can see?</td><td>Yes — all code is visible in DevTools</td><td>No — code stays on the server</td></tr>
+                                <tr><td>Handles</td><td>Layout, animations, user interactions</td><td>Database, APIs, authentication, secrets</td></tr>
+                                <tr><td>Our chatbot files</td><td><code>index.html</code>, <code>style.css</code>, <code>script.js</code></td><td><code>app.py</code>, <code>.env</code>, <code>requirements.txt</code></td></tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Flask: Anatomy of a Web Route</h3>
+                        <p>A <strong>route</strong> maps a URL path to a Python function. When Flask receives an HTTP request at that URL, it calls the matching function and returns whatever the function produces.</p>
+
+                        <pre class="code-view"><code>from flask import Flask, request, jsonify
+
+app = Flask(__name__)  # Create the Flask application instance
+
+# Route 1: Serve the homepage when someone visits "/"
+@app.route("/")
+def home():
+    return render_template("index.html")  # Sends back the HTML page
+
+# Route 2: Accept chat messages sent via HTTP POST
+@app.route("/chat", methods=["POST"])
+def chat():
+    data = request.json              # Parse the incoming JSON body
+    user_msg = data.get("message")   # Extract the "message" field
+    # ... call AI API here ...
+    return jsonify({"reply": bot_response})  # Send JSON back to browser
+
+if __name__ == "__main__":
+    app.run(debug=True)  # Start the local development server</code></pre>
+
+                        <div class="analogy-box">
+                            <h5>🔑 What is HTTP?</h5>
+                            <p><strong>HTTP (HyperText Transfer Protocol)</strong> is the set of rules browsers and servers use to communicate. Every web request is an HTTP message. The two most common types are: <strong>GET</strong> (retrieve data — like loading a webpage) and <strong>POST</strong> (send data — like submitting a form or a chat message). Flask's <code>methods=["POST"]</code> tells it to only accept POST requests on that route.</p>
+                        </div>
+                    </div>
+
+                    <div class="interactive-widget">
+                        <h4>Interactive Diagnostic: Backend Rules</h4>
+                        <div class="tf-question">
+                            <p><strong>Statement:</strong> The backend is where HTML templates are parsed and visual CSS styles are rendered for the screen.</p>
+                            <button class="tf-btn" data-answer="false">True</button>
+                            <button class="tf-btn" data-answer="true">False</button>
+                            <p id="tf-feedback" class="tf-feedback hidden"></p>
+                        </div>
+                    </div>
+
+                    <div class="interactive-widget python-lab">
+                        <span class="lab-tag">🐍 Python Lab</span>
+                        <h4>Lab Activity: Simulate a Flask Chat Route</h4>
+                        <p>This lab strips away Flask's web layer and runs the <strong>pure Python logic</strong> of what happens inside <code>app.py</code> when a message arrives. See how the route function processes input and builds a response — then add your own keyword rules!</p>
+                        <div class="lab-container">
+                            <textarea class="python-editor" id="code-w6" rows="30"># ============================================
+# WORLD 6 LAB: Simulate a Flask /chat Route
+# ============================================
+# This is the core logic inside our app.py
+# (without the web framework wrapping it)
+
+def simulate_chat_route(request_json):
+    """
+    Simulates Flask's /chat route.
+    In real Flask: data = request.json
+    Here we pass the dict directly.
+    """
+    # --- Step 1: Extract the message (like request.json) ---
+    user_message = request_json.get("message", "")
+
+    if not user_message:
+        return {"error": "400 Bad Request: no message provided"}
+
+    # --- Step 2: Build a response (normally calls Hugging Face) ---
+    msg = user_message.lower()
+
+    if "hello" in msg or "hi" in msg:
+        reply = "Hello! I am your AI assistant. How can I help?"
+    elif "python" in msg:
+        reply = "Python is a high-level language great for AI and web apps!"
+    elif "flask" in msg:
+        reply = "Flask is a lightweight Python web framework for building APIs."
+    elif "api" in msg:
+        reply = "An API lets two applications communicate over a network."
+    else:
+        reply = f"Interesting! You said: '{user_message}'"
+
+    # --- Step 3: Return JSON-like dict (like jsonify()) ---
+    return {"reply": reply, "status": 200}
+
+
+# --- Test the route with different messages ---
+test_inputs = [
+    {"message": "Hello!"},
+    {"message": "Tell me about Python"},
+    {"message": "What is an API?"},
+    {"message": ""},   # Edge case: empty message
+]
+
+print("Simulating Flask /chat route...\n")
+for req in test_inputs:
+    response = simulate_chat_route(req)
+    print(f'Input:    {req}')
+    print(f'Response: {response}')
+    print("-" * 45)</textarea>
+                            <div class="lab-controls">
+                                <button class="run-btn" onclick="runPythonLab('code-w6', 'output-w6')">▶ Run Code</button>
+                                <button class="reset-btn" onclick="resetPythonLab('code-w6')">↺ Reset</button>
+                            </div>
+                            <div class="python-output" id="output-w6"><span class="output-placeholder">Output will appear here after you click Run...</span></div>
+                        </div>
+                    </div>
+
+                    <div class="quiz-block" id="quiz-w6">
+                        <h3>Knowledge Checkpoint</h3>
+                        <div class="quiz-question">
+                            <p><strong>Question:</strong> What is Flask used for in our running chatbot architecture?</p>
+                            <label class="quiz-option"><input type="radio" name="q6" value="a"> Styling chat message background gradients.</label>
+                            <label class="quiz-option"><input type="radio" name="q6" value="b"> Running a Python web server that accepts chat text requests and routes data.</label>
+                            <label class="quiz-option"><input type="radio" name="q6" value="c"> Saving browser history directly into cookies.</label>
+                        </div>
+                        <button class="submit-quiz-btn" data-world="6">Verify Solution</button>
+                        <div class="quiz-feedback hidden"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="world-7" class="world-card locked">
+                <div class="world-header">
+                    <span class="world-tag">World 7</span>
+                    <h2>Crossing the API Bridge</h2>
+                </div>
+                <div class="world-body">
+                    <div class="mission-brief">
+                        <h4>🎯 Mission Brief</h4>
+                        <p>Connect isolated computer systems across the web. Master the rules of APIs, and learn how machines request and share structured data securely.</p>
+                    </div>
+
+                    <div class="learning-objectives">
+                        <h4>Learning Objectives</h4>
+                        <ul>
+                            <li>Define Application Programming Interfaces (APIs).</li>
+                            <li>Understand Request and Response life cycles.</li>
+                            <li>Deconstruct a JSON data transmission object.</li>
+                        </ul>
+                    </div>
+
+                    <div class="interactive-content">
+                        <h3>The Universal Connector</h3>
+                        <p>An <strong>API (Application Programming Interface)</strong> is a standardized contract that allows two completely independent software applications to communicate with each other over a network.</p>
+                        
+                        <div class="analogy-box">
+                            <h5>🧩 Real-World Analogy</h5>
+                            <p>Think of an API like an electrical wall socket. You don't need to know how the entire power grid generates electricity; you just plug in your appliance matching the exact shape of the socket, and you receive power immediately.</p>
+                        </div>
+
+                        <div class="chatbot-connection">
+                            <h5>🤖 Connection to Chatbot</h5>
+                            <p>Our server does not calculate AI responses on its own. Instead, it packages up your text and hits an external API provided by Hugging Face, passing along your user message and waiting for the AI response to come back.</p>
+                        </div>
+
+                        <h3>Anatomy of an API Request</h3>
+                        <p>An API call has four fundamental components. Understanding them will allow you to use <em>any</em> API on the internet:</p>
+                        <table class="academic-table">
+                            <thead><tr><th>Component</th><th>Description</th><th>Our Chatbot Example</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Endpoint URL</strong></td><td>The address of the API resource on the server.</td><td><code>https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2</code></td></tr>
+                                <tr><td><strong>HTTP Method</strong></td><td>The type of action: GET (read) or POST (write/send).</td><td><code>POST</code> — we are sending a message.</td></tr>
+                                <tr><td><strong>Headers</strong></td><td>Metadata about the request, including authentication tokens.</td><td><code>Authorization: Bearer &lt;HF_TOKEN&gt;</code></td></tr>
+                                <tr><td><strong>Body (Payload)</strong></td><td>The actual data sent with the request, usually in JSON format.</td><td><code>{"inputs": "[INST] Hello [/INST]"}</code></td></tr>
+                            </tbody>
+                        </table>
+
+                        <h3>JSON: The Universal Language of APIs</h3>
+                        <p><strong>JSON (JavaScript Object Notation)</strong> is a lightweight text format used to transmit data between systems. It is human-readable and language-independent — every major programming language can parse it.</p>
+
+                        <pre class="code-view"><code>// JSON Request Body — what we SEND to Hugging Face
+{
+    "inputs": "[INST] What is the capital of France? [/INST]"
+}
+
+// JSON Response Body — what Hugging Face SENDS BACK
+[
+    {
+        "generated_text": "[INST] What is the capital of France? [/INST] The capital of France is Paris."
+    }
+]
+
+// JSON Rules:
+// - Keys must be in double quotes
+// - Values can be: string, number, boolean, array [], object {}, or null
+// - No trailing commas allowed</code></pre>
+
+                        <h3>Making an API Call in Python</h3>
+                        <pre class="code-view"><code>import requests  # pip install requests
+
+API_URL = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2"
+HF_TOKEN = "your_token_here"
+
+# Build the request
+headers  = {"Authorization": f"Bearer {HF_TOKEN}"}
+payload  = {"inputs": "[INST] Explain APIs in one sentence. [/INST]"}
+
+# Send the POST request and wait for the response
+response = requests.post(API_URL, headers=headers, json=payload)
+
+# Parse the JSON response
+data = response.json()
+print(data[0]["generated_text"])  # Print the AI's reply</code></pre>
+                    </div>
+
+                    <div class="interactive-widget">
+                        <h4>Interactive Flow Builder: Data Routing</h4>
+                        <p>Arrange the steps of an API lifecycle from start to finish:</p>
+                        <div class="flow-container" id="flow-builder-w7">
+                            <div class="flow-node" draggable="true" data-step="1">1. Frontend initiates a Request with JSON data</div>
+                            <div class="flow-node" draggable="true" data-step="2">2. Network routes request to endpoint server</div>
+                            <div class="flow-node" draggable="true" data-step="3">3. Target server processes data internally</div>
+                            <div class="flow-node" draggable="true" data-step="4">4. Target server transmits a clear JSON Response</div>
+                        </div>
+                        <button class="action-btn" id="btn-verify-flow">Validate API Chain</button>
+                    </div>
+
+                    <div class="interactive-widget python-lab">
+                        <span class="lab-tag">🐍 Python Lab</span>
+                        <h4>Lab Activity: Building & Parsing JSON Payloads</h4>
+                        <p>Every API call our chatbot makes involves <strong>encoding</strong> a Python dict into a JSON string and <strong>decoding</strong> the response back. This lab walks you through both directions — the exact operations happening inside <code>app.py</code>!</p>
+                        <div class="lab-container">
+                            <textarea class="python-editor" id="code-w7" rows="30"># ============================================
+# WORLD 7 LAB: JSON Encoding & Decoding
+# ============================================
+import json
+
+# ---- OUTBOUND: Build the request payload ----
+# This is what we SEND to Hugging Face
+request_payload = {
+    "inputs": "[INST] What is the capital of France? [/INST]",
+    "parameters": {
+        "max_new_tokens": 100,
+        "temperature": 0.7,
+        "return_full_text": False
+    }
+}
+
+# Convert Python dict → JSON string (sent over HTTP)
+json_string = json.dumps(request_payload, indent=2)
+print("=== JSON sent to Hugging Face ===")
+print(json_string)
+
+# ---- INBOUND: Parse the API response ----
+# This is what Hugging Face SENDS BACK
+mock_response = '[{"generated_text": "[INST] What is the capital of France? [/INST] The capital of France is Paris."}]'
+
+# Convert JSON string → Python object
+response_data = json.loads(mock_response)
+full_text = response_data[0]["generated_text"]
+
+# Clean up: extract only the answer after [/INST]
+answer = full_text.split("[/INST]")[-1].strip()
+
+print("\n=== Parsed AI Reply ===")
+print(answer)
+print(f"\nResponse type: {type(response_data)}")
+print(f"Number of results: {len(response_data)}")
+
+# ---- JSON Rules Recap ----
+print("\n=== JSON Type Examples ===")
+examples = {
+    "string_val":  "Hello world",
+    "int_val":     42,
+    "float_val":   0.75,
+    "bool_val":    True,
+    "null_val":    None,
+    "array_val":   [1, 2, 3],
+}
+for key, val in examples.items():
+    print(f"  {key}: {json.dumps(val)} (Python type: {type(val).__name__})")</textarea>
+                            <div class="lab-controls">
+                                <button class="run-btn" onclick="runPythonLab('code-w7', 'output-w7')">▶ Run Code</button>
+                                <button class="reset-btn" onclick="resetPythonLab('code-w7')">↺ Reset</button>
+                            </div>
+                            <div class="python-output" id="output-w7"><span class="output-placeholder">Output will appear here after you click Run...</span></div>
+                        </div>
+                    </div>
+
+                    <div class="quiz-block" id="quiz-w7">
+                        <h3>Knowledge Checkpoint</h3>
+                        <div class="quiz-question">
+                            <p><strong>Question:</strong> What role does JSON serve in API network communication?</p>
+                            <label class="quiz-option"><input type="radio" name="q7" value="a"> It translates Python into physical silicon machinery.</label>
+                            <label class="quiz-option"><input type="radio" name="q7" value="b"> It serves as a lightweight text format for exchanging structured data.</label>
+                            <label class="quiz-option"><input type="radio" name="q7" value="c"> It protects frontend layout styles from leaking.</label>
+                        </div>
+                        <button class="submit-quiz-btn" data-world="7">Verify Solution</button>
+                        <div class="quiz-feedback hidden"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="world-8" class="world-card locked">
+                <div class="world-header">
+                    <span class="world-tag">World 8</span>
+                    <h2>Meet Hugging Face</h2>
+                </div>
+                <div class="world-body">
+                    <div class="mission-brief">
+                        <h4>🎯 Mission Brief</h4>
+                        <p>Discover where modern AI live. Meet Hugging Face, the open repository hosting thousands of machine learning models ready for immediate access.</p>
+                    </div>
+
+                    <div class="learning-objectives">
+                        <h4>Learning Objectives</h4>
+                        <ul>
+                            <li>Understand AI hubs and code registries.</li>
+                            <li>Learn what model Inference means in the cloud.</li>
+                            <li>Discover how API tokens authorize and secure your access.</li>
+                        </ul>
+                    </div>
+
+                    <div class="interactive-content">
+                        <h3>The Central Hub of Modern AI</h3>
+                        <p>Running a massive AI model takes a lot of computing power and expensive graphics cards (GPUs). Instead of hosting it on your own machine, platforms like <strong>Hugging Face</strong> run these models for us in the cloud. We can use their <strong>Inference API</strong> to interact with these models with simple web requests.</p>
+                        
+                        <div class="analogy-box">
+                            <h5>🧩 Real-World Analogy</h5>
+                            <p>Imagine you need a specialized tool that you only use once a year, like a heavy-duty power washer. Instead of spending thousands buying one, you go to a hardware tool library and rent it out whenever you need to clean your deck.</p>
+                        </div>
+
+                        <div class="chatbot-connection">
+                            <h5>🤖 Connection to Chatbot</h5>
+                            <p>Inside our server file <code>app.py</code>, we will provide a unique string token from Hugging Face. This token acts as our digital key, proving who we are so Hugging Face will process our text query and return our chatbot's response.</p>
+                        </div>
+
+                        <h3>What is Hugging Face?</h3>
+                        <p>Hugging Face is an open-source platform and community hub for machine learning. Think of it as the <strong>GitHub of AI</strong>. It hosts:</p>
+                        <table class="academic-table">
+                            <thead><tr><th>Resource</th><th>Description</th><th>Example</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Models</strong></td><td>Pre-trained neural networks ready to use for tasks like text generation, translation, or image recognition.</td><td>Mistral-7B, GPT-2, BERT</td></tr>
+                                <tr><td><strong>Datasets</strong></td><td>Large collections of labelled data used to train or evaluate AI models.</td><td>Common Crawl, WikiText</td></tr>
+                                <tr><td><strong>Spaces</strong></td><td>Hosted demo apps built with Gradio or Streamlit, running directly in the browser.</td><td>Chatbot demos, image generators</td></tr>
+                                <tr><td><strong>Inference API</strong></td><td>An HTTP endpoint that runs a hosted model on demand — no GPU required on your side.</td><td>Our chatbot uses this!</td></tr>
+                            </tbody>
+                        </table>
+
+                        <h3>API Tokens: Your Digital Identity Badge</h3>
+                        <p>To prevent abuse, Hugging Face requires you to prove your identity with a <strong>token</strong> — a long, randomly generated secret string. Tokens work like passwords for API calls:</p>
+
+                        <pre class="code-view"><code># Step 1: Create a free account at huggingface.co
+# Step 2: Go to Settings → Access Tokens → New Token
+# Step 3: Copy the token (starts with "hf_")
+# Step 4: Store it SAFELY in a .env file — NEVER in your code!
+
+# .env file (kept secret, never committed to GitHub)
+HF_TOKEN=hf_aBcDeFgHiJkLmNoPqRsTuVwXyZ123456
+
+# app.py — read the token from the environment
+import os
+HF_TOKEN = os.getenv("HF_TOKEN")  # Reads from .env without hardcoding it</code></pre>
+
+                        <div class="analogy-box">
+                            <h5>⚠️ Why You Must Never Hardcode API Tokens</h5>
+                            <p>If you paste your token directly into <code>app.py</code> and push it to GitHub, bots will find it within minutes and abuse your account. Always use environment variables (<code>.env</code> files) to keep secrets out of your source code. The <code>.gitignore</code> file tells Git to skip the <code>.env</code> file when committing.</p>
+                        </div>
+
+                        <h3>Understanding Model Inference</h3>
+                        <p><strong>Inference</strong> is the process of running a trained AI model on new, unseen input to produce a prediction or output. It is different from <strong>training</strong>, which is the expensive process of teaching the model using billions of examples. We only do <em>inference</em> — we let Hugging Face handle the heavy lifting.</p>
+                    </div>
+
+                    <div class="quiz-block" id="quiz-w8">
+                        <h3>Knowledge Checkpoint</h3>
+                        <div class="quiz-question">
+                            <p><strong>Question:</strong> Why do we use Hugging Face's Inference API instead of running massive AI models directly inside our local laptop chip?</p>
+                            <label class="quiz-option"><input type="radio" name="q8" value="a"> Standard laptops lack the specialized hardware (GPUs) to run massive AI models efficiently.</label>
+                            <label class="quiz-option"><input type="radio" name="q8" value="b"> Python code is legally barred from executing AI tasks locally.</label>
+                            <label class="quiz-option"><input type="radio" name="q8" value="c"> External APIs are the only way to read local HTML templates.</label>
+                        </div>
+                        <button class="submit-quiz-btn" data-world="8">Verify Solution</button>
+                        <div class="quiz-feedback hidden"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="world-9" class="world-card locked">
+                <div class="world-header">
+                    <span class="world-tag">World 9</span>
+                    <h2>The AI Brain</h2>
+                </div>
+                <div class="world-body">
+                    <div class="mission-brief">
+                        <h4>🎯 Mission Brief</h4>
+                        <p>Demystify Large Language Models (LLMs) without complex math. Learn how text parsing, tokens, context windows, and settings like temperature shape AI personalities.</p>
+                    </div>
+
+                    <div class="learning-objectives">
+                        <h4>Learning Objectives</h4>
+                        <ul>
+                            <li>Learn how LLMs process text broken down into tokens.</li>
+                            <li>Understand how a model guesses the next word based on probability.</li>
+                            <li>See how the temperature setting controls creativity and randomness.</li>
+                        </ul>
+                    </div>
+
+                    <div class="interactive-content">
+                        <h3>The Art of Sophisticated Prediction</h3>
+                        <p>An AI model doesn't "think" like a human being. It doesn't look up rules in an encyclopedia. At its core, it is a <strong>highly advanced prediction engine</strong> that looks at your prompt and continuously asks: <em>"Given all these words, what word should logically follow next?"</em></p>
+                        
+                        <div class="analogy-box">
+                            <h5>🧩 Real-World Analogy</h5>
+                            <p>Think of it like the predictive text keyboard on your smartphone, but incredibly smart. If you type "A cup of hot...", your phone might suggest "coffee" or "cocoa." An LLM does the exact same thing, just scaled up to evaluate entire paragraphs of context at once.</p>
+                        </div>
+
+                        <div class="chatbot-connection">
+                            <h5>🤖 Connection to Chatbot</h5>
+                            <p>When you pass text to Hugging Face, you can tweak a setting called <strong>temperature</strong>. A low temperature makes the bot stick to safer, predictable answers. A higher temperature allows the model to take risks, leading to more creative (and sometimes unpredictable) responses.</p>
+                        </div>
+
+                        <h3>How LLMs Work: Tokens, Not Words</h3>
+                        <p>LLMs do not process text word-by-word. They break text into <strong>tokens</strong> — chunks that can be a full word, a word fragment, or even a punctuation mark. The model assigns a probability to every possible next token, then samples one based on the temperature setting.</p>
+
+                        <table class="academic-table">
+                            <thead><tr><th>Text</th><th>Tokenized As</th><th>Token Count</th></tr></thead>
+                            <tbody>
+                                <tr><td>"Hello, world!"</td><td>"Hello", ",", " world", "!"</td><td>4 tokens</td></tr>
+                                <tr><td>"unbelievable"</td><td>"un", "believ", "able"</td><td>3 tokens</td></tr>
+                                <tr><td>"app.py"</td><td>"app", ".", "py"</td><td>3 tokens</td></tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Key LLM Parameters Explained</h3>
+                        <table class="academic-table">
+                            <thead><tr><th>Parameter</th><th>What It Controls</th><th>Low Value Effect</th><th>High Value Effect</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Temperature</strong></td><td>Randomness of token selection.</td><td>Safe, repetitive, focused answers.</td><td>Creative, diverse, sometimes odd answers.</td></tr>
+                                <tr><td><strong>Max New Tokens</strong></td><td>Maximum length of the generated response.</td><td>Short, concise replies.</td><td>Long, detailed replies (costs more API time).</td></tr>
+                                <tr><td><strong>Top-p (Nucleus Sampling)</strong></td><td>Restricts selection to the most probable tokens.</td><td>Very predictable output.</td><td>More diverse word choices.</td></tr>
+                                <tr><td><strong>Context Window</strong></td><td>How much conversation history the model "remembers".</td><td>Forgets earlier parts of long chats.</td><td>Retains more context for coherent replies.</td></tr>
+                            </tbody>
+                        </table>
+
+                        <h3>The System Prompt: Giving Your Bot a Personality</h3>
+                        <p>Most instruction-tuned LLMs (like Mistral-7B-Instruct) accept a <strong>system prompt</strong> — a hidden instruction you send before the user's message to set the AI's tone, role, and constraints:</p>
+
+                        <pre class="code-view"><code># Mistral Instruct format
+payload = {
+    "inputs": "&lt;s&gt;[INST] You are a helpful and friendly CS tutor. "
+              "Answer clearly and concisely. "
+              "User: What is an API? [/INST]",
+    "parameters": {
+        "max_new_tokens": 200,
+        "temperature": 0.6,
+        "return_full_text": False
+    }
+}</code></pre>
+                    </div>
+
+                    <div class="interactive-widget">
+                        <h4>Interactive Simulator: Temperature Controls</h4>
+                        <p>Adjust the slider below to see how a model's sentence predictions change based on temperature values:</p>
+                        <input type="range" id="temp-slider" min="1" max="10" value="2" step="1">
+                        <span id="temp-val-display">0.2 (Predictable)</span>
+                        <div class="sentence-prediction-box" id="prediction-output">
+                            "The student went to the library to study..."
+                        </div>
+                    </div>
+
+                    <div class="interactive-widget python-lab">
+                        <span class="lab-tag">🐍 Python Lab</span>
+                        <h4>Lab Activity: Simulate LLM Temperature & Tokenization</h4>
+                        <p>This lab simulates two core LLM concepts: <strong>tokenization</strong> (splitting text into chunks) and <strong>temperature</strong> (how random the output is). Change the temperature value and sentence to explore how the model's behaviour shifts!</p>
+                        <div class="lab-container">
+                            <textarea class="python-editor" id="code-w9" rows="40"># ============================================
+# WORLD 9 LAB: LLM Temperature & Tokenization
+# ============================================
+import random
+
+# ---- PART 1: Tokenization Simulator ----
+def simple_tokenize(text):
+    """
+    A simplified tokenizer — splits on spaces and punctuation.
+    Real LLMs use Byte-Pair Encoding (BPE) for sub-word tokens.
+    """
+    import re
+    tokens = re.findall(r"[\w']+|[.,!?;:]", text)
+    return tokens
+
+print("=" * 42)
+print("PART 1: Tokenization")
+print("=" * 42)
+
+test_phrases = [
+    "Hello, world!",
+    "unbelievable",
+    "The chatbot replied: 'Hello!'"
+]
+
+for phrase in test_phrases:
+    tokens = simple_tokenize(phrase)
+    print(f"  Text   : {phrase}")
+    print(f"  Tokens : {tokens}")
+    print(f"  Count  : {len(tokens)} tokens")
+    print()
+
+# ---- PART 2: Temperature Effect Simulator ----
+print("=" * 42)
+print("PART 2: Temperature Effect")
+print("=" * 42)
+print("Context: 'The student went to the library to...'")
+print()
+
+def pick_next_word(temperature):
+    """Simulates token sampling at different temperatures."""
+    # Token pools — safe to creative
+    safe      = ["study", "read", "learn"]
+    balanced  = ["explore", "discover", "research"]
+    creative  = ["dream", "invent", "code", "teleport"]
+
+    if temperature <= 0.3:
+        pool, label = safe, "Predictable 🎯"
+    elif temperature <= 0.6:
+        pool, label = safe + balanced, "Balanced ⚖️"
+    elif temperature <= 0.85:
+        pool, label = balanced + creative, "Creative 🎨"
+    else:
+        pool, label = safe + balanced + creative, "Wild 🎲"
+
+    return random.choice(pool), label
+
+# Try different temperatures
+for temp in [0.1, 0.4, 0.7, 1.0]:
+    results = [pick_next_word(temp)[0] for _ in range(4)]
+    _, label = pick_next_word(temp)
+    print(f"  temp={temp} {label}")
+    print(f"    → {', '.join(results)}")
+
+# CHALLENGE: Change the temperature values above and re-run!</textarea>
+                            <div class="lab-controls">
+                                <button class="run-btn" onclick="runPythonLab('code-w9', 'output-w9')">▶ Run Code</button>
+                                <button class="reset-btn" onclick="resetPythonLab('code-w9')">↺ Reset</button>
+                            </div>
+                            <div class="python-output" id="output-w9"><span class="output-placeholder">Output will appear here after you click Run...</span></div>
+                        </div>
+                    </div>
+
+                    <div class="quiz-block" id="quiz-w9">
+                        <h3>Knowledge Checkpoint</h3>
+                        <div class="quiz-question">
+                            <p><strong>Question:</strong> What happens conceptually when you increase an LLM's "temperature" setting toward a high value?</p>
+                            <label class="quiz-option"><input type="radio" name="q9" value="a"> The computer's internal hardware processor physically heats up.</label>
+                            <label class="quiz-option"><input type="radio" name="q9" value="b"> The model's answers become more varied, random, and creative.</label>
+                            <label class="quiz-option"><input type="radio" name="q9" value="c"> The model shuts down to prevent syntax exceptions.</label>
+                        </div>
+                        <button class="submit-quiz-btn" data-world="9">Verify Solution</button>
+                        <div class="quiz-feedback hidden"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="world-10" class="world-card locked">
+                <div class="world-header">
+                    <span class="world-tag">World 10</span>
+                    <h2>Build the Chatbot (Source Project Blueprints)</h2>
+                </div>
+                <div class="world-body">
+                    <div class="mission-brief">
+                        <h4>🎯 Mission Brief</h4>
+                        <p>Review the blueprint. Here are the exact files that make up your application. Read through each component to see how it fits into the overall system architecture.</p>
+                    </div>
+
+                    <div class="learning-objectives">
+                        <h4>Learning Objectives</h4>
+                        <ul>
+                            <li>Examine the structural layout of a complete web application.</li>
+                            <li>Analyze how the backend logic communicates with your layout design.</li>
+                            <li>Understand why configuration files exist in production.</li>
+                        </ul>
+                    </div>
+
+                    <div class="interactive-content">
+                        <h3>The Complete Blueprint Layout</h3>
+                        
+                        <pre class="code-view"><code>chatbot/
+├── app.py
+├── requirements.txt
+├── .env.example
+├── .gitignore
+├── README.md
+├── templates/
+│   └── index.html
+└── static/
+    ├── style.css
+    └── script.js</code></pre>
+
+                        <div class="accordion-container">
+                            <div class="accordion-item">
+                                <button class="accordion-trigger">📄 File 1: <code>app.py</code> (Python Server Engine)</button>
+                                <div class="accordion-panel">
+                                    <p>This is your backend server. It listens for incoming requests and safely manages the connection to the Hugging Face API.</p>
+                                    <pre class="code-view"><code>from flask import Flask, render_template, request, jsonify
+import os
+import requests
+
+app = Flask(__name__)
+
+# Mock configuration - in production, load from your secure environment variables
+API_URL = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2"
+HF_TOKEN = os.getenv("HF_TOKEN", "mock_placeholder_token")
+
+@app.route("/")
+def home():
+    return render_template("index.html")
+
+@app.route("/chat", methods=["POST"])
+def chat():
+    user_data = request.json
+    user_message = user_data.get("message", "")
+    
+    headers = {"Authorization": f"Bearer {HF_TOKEN}"}
+    payload = {"inputs": f"<s>[INST] {user_message} [/INST]"}
+    
+    try:
+        response = requests.post(API_URL, headers=headers, json=payload)
+        response_json = response.json()
+        # Extract the model's text generation results
+        bot_response = response_json[0]['generated_text']
+        # Clean up output to return just the answer
+        bot_response = bot_response.split("[/INST]")[-1].strip()
+    except Exception:
+        bot_response = "I received your message on the backend, but my API key needs verification!"
+        
+    return jsonify({"reply": bot_response})
+
+if __name__ == "__main__":
+    app.run(debug=True)</code></pre>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <button class="accordion-trigger">📄 File 2: <code>templates/index.html</code> (The Visual Skeleton)</button>
+                                <div class="accordion-panel">
+                                    <p>Defines the UI layout of your chat interface inside the browser.</p>
+                                    <pre class="code-view"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Local AI Assistant&lt;/title&gt;
+    &lt;link rel="stylesheet" href="/static/style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="chat-container"&gt;
+        &lt;div id="chat-box" class="chat-box"&gt;&lt;/div&gt;
+        &lt;div class="input-area"&gt;
+            &lt;input type="text" id="user-input" placeholder="Type a prompt..."&gt;
+            &lt;button id="send-btn"&gt;Send&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;script src="/static/script.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <button class="accordion-trigger">📄 File 3: <code>static/style.css</code> (The Visual Skin)</button>
+                                <div class="accordion-panel">
+                                    <p>Styles the chat window, input fields, and chat bubbles.</p>
+                                    <pre class="code-view"><code>body { font-family: sans-serif; background-color: #fcfaf8; display: flex; justify-content: center; padding: 50px; }
+.chat-container { width: 400px; background: white; border: 1px solid #ddd; border-radius: 8px; padding: 20px; }
+.chat-box { height: 300px; overflow-y: auto; border-bottom: 1px solid #eee; margin-bottom: 10px; }
+.msg { padding: 8px 12px; margin: 5px 0; border-radius: 4px; }
+.user { background: #8C1515; color: white; text-align: right; }
+.bot { background: #eee; color: #333; }</code></pre>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <button class="accordion-trigger">📄 File 4: <code>static/script.js</code> (The Interaction Engine)</button>
+                                <div class="accordion-panel">
+                                    <p>Captures your inputs, triggers the network request, and renders the AI response back to the page.</p>
+                                    <pre class="code-view"><code>document.getElementById("send-btn").addEventListener("click", sendMessage);
+
+async function sendMessage() {
+    const inputEl = document.getElementById("user-input");
+    const text = inputEl.value.trim();
+    if (!text) return;
+
+    appendBubble(text, "user");
+    inputEl.value = "";
+
+    const response = await fetch("/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: text })
+    });
+    const data = await response.json();
+    appendBubble(data.reply, "bot");
+}
+
+  function appendBubble(text, sender) {
+    const box = document.getElementById("chat-box");
+    const div = document.createElement("div");
+    div.className = `msg ${sender}`;
+    div.innerText = text;
+    box.appendChild(div);
+    box.scrollTop = box.scrollHeight;
+}</code></pre>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <button class="accordion-trigger">📄 File 5: <code>requirements.txt</code> & Config files</button>
+                                <div class="accordion-panel">
+                                    <p><strong>requirements.txt</strong> lists the software dependencies that Python needs to download:</p>
+                                    <pre class="code-view"><code>flask==3.0.2
+requests==2.31.0</code></pre>
+                                    <p><strong>.env.example</strong> provides a safe template for managing private API keys securely:</p>
+                                    <pre class="code-view"><code>HF_TOKEN=your_huggingface_api_token_here</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quiz-block" id="quiz-w10">
+                        <h3>Knowledge Checkpoint</h3>
+                        <div class="quiz-question">
+                            <p><strong>Question:</strong> What would happen if we deleted the <code>templates/index.html</code> file but kept all the backend Python code intact?</p>
+                            <label class="quiz-option"><input type="radio" name="q10" value="a"> The app works fine because Python creates visual boxes automatically.</label>
+                            <label class="quiz-option"><input type="radio" name="q10" value="b"> The server will crash or throw an error when trying to load the homepage because the visual blueprint is missing.</label>
+                            <label class="quiz-option"><input type="radio" name="q10" value="c"> The CSS file will take over and display the page anyway.</label>
+                        </div>
+                        <button class="submit-quiz-btn" data-world="10">Verify Solution</button>
+                        <div class="quiz-feedback hidden"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="world-11" class="world-card locked">
+                <div class="world-header">
+                    <span class="world-tag">World 11</span>
+                    <h2>How Everything Connects</h2>
+                </div>
+                <div class="world-body">
+                    <div class="mission-brief">
+                        <h4>🎯 Mission Brief</h4>
+                        <p>See the big picture. Trace exactly how a single message travels through every layer of the tech stack and back again.</p>
+                    </div>
+
+                    <div class="learning-objectives">
+                        <h4>Learning Objectives</h4>
+                        <ul>
+                            <li>Map the complete data path across frontend, backend, and external APIs.</li>
+                            <li>See how abstract layers work together to power a live application.</li>
+                        </ul>
+                    </div>
+
+                    <div class="interactive-content">
+                        <h3>Tracing the Data Journey</h3>
+                        <p>When you click "Send" in the chat interface, your message travels through a complete round-trip across the network:</p>
+                        
+                        <div class="diagram-container">
+                            <svg viewBox="0 0 600 320" class="inline-svg-diagram" aria-label="End-to-End Chatbot Data Flow Architecture">
+                                <rect x="10" y="20" width="100" height="60" rx="5" fill="#fcfaf8" stroke="#2e2e2e"/>
+                                <text x="60" y="55" text-anchor="middle" font-size="12">1. User Types</text>
+                                
+                                <path d="M 60 80 L 60 120" stroke="#8C1515" stroke-width="2" marker-end="url(#arrow)"/>
+                                
+                                <rect x="10" y="120" width="100" height="60" rx="5" fill="#fcfaf8" stroke="#8C1515"/>
+                                <text x="60" y="155" text-anchor="middle" font-size="11" font-weight="bold">2. JavaScript</text>
+                                
+                                <path d="M 110 150 L 200 150" stroke="#8C1515" stroke-width="2" marker-end="url(#arrow)"/>
+                                <text x="155" y="140" text-anchor="middle" font-size="10" fill="#6e6e6e">POST /chat</text>
+
+                                <rect x="200" y="120" width="120" height="60" rx="5" fill="#8C1515"/>
+                                <text x="260" y="155" text-anchor="middle" fill="white" font-size="12" font-weight="bold">3. Flask (app.py)</text>
+
+                                <path d="M 320 150 L 440 150" stroke="#8C1515" stroke-width="2" marker-end="url(#arrow)"/>
+                                <text x="380" y="140" text-anchor="middle" font-size="10" fill="#6e6e6e">Hugging Face API</text>
+
+                                <rect x="440" y="120" width="140" height="60" rx="5" fill="#fcfaf8" stroke="#2e2e2e"/>
+                                <text x="510" y="155" text-anchor="middle" font-size="11">4. AI Brain Computes</text>
+
+                                <path d="M 510 180 L 510 240 L 260 240 L 260 180" fill="none" stroke="#28a745" stroke-dasharray="4" stroke-width="2" marker-end="url(#arrow)"/>
+                                <text x="380" y="230" text-anchor="middle" font-size="10" fill="#28a745">5. AI text returns to Flask</text>
+
+                                <path d="M 200 160 L 60 160 L 60 180" fill="none" stroke="#28a745" stroke-dasharray="4" stroke-width="2" marker-end="url(#arrow)"/>
+                                <text x="120" y="200" text-anchor="middle" font-size="10" fill="#28a745">6. JSON response to UI</text>
+
+                                <path d="M 60 120 L 60 80" stroke="#28a745" stroke-width="2" marker-end="url(#arrow)"/>
+                            </svg>
+                            <p class="diagram-caption">The clear lifecycle of data moving from the user interface, through the server, out to the AI models, and back to your screen.</p>
+                        </div>
+
+                        <h3>Step-by-Step: A Single Message's Journey</h3>
+                        <table class="academic-table">
+                            <thead><tr><th>Step</th><th>Actor</th><th>What Happens</th><th>Technology</th></tr></thead>
+                            <tbody>
+                                <tr><td>1</td><td>User</td><td>Types a message and clicks Send.</td><td>Browser / HTML</td></tr>
+                                <tr><td>2</td><td>JavaScript</td><td>Reads the input value, builds a JSON payload, and calls <code>fetch("/chat", ...)</code>.</td><td>JavaScript / Fetch API</td></tr>
+                                <tr><td>3</td><td>HTTP Network</td><td>The POST request travels over localhost (or the internet) to the Flask server.</td><td>HTTP / TCP/IP</td></tr>
+                                <tr><td>4</td><td>Flask (app.py)</td><td>The <code>/chat</code> route receives the JSON body and extracts the message string.</td><td>Python / Flask</td></tr>
+                                <tr><td>5</td><td>Flask → HF</td><td>Flask sends a new POST request (with the auth token) to Hugging Face's Inference API.</td><td>Python Requests / HTTPS</td></tr>
+                                <tr><td>6</td><td>Hugging Face</td><td>The LLM generates the reply tokens and returns a JSON response.</td><td>Cloud GPU / REST API</td></tr>
+                                <tr><td>7</td><td>Flask</td><td>Parses the HF response and returns it as JSON to the browser.</td><td>Python / jsonify()</td></tr>
+                                <tr><td>8</td><td>JavaScript</td><td>Receives the JSON reply, creates a new bubble element, and appends it to the chat box.</td><td>JavaScript / DOM</td></tr>
+                            </tbody>
+                        </table>
+
+                        <h3>HTTP Status Codes: Reading the Server's Response</h3>
+                        <p>Every HTTP response includes a <strong>status code</strong> — a 3-digit number that tells you whether the request succeeded or why it failed. Knowing these codes is essential for debugging:</p>
+                        <table class="academic-table">
+                            <thead><tr><th>Code</th><th>Meaning</th><th>When You'll See It</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>200 OK</strong></td><td>Request succeeded.</td><td>Normal chatbot reply.</td></tr>
+                                <tr><td><strong>400 Bad Request</strong></td><td>The server couldn't understand the request — often malformed JSON.</td><td>You forgot to set Content-Type header.</td></tr>
+                                <tr><td><strong>401 Unauthorized</strong></td><td>Authentication failed — invalid or missing token.</td><td>Wrong or expired HF_TOKEN.</td></tr>
+                                <tr><td><strong>404 Not Found</strong></td><td>The URL path doesn't exist on the server.</td><td>Typo in the route name.</td></tr>
+                                <tr><td><strong>500 Internal Server Error</strong></td><td>The server crashed while processing the request.</td><td>Unhandled exception in <code>app.py</code>.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="interactive-widget">
+                        <h4>Interactive Diagnostic: Run a Simulated Request</h4>
+                        <p>Click the button below to watch a simulated text packet travel through our architecture pipeline in real time.</p>
+                        <button class="action-btn" id="btn-run-pipeline">Trigger Pipeline Test</button>
+                        <div class="pipeline-track hidden" id="pipeline-visualizer">
+                            <span class="pipe-step" id="ps1">UI</span> → 
+                            <span class="pipe-step" id="ps2">JS Fetch</span> → 
+                            <span class="pipe-step" id="ps3">Python Server</span> → 
+                            <span class="pipe-step" id="ps4">Hugging Face API</span> → 
+                            <span class="pipe-step" id="ps5">Render Bubble</span>
+                        </div>
+                    </div>
+
+                    <div class="quiz-block" id="quiz-w11">
+                        <h3>Knowledge Checkpoint</h3>
+                        <div class="quiz-question">
+                            <p><strong>Question:</strong> Who directly initiates the web request to the Flask <code>/chat</code> backend route when you click send?</p>
+                            <label class="quiz-option"><input type="radio" name="q11" value="a"> The raw HTML code structure.</label>
+                            <label class="quiz-option"><input type="radio" name="q11" value="b"> Client-side JavaScript using the fetch mechanism.</label>
+                            <label class="quiz-option"><input type="radio" name="q11" value="c"> The Hugging Face cloud servers.</label>
+                        </div>
+                        <button class="submit-quiz-btn" data-world="11">Verify Solution</button>
+                        <div class="quiz-feedback hidden"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="world-12" class="world-card locked">
+                <div class="world-header">
+                    <span class="world-tag">World 12</span>
+                    <h2>Vibe Coding Academy</h2>
+                </div>
+                <div class="world-body">
+                    <div class="mission-brief">
+                        <h4>🎯 Mission Brief</h4>
+                        <p>Learn how modern software engineers actually build software today. Discover how to use AI coding assistants effectively while keeping your critical thinking sharp.</p>
+                    </div>
+
+                    <div class="learning-objectives">
+                        <h4>Learning Objectives</h4>
+                        <ul>
+                            <li>Learn how to use AI coding assistants effectively.</li>
+                            <li>Understand why systemic planning matters more than raw typing speed.</li>
+                            <li>Develop debugging skills to troubleshoot AI-generated code.</li>
+                        </ul>
+                    </div>
+
+                    <div class="interactive-content">
+                        <h3>The Modern Engineering Paradigm</h3>
+                        <p>Today, developers rarely write every single line of boilerplate code by hand. We use AI tools to generate templates. This is often called <strong>Vibe Coding</strong> — directing AI engines using clear, structural descriptions of what we want to build.</p>
+                        
+                        <blockquote>
+                            "The superpower of a modern developer is not memorizing syntax anymore; it is system design, clear reasoning, and knowing exactly how to debug when things go wrong."
+                        </blockquote>
+
+                        <div class="analogy-box">
+                            <h5>🧩 Real-World Analogy</h5>
+                            <p>Think of yourself as a movie director. The AI is your camera crew and special effects team. They can generate incredible scenes quickly, but they don't know the story you want to tell. You need to guide the vision, spot mistakes, and piece the scenes together into a cohesive movie.</p>
+                        </div>
+
+                        <h3>Effective AI Prompting for Code</h3>
+                        <p>The quality of AI-generated code depends entirely on the quality of your prompt. Here is a framework for writing prompts that get great results:</p>
+                        <table class="academic-table">
+                            <thead><tr><th>Prompt Element</th><th>Why It Matters</th><th>Example</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Context</strong></td><td>Tell the AI what project it is helping with.</td><td>"I am building a Flask chatbot that uses the Hugging Face API."</td></tr>
+                                <tr><td><strong>Task</strong></td><td>Be specific about exactly what you want.</td><td>"Write a Python function that sends a POST request to the HF Inference API."</td></tr>
+                                <tr><td><strong>Constraints</strong></td><td>Specify libraries, versions, or style requirements.</td><td>"Use the <code>requests</code> library. Keep it under 20 lines."</td></tr>
+                                <tr><td><strong>Output format</strong></td><td>Tell it how to format the response.</td><td>"Return only the function with a short docstring explaining each line."</td></tr>
+                            </tbody>
+                        </table>
+
+                        <h3>The Debugging Mindset</h3>
+                        <p>Even with AI-generated code, bugs happen. Great developers follow a systematic debugging process:</p>
+
+                        <pre class="code-view"><code># Step 1: Read the error message carefully
+# Python errors are informative — they tell you the file, line, and type of error
+# Example: FileNotFoundError: [Errno 2] No such file or directory: '.env'
+
+# Step 2: Add print() statements to trace the data flow
+def chat():
+    data = request.json
+    print("Received data:", data)       # Is the payload arriving?
+    user_msg = data.get("message", "")
+    print("User message:", user_msg)    # Is the key correct?
+    # ...
+
+# Step 3: Use the browser's DevTools (F12) to inspect network requests
+# Network tab → click the /chat request → see Request/Response bodies
+
+# Step 4: Check the Flask terminal output for tracebacks
+# Step 5: Simplify and isolate — comment out code until the bug disappears</code></pre>
+
+                        <div class="analogy-box">
+                            <h5>🔑 The Golden Rule of AI-Assisted Coding</h5>
+                            <p>Never paste code you do not understand into your project. Before accepting any AI-generated snippet, ask yourself: <em>"Can I explain what every line does?"</em> If you cannot, ask the AI to explain it line by line. Understanding the code is what separates a developer from someone who just has a working program by luck.</p>
+                        </div>
+                    </div>
+
+                    <div class="quiz-block" id="quiz-w12">
+                        <h3>Knowledge Checkpoint</h3>
+                        <div class="quiz-question">
+                            <p><strong>Question:</strong> What is the biggest trap to avoid when using AI assistants to generate code blueprints?</p>
+                            <label class="quiz-option"><input type="radio" name="q12" value="a"> Copy-pasting massive chunks of code without understanding how they fit together or how to debug them.</label>
+                            <label class="quiz-option"><input type="radio" name="q12" value="b"> Asking the AI to format code using clean indentation.</label>
+                            <label class="quiz-option"><input type="radio" name="q12" value="c"> Using Python instead of older, legacy web frameworks.</label>
+                        </div>
+                        <button class="submit-quiz-btn" data-world="12">Verify Solution</button>
+                        <div class="quiz-feedback hidden"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="world-13" class="world-card locked">
+                <div class="world-header">
+                    <span class="world-tag">World 13</span>
+                    <h2>Your Journey Continues</h2>
+                </div>
+                <div class="world-body">
+                    <div class="mission-brief">
+                        <h4>🎯 Mission Brief</h4>
+                        <p>Congratulations, Explorer! You have unlocked the entire tech stack. Review your long-term growth roadmap and claim your completion certificate below.</p>
+                    </div>
+
+                    <div class="interactive-content">
+                        <h3>Your Professional Roadmap</h3>
+                        <p>You now understand how frontend interfaces, backend routing engines, and cloud AI models work together. Here is your roadmap for taking these skills to the next level:</p>
+
+                        <h3>What You Have Mastered</h3>
+                        <table class="academic-table">
+                            <thead><tr><th>World</th><th>Topic</th><th>Core Skill Earned</th></tr></thead>
+                            <tbody>
+                                <tr><td>1</td><td>Welcome Explorer</td><td>Computational thinking &amp; decomposition.</td></tr>
+                                <tr><td>2</td><td>Understanding Computers</td><td>Hardware layers: CPU, RAM, Storage &amp; file systems.</td></tr>
+                                <tr><td>3</td><td>Speaking to Computers</td><td>Python syntax, variables, functions &amp; how interpreters work.</td></tr>
+                                <tr><td>4</td><td>The Holy Trinity</td><td>HTML structure, CSS styling, JavaScript interactivity.</td></tr>
+                                <tr><td>5</td><td>Frontend Adventure</td><td>DOM manipulation, events &amp; async fetch calls.</td></tr>
+                                <tr><td>6</td><td>Backend Fortress</td><td>Flask routes, HTTP methods &amp; frontend/backend separation.</td></tr>
+                                <tr><td>7</td><td>Crossing the API Bridge</td><td>REST APIs, JSON payloads &amp; HTTP status codes.</td></tr>
+                                <tr><td>8</td><td>Meet Hugging Face</td><td>Cloud AI inference, API tokens &amp; environment variables.</td></tr>
+                                <tr><td>9</td><td>The AI Brain</td><td>LLM tokenization, temperature &amp; system prompts.</td></tr>
+                                <tr><td>10</td><td>Build the Chatbot</td><td>Reading and understanding a complete application blueprint.</td></tr>
+                                <tr><td>11</td><td>How Everything Connects</td><td>End-to-end data flow across the full tech stack.</td></tr>
+                                <tr><td>12</td><td>Vibe Coding Academy</td><td>AI-assisted development &amp; systematic debugging.</td></tr>
+                            </tbody>
+                        </table>
+
+                        <div class="roadmap-timeline">
+                            <div class="timeline-stop">
+                                <h5>1. Deepen Your Core Python Skills</h5>
+                                <p>Master data structures, loops, and handling files securely on your system.</p>
+                            </div>
+                            <div class="timeline-stop">
+                                <h5>2. Version Control with Git & GitHub</h5>
+                                <p>Learn how to track changes to your code and collaborate seamlessly with other developers.</p>
+                            </div>
+                            <div class="timeline-stop">
+                                <h5>3. Relational Databases & Storage</h5>
+                                <p>Move past temporary variables and learn how to store user accounts and chat history permanently in databases like PostgreSQL or SQLite.</p>
+                            </div>
+                            <div class="timeline-stop">
+                                <h5>4. Production Cloud Deployments</h5>
+                                <p>Take your app off your local machine and deploy it to the cloud using platforms like Render, AWS, or Docker containers so anyone can use it.</p>
+                            </div>
+                        </div>
+
+                        <div id="certificate-box" class="certificate-box locked-cert">
+                            <h3>Official Laboratory Certificate</h3>
+                            <p>This document certifies that the bearer has completed the introductory curriculum in full-stack AI system architectures from first principles.</p>
+                            <div class="cert-signature-line">
+                                <span>SYSTEM INITIALIZED</span>
+                                <strong>GRADUATE EXPLORER</strong>
+                            </div>
+                            <button class="action-btn" id="btn-print-cert" disabled>Generate Certificate</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <footer class="global-footer">
+        <p>&copy; 2026 Stanford-Inspired Academic CS Laboratory Engine. Completely Self-Contained. Freedom to Learn.</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <!-- ================================================================
+         SKULPT PYTHON LAB RUNNER
+         Self-contained — does not touch gameState or script.js logic.
+         ================================================================ -->
+    <script>
+    /* Default code map — used by the Reset button */
+    const PYTHON_LAB_DEFAULTS = {};
+
+    /* Capture defaults from each textarea on page load */
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.python-editor').forEach(function (ta) {
+            PYTHON_LAB_DEFAULTS[ta.id] = ta.value;
+        });
+    });
+
+    /**
+     * runPythonLab(editorId, outputId)
+     * Reads code from the textarea, runs it via Skulpt,
+     * and streams print() output into the output panel.
+     */
+    function runPythonLab(editorId, outputId) {
+        var code      = document.getElementById(editorId).value;
+        var outputEl  = document.getElementById(outputId);
+
+        /* Clear previous output and show running indicator */
+        outputEl.innerHTML = '<span class="output-running">⚡ Running...</span>';
+        var buffer = '';
+
+        /* Skulpt output handler — called for every print() */
+        function outf(text) {
+            buffer += text
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;');
+            outputEl.innerHTML = buffer;
+        }
+
+        /* Skulpt file reader (required for import statements) */
+        function builtinRead(x) {
+            if (Sk.builtinFiles === undefined ||
+                Sk.builtinFiles['files'][x] === undefined) {
+                throw 'File not found: \'' + x + "'";
+            }
+            return Sk.builtinFiles['files'][x];
+        }
+
+        /* Configure Skulpt runtime */
+        Sk.configure({
+            output: outf,
+            read:   builtinRead,
+            __future__: Sk.python3,
+            execLimit: 10000  /* ms — prevents infinite loops from freezing */
+        });
+
+        /* Execute the code asynchronously */
+        Sk.misceval.asyncToPromise(function () {
+            return Sk.importMainWithBody('<stdin>', false, code, true);
+        }).then(
+            function () {
+                /* Success */
+                if (!buffer) {
+                    outputEl.innerHTML = '<span class="output-placeholder">✅ Program finished with no output.</span>';
+                }
+            },
+            function (err) {
+                /* Error: show traceback in red */
+                if (!buffer) { outputEl.innerHTML = ''; }
+                outputEl.innerHTML += '<span class="error-text">❌ ' +
+                    String(err).replace(/</g, '&lt;').replace(/>/g, '&gt;') +
+                    '</span>';
+            }
+        );
+    }
+
+    /**
+     * resetPythonLab(editorId)
+     * Restores the textarea to its original pre-filled code
+     * and clears the output panel.
+     */
+    function resetPythonLab(editorId) {
+        var outputId = editorId.replace('code-', 'output-');
+        if (PYTHON_LAB_DEFAULTS[editorId]) {
+            document.getElementById(editorId).value = PYTHON_LAB_DEFAULTS[editorId];
+        }
+        document.getElementById(outputId).innerHTML =
+            '<span class="output-placeholder">Output will appear here after you click Run...</span>';
+    }
+    </script>
+</body>
+</html>

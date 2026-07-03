@@ -1,0 +1,25 @@
+services:
+
+  chatbot:
+    build: ./chatbot-project
+    env_file:
+      - ./chatbot-project/.env
+    volumes:
+      - ./chatbot-project:/app
+    ports:
+      - "5000:5000"
+    command: python app.py
+
+  learning:
+    image: nginx:alpine
+    volumes:
+      - ./learning-site:/usr/share/nginx/html:ro
+    ports:
+      - "8080:80"
+
+  teaching:
+    image: nginx:alpine
+    volumes:
+      - ./teaching-site:/usr/share/nginx/html:ro
+    ports:
+      - "8081:80"
