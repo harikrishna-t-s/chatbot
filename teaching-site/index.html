@@ -146,6 +146,60 @@
         </div>
       </div>
 
+      <!-- Interactive: Build the Stack Game -->
+      <div class="sandbox-container" id="stackGameSandbox" style="margin-top: 36px; padding: 24px; background: var(--card-bg); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow);">
+        <h3 style="margin-top: 0; font-family: var(--font-display); color: var(--cardinal-deep); font-size: clamp(1.2rem, 1.0rem + 0.8vw, 1.45rem);">🧩 Build the Stack: Put It In Order</h3>
+        <p style="font-size: 0.95rem; color: var(--ink-soft); margin-bottom: 18px;">Your chatbot has three layers. Drag (or tap arrows) to arrange them in the correct order — from what the <strong>user sees</strong> at the top, to the <strong>AI brain</strong> at the bottom.</p>
+        
+        <div id="stackGame" class="stack-game">
+          <div class="stack-item" draggable="true" data-correct="0" data-id="frontend">
+            <span class="stack-grip">⠿</span>
+            <div class="stack-item-content">
+              <span class="stack-emoji">🖥️</span>
+              <div><strong>Frontend</strong><br><small>The webpage you see & touch</small></div>
+            </div>
+            <div class="stack-arrows">
+              <button class="stack-arrow-btn stack-up" aria-label="Move up">▲</button>
+              <button class="stack-arrow-btn stack-down" aria-label="Move down">▼</button>
+            </div>
+          </div>
+          <div class="stack-item" draggable="true" data-correct="2" data-id="ai">
+            <span class="stack-grip">⠿</span>
+            <div class="stack-item-content">
+              <span class="stack-emoji">🧠</span>
+              <div><strong>AI Model</strong><br><small>The borrowed brain (Hugging Face)</small></div>
+            </div>
+            <div class="stack-arrows">
+              <button class="stack-arrow-btn stack-up" aria-label="Move up">▲</button>
+              <button class="stack-arrow-btn stack-down" aria-label="Move down">▼</button>
+            </div>
+          </div>
+          <div class="stack-item" draggable="true" data-correct="1" data-id="backend">
+            <span class="stack-grip">⠿</span>
+            <div class="stack-item-content">
+              <span class="stack-emoji">⚙️</span>
+              <div><strong>Backend</strong><br><small>The Python program (Flask)</small></div>
+            </div>
+            <div class="stack-arrows">
+              <button class="stack-arrow-btn stack-up" aria-label="Move up">▲</button>
+              <button class="stack-arrow-btn stack-down" aria-label="Move down">▼</button>
+            </div>
+          </div>
+        </div>
+        <button class="btn-secondary" id="checkStackBtn" style="margin-top: 16px;">Check my order ✓</button>
+        <p id="stackFeedback" style="margin-top: 12px; font-weight: 600; font-size: 0.95rem; min-height: 1.4em;"></p>
+        <!-- Flow animation shown on success -->
+        <div id="stackFlowAnim" class="stack-flow-anim" style="display: none;">
+          <div class="stack-flow-node">🖥️ Frontend</div>
+          <div class="stack-flow-arrow">→</div>
+          <div class="stack-flow-node">⚙️ Backend</div>
+          <div class="stack-flow-arrow">→</div>
+          <div class="stack-flow-node">🧠 AI Model</div>
+          <div class="stack-flow-arrow">→</div>
+          <div class="stack-flow-node">💬 Reply!</div>
+        </div>
+      </div>
+
       <div class="callout">
         <p><strong>Here's the honest version:</strong> almost no modern software is built entirely from scratch. Real engineers connect existing pieces — a database someone else wrote, a payment system someone else built, an AI model someone else trained — and write the "glue" code that makes them work together. That's exactly what you did today. That's not cheating. That <em>is</em> the job.</p>
       </div>
@@ -198,6 +252,26 @@
         It does this so fast and so well that the result reads like a thoughtful answer —
         even though under the hood, it's prediction, not understanding in the human sense.
       </p>
+
+      <!-- Interactive: Live Autocomplete Simulator -->
+      <div class="sandbox-container" style="margin-top: 36px; padding: 24px; background: var(--card-bg); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow);">
+        <h3 style="margin-top: 0; font-family: var(--font-display); color: var(--cardinal-deep); font-size: clamp(1.2rem, 1.0rem + 0.8vw, 1.45rem);">🤖 Be the AI: Autocomplete Simulator</h3>
+        <p style="font-size: 0.95rem; color: var(--ink-soft); margin-bottom: 18px;">Pretend <em>you</em> are the AI. A sentence starts below — click one of the predicted next words to continue it. Watch how each choice shapes the response, just like an LLM generates text token by token.</p>
+        
+        <div class="autocomplete-sim">
+          <div class="autocomplete-sim-output" id="acSimOutput">
+            <span class="ac-sim-base">The best way to learn programming is</span>
+            <span class="ac-sim-cursor-blink"></span>
+          </div>
+          <div class="autocomplete-sim-choices" id="acSimChoices">
+            <!-- Choices dynamically inserted by JS -->
+          </div>
+          <div style="display: flex; gap: 10px; align-items: center; margin-top: 14px; flex-wrap: wrap;">
+            <button class="btn-secondary" id="acSimReset">↻ Start Over</button>
+            <span id="acSimTokenCount" style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--ink-soft);">Tokens generated: 0</span>
+          </div>
+        </div>
+      </div>
 
       <div class="callout callout-gold">
         <p><strong>Why this matters:</strong> this is exactly why AI models sometimes state
@@ -427,6 +501,46 @@
         </div>
       </div>
 
+      <!-- Interactive: DOM Tree Explorer -->
+      <div class="sandbox-container" style="margin-top: 36px; padding: 24px; background: var(--card-bg); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow);">
+        <h3 style="margin-top: 0; font-family: var(--font-display); color: var(--cardinal-deep); font-size: clamp(1.2rem, 1.0rem + 0.8vw, 1.45rem);">🌳 Live DOM Tree Explorer</h3>
+        <p style="font-size: 0.95rem; color: var(--ink-soft); margin-bottom: 18px;">Click on any element in the mini chat preview below. The DOM tree on the right highlights <em>exactly</em> where that element lives in the browser's memory — showing how HTML becomes a live tree structure.</p>
+        
+        <div class="dom-explorer">
+          <!-- Mini chat preview -->
+          <div class="dom-preview" id="domPreview">
+            <div class="dom-el" data-node="body" data-depth="0">
+              <div class="dom-el dom-header" data-node="header" data-depth="1">
+                <span>🤖 MyChatBot</span>
+              </div>
+              <div class="dom-el dom-messages" data-node="div.messages" data-depth="1">
+                <div class="dom-el dom-msg-user" data-node="div.msg-user" data-depth="2">Hello!</div>
+                <div class="dom-el dom-msg-bot" data-node="div.msg-bot" data-depth="2">Hi there! How can I help?</div>
+              </div>
+              <div class="dom-el dom-input-area" data-node="div.input-area" data-depth="1">
+                <span class="dom-el dom-input-box" data-node="input" data-depth="2">Type a message…</span>
+                <span class="dom-el dom-send-btn" data-node="button" data-depth="2">Send</span>
+              </div>
+            </div>
+          </div>
+          <!-- DOM tree view -->
+          <div class="dom-tree" id="domTree">
+            <div class="dom-tree-node" data-for="body"><span class="dom-tag">&lt;body&gt;</span>
+              <div class="dom-tree-node" data-for="header" style="margin-left: 16px;"><span class="dom-tag">&lt;header&gt;</span> <span class="dom-desc">"🤖 MyChatBot"</span></div>
+              <div class="dom-tree-node" data-for="div.messages" style="margin-left: 16px;"><span class="dom-tag">&lt;div class="messages"&gt;</span>
+                <div class="dom-tree-node" data-for="div.msg-user" style="margin-left: 32px;"><span class="dom-tag">&lt;div class="msg-user"&gt;</span> <span class="dom-desc">"Hello!"</span></div>
+                <div class="dom-tree-node" data-for="div.msg-bot" style="margin-left: 32px;"><span class="dom-tag">&lt;div class="msg-bot"&gt;</span> <span class="dom-desc">"Hi there!…"</span></div>
+              </div>
+              <div class="dom-tree-node" data-for="div.input-area" style="margin-left: 16px;"><span class="dom-tag">&lt;div class="input-area"&gt;</span>
+                <div class="dom-tree-node" data-for="input" style="margin-left: 32px;"><span class="dom-tag">&lt;input&gt;</span> <span class="dom-desc">text field</span></div>
+                <div class="dom-tree-node" data-for="button" style="margin-left: 32px;"><span class="dom-tag">&lt;button&gt;</span> <span class="dom-desc">"Send"</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p id="domExplorerInfo" style="margin-top: 14px; font-family: var(--font-mono); font-size: 0.84rem; color: var(--ink-soft); min-height: 1.4em;">👆 Click any element above to see it in the DOM tree</p>
+      </div>
+
       <div class="callout">
         <h4 style="margin: 0 0 6px 0; color: var(--cardinal-deep); font-family: var(--font-display); font-size: 1.15rem;">💡 Your Debugging Superpower: Browser DevTools</h4>
         <p style="margin-bottom: 8px;">If you press <strong>F12</strong> (or right-click anywhere and select <strong>"Inspect"</strong>), your browser opens its <strong>Developer Tools</strong>. This is your command center as a web developer. It has two essential tabs:</p>
@@ -497,6 +611,25 @@ def chat():
     return jsonify({"reply": reply_text})</code></pre>
       </div>
       <p class="section-note">Notice how directly this reads: get the message, ask the AI, send the reply back. That's the entire job of the backend, in five lines.</p>
+
+      <!-- Interactive: Route Tester Simulator -->
+      <div class="sandbox-container" style="margin-top: 36px; padding: 24px; background: var(--card-bg); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow);">
+        <h3 style="margin-top: 0; font-family: var(--font-display); color: var(--cardinal-deep); font-size: clamp(1.2rem, 1.0rem + 0.8vw, 1.45rem);">🖥️ Route Tester: Talk to the Server</h3>
+        <p style="font-size: 0.95rem; color: var(--ink-soft); margin-bottom: 18px;">Type a route path below and see what Flask would do. Try <code>/</code>, <code>/chat</code>, or anything else!</p>
+        
+        <div class="route-tester">
+          <div class="route-input-row">
+            <span class="route-method">GET</span>
+            <select id="routeMethod" class="route-method-select" style="padding: 10px 12px; border: 1px solid var(--line); border-radius: var(--radius-sm) 0 0 var(--radius-sm); font-family: var(--font-mono); font-size: 0.88rem; font-weight: 600; background: var(--panel); color: var(--cardinal); outline: none; cursor: pointer; border-right: none;">
+              <option value="GET">GET</option>
+              <option value="POST">POST</option>
+            </select>
+            <input type="text" id="routeInput" value="/" placeholder="/chat" style="flex: 1; padding: 10px 14px; border: 1px solid var(--line); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-family: var(--font-mono); font-size: 0.95rem; background: var(--paper); color: var(--ink); outline: none;">
+            <button class="btn-primary" id="routeSendBtn" style="padding: 10px 20px; font-size: 0.88rem;">Send →</button>
+          </div>
+          <div id="routeResponse" class="route-response" style="margin-top: 16px; background: #201C17; border-radius: var(--radius-sm); padding: 16px 18px; font-family: var(--font-mono); font-size: 0.85rem; color: #F0EAD8; min-height: 80px; white-space: pre-wrap; display: none;"></div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -678,6 +811,25 @@ const data = await response.json();
         scale, is dramatically more realistic for a student project (or most companies,
         honestly).
       </p>
+
+      <!-- Interactive: API Key Validator Demo -->
+      <div class="sandbox-container" style="margin-top: 36px; padding: 24px; background: var(--card-bg); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow);">
+        <h3 style="margin-top: 0; font-family: var(--font-display); color: var(--cardinal-deep); font-size: clamp(1.2rem, 1.0rem + 0.8vw, 1.45rem);">🔑 API Key Validator</h3>
+        <p style="font-size: 0.95rem; color: var(--ink-soft); margin-bottom: 18px;">Paste or type an API key below. The validator checks its format and shows what happens when you use a valid vs. invalid key. <strong>This is a simulation — no real keys are sent anywhere.</strong></p>
+        
+        <div class="apikey-validator">
+          <div style="display: flex; gap: 10px; align-items: stretch; flex-wrap: wrap;">
+            <input type="text" id="apiKeyInput" placeholder="hf_aBcDeFgHiJkLmNoPqRsTuVwXyZ123456" style="flex: 1; min-width: 200px; padding: 10px 14px; border: 1px solid var(--line); border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 0.88rem; background: var(--paper); color: var(--ink); outline: none;">
+            <button class="btn-primary" id="apiKeyValidateBtn" style="padding: 10px 20px; font-size: 0.88rem;">Validate Key</button>
+          </div>
+          <div id="apiKeyResult" style="margin-top: 16px; padding: 16px; border-radius: var(--radius-sm); border: 1px solid var(--line); background: var(--panel); min-height: 60px; display: none;"></div>
+          <div style="margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap;">
+            <button class="btn-secondary" id="apiKeyTryValid" style="font-size: 0.82rem;">Try a valid key ✓</button>
+            <button class="btn-secondary" id="apiKeyTryInvalid" style="font-size: 0.82rem;">Try an invalid key ✗</button>
+            <button class="btn-secondary" id="apiKeyTryExposed" style="font-size: 0.82rem;">⚠️ Simulate a leaked key</button>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -854,6 +1006,32 @@ const data = await response.json();
         </div>
       </div>
 
+      <!-- Interactive: File Explorer -->
+      <div class="sandbox-container" style="margin-top: 36px; padding: 24px; background: var(--card-bg); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow);">
+        <h3 style="margin-top: 0; font-family: var(--font-display); color: var(--cardinal-deep); font-size: clamp(1.2rem, 1.0rem + 0.8vw, 1.45rem);">📁 Interactive File Explorer</h3>
+        <p style="font-size: 0.95rem; color: var(--ink-soft); margin-bottom: 18px;">Click any file in the tree to see a preview of its contents and what it does — just like in VS Code.</p>
+        
+        <div class="file-explorer">
+          <div class="file-explorer-tree" id="fileExplorerTree">
+            <div class="fe-item fe-folder fe-open" data-file="root">📂 chatbot-project/</div>
+            <div class="fe-item fe-file" data-file="app.py" style="padding-left: 24px;"><span class="file-dot file-dot-py"></span> app.py</div>
+            <div class="fe-item fe-folder fe-open" data-file="templates" style="padding-left: 24px;">📂 templates/</div>
+            <div class="fe-item fe-file" data-file="index.html" style="padding-left: 48px;"><span class="file-dot file-dot-html"></span> index.html</div>
+            <div class="fe-item fe-folder fe-open" data-file="static" style="padding-left: 24px;">📂 static/</div>
+            <div class="fe-item fe-file" data-file="style.css" style="padding-left: 48px;"><span class="file-dot file-dot-css"></span> style.css</div>
+            <div class="fe-item fe-file" data-file="script.js" style="padding-left: 48px;"><span class="file-dot file-dot-js"></span> script.js</div>
+            <div class="fe-item fe-file" data-file="requirements.txt" style="padding-left: 24px;"><span class="file-dot file-dot-txt"></span> requirements.txt</div>
+            <div class="fe-item fe-file" data-file=".env" style="padding-left: 24px;"><span class="file-dot file-dot-env"></span> .env</div>
+            <div class="fe-item fe-file" data-file=".gitignore" style="padding-left: 24px;"><span class="file-dot file-dot-txt"></span> .gitignore</div>
+          </div>
+          <div class="file-explorer-preview" id="fileExplorerPreview">
+            <div class="fe-preview-header" id="fePreviewHeader">Select a file →</div>
+            <pre class="fe-preview-code" id="fePreviewCode"><code>// Click a file on the left to see its contents</code></pre>
+            <p class="fe-preview-desc" id="fePreviewDesc"></p>
+          </div>
+        </div>
+      </div>
+
       <div class="checkpoint" data-quiz="project-files">
         <div class="checkpoint-head">
           <span class="checkpoint-badge">Quick check</span>
@@ -1008,6 +1186,29 @@ const data = await response.json();
         </div>
       </div>
       <p class="section-note">Notice the good prompt names the tech stack, the exact behavior, the data format, and the edge cases. That specificity is what turned a vague wish into today's working project.</p>
+
+      <!-- Interactive: Prompt Improver Challenge -->
+      <div class="sandbox-container" style="margin-top: 36px; padding: 24px; background: var(--card-bg); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow);">
+        <h3 style="margin-top: 0; font-family: var(--font-display); color: var(--cardinal-deep); font-size: clamp(1.2rem, 1.0rem + 0.8vw, 1.45rem);">✍️ Prompt Improver Challenge</h3>
+        <p style="font-size: 0.95rem; color: var(--ink-soft); margin-bottom: 18px;">Start with the vague prompt below and edit it to be more specific. Your score updates live based on what details you include!</p>
+        
+        <div class="prompt-improver">
+          <textarea id="promptImproverInput" style="width: 100%; height: 100px; padding: 14px; border: 1px solid var(--line); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 0.95rem; resize: vertical; outline: none; background: var(--paper); color: var(--ink);">Make a chatbot</textarea>
+          
+          <div class="prompt-score-bar" style="margin-top: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span style="font-weight: 600; font-size: 0.95rem;">Prompt Quality Score</span>
+              <span id="promptScore" style="font-family: var(--font-mono); font-weight: 700; font-size: 1.1rem; color: var(--cardinal);">1/6</span>
+            </div>
+            <div style="height: 10px; background: var(--panel); border-radius: 999px; overflow: hidden; border: 1px solid var(--line);">
+              <div id="promptScoreBar" style="height: 100%; width: 16%; background: var(--cardinal); border-radius: 999px; transition: width 0.3s ease, background 0.3s ease;"></div>
+            </div>
+          </div>
+          
+          <div id="promptChecklist" class="prompt-checklist" style="margin-top: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;"></div>
+          <button class="btn-secondary" id="promptImproverHint" style="margin-top: 14px;">💡 Give me a hint</button>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1059,6 +1260,29 @@ const data = await response.json();
         </li>
       </ol>
 
+      <!-- Interactive: Debug Challenge -->
+      <div class="sandbox-container" style="margin-top: 36px; padding: 24px; background: var(--card-bg); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow);">
+        <h3 style="margin-top: 0; font-family: var(--font-display); color: var(--cardinal-deep); font-size: clamp(1.2rem, 1.0rem + 0.8vw, 1.45rem);">🐛 Debug Challenge: Find the Bug!</h3>
+        <p style="font-size: 0.95rem; color: var(--ink-soft); margin-bottom: 18px;">The code below has a bug that crashes the chatbot. Click the line you think contains the error. You get 3 attempts!</p>
+        
+        <div class="debug-challenge">
+          <div id="debugCode" class="debug-code">
+            <div class="debug-line" data-line="1" data-buggy="false"><span class="debug-ln">1</span><code>@app.route("/chat", methods=["POST"])</code></div>
+            <div class="debug-line" data-line="2" data-buggy="false"><span class="debug-ln">2</span><code>def chat():</code></div>
+            <div class="debug-line" data-line="3" data-buggy="false"><span class="debug-ln">3</span><code>    data = request.get_json()</code></div>
+            <div class="debug-line" data-line="4" data-buggy="true"><span class="debug-ln">4</span><code>    user_message = data["mesage"]</code></div>
+            <div class="debug-line" data-line="5" data-buggy="false"><span class="debug-ln">5</span><code>    reply = ask_huggingface(user_message)</code></div>
+            <div class="debug-line" data-line="6" data-buggy="false"><span class="debug-ln">6</span><code>    return jsonify({"reply": reply})</code></div>
+          </div>
+          <div style="display: flex; gap: 12px; align-items: center; margin-top: 14px; flex-wrap: wrap;">
+            <span id="debugAttempts" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--ink-soft);">Attempts left: 3</span>
+            <button class="btn-secondary" id="debugHintBtn">🔍 Show hint</button>
+            <button class="btn-secondary" id="debugResetBtn" style="display: none;">↻ Try again</button>
+          </div>
+          <p id="debugFeedback" style="margin-top: 12px; font-weight: 600; font-size: 0.95rem; min-height: 1.4em;"></p>
+        </div>
+      </div>
+
       <div class="callout">
         <p><strong>The reassuring truth:</strong> feeling confused while coding isn't a sign
         you're bad at this — it's the normal, permanent texture of the job, for everyone,
@@ -1077,6 +1301,26 @@ const data = await response.json();
       <p class="eyebrow">16 — Reference</p>
       <h2>Mini glossary</h2>
       <p class="lead">Every term used on this page, in one place, for whenever your memory needs a nudge.</p>
+
+      <!-- Interactive: Glossary Search + Flashcard Mode -->
+      <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 20px; flex-wrap: wrap;">
+        <input type="text" id="glossarySearch" placeholder="🔍 Search terms..." style="flex: 1; min-width: 180px; padding: 10px 16px; border: 1px solid var(--line); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 0.95rem; background: var(--card-bg); color: var(--ink); outline: none;">
+        <button class="btn-secondary" id="glossaryFlashcardToggle">🃏 Flashcard Mode</button>
+      </div>
+      <div id="glossaryFlashcard" class="glossary-flashcard" style="display: none;">
+        <div class="flashcard" id="flashcard">
+          <div class="flashcard-inner" id="flashcardInner">
+            <div class="flashcard-front" id="flashcardFront">API</div>
+            <div class="flashcard-back" id="flashcardBack">A defined way for one program to ask another program to do something.</div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 16px;">
+          <button class="btn-secondary" id="flashcardPrev">← Previous</button>
+          <span id="flashcardCounter" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--ink-soft); align-self: center;">1 / 22</span>
+          <button class="btn-secondary" id="flashcardNext">Next →</button>
+        </div>
+        <p style="text-align: center; font-size: 0.82rem; color: var(--ink-faint); margin-top: 10px;">Click the card to flip it!</p>
+      </div>
 
       <div class="glossary-grid" id="glossaryGrid">
         <div class="gloss-item"><dt>API</dt><dd>A defined way for one program to ask another program to do something.</dd></div>
@@ -1174,6 +1418,18 @@ const data = await response.json();
             <h4>The cloud</h4>
             <p>Learn how to put your Flask app on a real server on the internet, so anyone — not just you — can use it.</p>
           </div>
+        </div>
+      </div>
+
+      <!-- Interactive: Skill Map -->
+      <div class="sandbox-container" style="margin-top: 36px; padding: 24px; background: var(--card-bg); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow);">
+        <h3 style="margin-top: 0; font-family: var(--font-display); color: var(--cardinal-deep); font-size: clamp(1.2rem, 1.0rem + 0.8vw, 1.45rem);">🗺️ Build Your Learning Path</h3>
+        <p style="font-size: 0.95rem; color: var(--ink-soft); margin-bottom: 18px;">Click any topic you're interested in to learn more. Mark the ones you want to explore — your personalized path appears below!</p>
+        
+        <div id="skillMap" class="skill-map"></div>
+        <div id="skillPathSummary" style="margin-top: 18px; display: none;">
+          <h4 style="font-family: var(--font-display); color: var(--cardinal-deep); margin-bottom: 10px;">📋 Your Learning Path:</h4>
+          <div id="skillPathList" style="display: flex; flex-direction: column; gap: 8px;"></div>
         </div>
       </div>
 

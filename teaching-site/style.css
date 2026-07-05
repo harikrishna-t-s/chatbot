@@ -1089,8 +1089,611 @@ a { color: var(--cardinal); }
   font-size: 0.85rem;
 }
 
+
+
+.sandbox-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
 /* ==========================================================================
-   Responsive
+   Transition utility
+   ========================================================================== */
+
+:root {
+  --transition: 0.2s ease;
+}
+
+/* ==========================================================================
+   Scroll-triggered entrance animations
+   ========================================================================== */
+
+.section {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   Section 02 — Build the Stack Game
+   ========================================================================== */
+
+.stack-game {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stack-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  background: var(--panel);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-sm);
+  cursor: grab;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  user-select: none;
+}
+
+.stack-item:active { cursor: grabbing; }
+.stack-item.dragging { opacity: 0.5; transform: scale(0.98); }
+.stack-item.drag-over { border-color: var(--cardinal); box-shadow: 0 0 0 2px var(--cardinal-tint); }
+.stack-item.correct-pos { border-color: var(--sage); background: var(--sage-tint); }
+.stack-item.wrong-pos { border-color: var(--cardinal); background: var(--cardinal-tint); }
+
+.stack-grip {
+  font-size: 1.2rem;
+  color: var(--ink-faint);
+  cursor: grab;
+  flex-shrink: 0;
+}
+
+.stack-item-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.stack-emoji { font-size: 1.5rem; }
+.stack-item-content small { color: var(--ink-soft); font-size: 0.85rem; }
+
+.stack-arrows {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stack-arrow-btn {
+  background: var(--card-bg);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  width: 28px;
+  height: 22px;
+  font-size: 0.65rem;
+  cursor: pointer;
+  color: var(--ink-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s;
+}
+
+.stack-arrow-btn:hover { background: var(--cardinal-tint); color: var(--cardinal); }
+
+.stack-flow-anim {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  animation: stackFlowIn 0.6s ease;
+}
+
+.stack-flow-node {
+  padding: 10px 16px;
+  background: var(--sage-tint);
+  border: 1px solid var(--sage);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.88rem;
+  animation: stackPulse 1.5s ease infinite;
+}
+
+.stack-flow-arrow {
+  font-size: 1.3rem;
+  color: var(--sage);
+  font-weight: bold;
+  animation: stackArrowBounce 1s ease infinite;
+}
+
+@keyframes stackFlowIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes stackPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(63, 97, 82, 0.2); } 50% { box-shadow: 0 0 0 6px rgba(63, 97, 82, 0); } }
+@keyframes stackArrowBounce { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(4px); } }
+
+/* ==========================================================================
+   Section 03 — Autocomplete Simulator
+   ========================================================================== */
+
+.autocomplete-sim-output {
+  padding: 18px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  line-height: 1.7;
+  min-height: 60px;
+  margin-bottom: 16px;
+  word-wrap: break-word;
+}
+
+.ac-sim-base { color: var(--ink); }
+
+.ac-sim-generated {
+  color: var(--cardinal);
+  font-weight: 600;
+  animation: acWordIn 0.3s ease;
+}
+
+@keyframes acWordIn { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: translateY(0); } }
+
+.ac-sim-cursor-blink {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  background: var(--cardinal);
+  animation: blink 1s step-end infinite;
+  vertical-align: text-bottom;
+  margin-left: 2px;
+}
+
+.autocomplete-sim-choices {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.ac-sim-choice {
+  padding: 8px 16px;
+  background: var(--card-bg);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  position: relative;
+}
+
+.ac-sim-choice:hover {
+  border-color: var(--cardinal);
+  background: var(--cardinal-tint);
+  color: var(--cardinal-deep);
+  transform: translateY(-1px);
+}
+
+.ac-sim-choice .ac-sim-prob {
+  display: block;
+  font-size: 0.68rem;
+  color: var(--ink-faint);
+  margin-top: 2px;
+}
+
+/* ==========================================================================
+   Section 06 — DOM Tree Explorer
+   ========================================================================== */
+
+.dom-explorer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  min-height: 250px;
+}
+
+.dom-preview {
+  background: #1a1a2e;
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  font-size: 0.85rem;
+  color: #e0e0e0;
+}
+
+.dom-el {
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  transition: border-color 0.2s, background 0.2s;
+  margin-bottom: 4px;
+}
+
+.dom-el:hover { border-color: rgba(140, 21, 21, 0.4); background: rgba(140, 21, 21, 0.1); }
+.dom-el.dom-active { border-color: var(--cardinal); background: rgba(140, 21, 21, 0.2); box-shadow: 0 0 0 2px rgba(140, 21, 21, 0.15); }
+
+.dom-header {
+  background: #16213e;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.dom-messages { padding: 4px 0; }
+.dom-msg-user { background: rgba(140, 21, 21, 0.15); border-radius: 10px 10px 0 10px; padding: 8px 12px; font-size: 0.82rem; }
+.dom-msg-bot { background: rgba(63, 97, 82, 0.15); border-radius: 10px 10px 10px 0; padding: 8px 12px; font-size: 0.82rem; }
+
+.dom-input-area {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.dom-input-box {
+  flex: 1;
+  background: #222;
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.dom-send-btn {
+  background: var(--cardinal);
+  color: #fff;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.dom-tree {
+  background: var(--panel);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.8;
+  overflow-x: auto;
+}
+
+.dom-tree-node {
+  padding: 2px 6px;
+  border-radius: 3px;
+  transition: background 0.2s;
+}
+
+.dom-tree-node.dom-tree-active { background: var(--cardinal-tint); border-left: 2px solid var(--cardinal); }
+
+.dom-tag { color: var(--cardinal); font-weight: 600; }
+.dom-desc { color: var(--ink-faint); font-size: 0.78rem; }
+
+/* ==========================================================================
+   Section 07 — Route Tester
+   ========================================================================== */
+
+.route-input-row {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.route-method {
+  display: none; /* hidden, using select instead */
+}
+
+.route-response {
+  animation: routeResponseIn 0.3s ease;
+}
+
+@keyframes routeResponseIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+.route-status-ok { color: #4CAF50; }
+.route-status-err { color: #F44336; }
+.route-status-info { color: #FFC107; }
+
+/* ==========================================================================
+   Section 10 — API Key Validator
+   ========================================================================== */
+
+.apikey-validator .key-valid { border-color: var(--sage) !important; }
+.apikey-validator .key-invalid { border-color: var(--cardinal) !important; }
+
+/* ==========================================================================
+   Section 12 — Interactive File Explorer
+   ========================================================================== */
+
+.file-explorer {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  min-height: 300px;
+}
+
+.file-explorer-tree {
+  background: #252526;
+  color: #cccccc;
+  padding: 12px 0;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  overflow-y: auto;
+}
+
+.fe-item {
+  padding: 5px 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.12s;
+  white-space: nowrap;
+}
+
+.fe-item:hover { background: #2a2d2e; }
+.fe-item.fe-active { background: #37373d; color: #ffffff; }
+.fe-folder { color: #c5a45c; font-weight: 600; }
+
+.file-explorer-preview {
+  background: #1e1e1e;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.fe-preview-header {
+  background: #252526;
+  color: #cccccc;
+  padding: 8px 16px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  border-bottom: 1px solid #333;
+}
+
+.fe-preview-code {
+  flex: 1;
+  margin: 0;
+  padding: 14px 16px;
+  overflow: auto;
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: #d4d4d4;
+}
+
+.fe-preview-code code {
+  background: none;
+  color: inherit;
+  padding: 0;
+  font-size: inherit;
+}
+
+.fe-preview-desc {
+  margin: 0;
+  padding: 12px 16px;
+  background: #252526;
+  color: #9cdcfe;
+  font-size: 0.82rem;
+  border-top: 1px solid #333;
+  font-style: italic;
+}
+
+/* ==========================================================================
+   Section 14 — Prompt Improver
+   ========================================================================== */
+
+.prompt-checklist-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--panel);
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  border: 1px solid var(--line);
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.prompt-checklist-item.checked {
+  background: var(--sage-tint);
+  border-color: var(--sage);
+}
+
+.prompt-checklist-item .check-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.prompt-checklist-item.checked .check-icon {
+  background: var(--sage);
+  border-color: var(--sage);
+  color: #fff;
+}
+
+/* ==========================================================================
+   Section 15 — Debug Challenge
+   ========================================================================== */
+
+.debug-code {
+  background: #1e1e1e;
+  border-radius: var(--radius-sm);
+  padding: 4px 0;
+  overflow-x: auto;
+}
+
+.debug-line {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 18px;
+  cursor: pointer;
+  transition: background 0.15s;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: #d4d4d4;
+}
+
+.debug-line:hover { background: #2a2d2e; }
+
+.debug-ln {
+  color: #858585;
+  font-size: 0.78rem;
+  width: 20px;
+  text-align: right;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.debug-line code {
+  background: none;
+  color: inherit;
+  padding: 0;
+  font-size: inherit;
+}
+
+.debug-line.bug-found {
+  background: rgba(244, 67, 54, 0.15);
+  border-left: 3px solid #F44336;
+}
+
+.debug-line.not-bug {
+  background: rgba(76, 175, 80, 0.08);
+  opacity: 0.6;
+}
+
+.debug-line.bug-correct {
+  background: rgba(76, 175, 80, 0.15);
+  border-left: 3px solid #4CAF50;
+}
+
+/* ==========================================================================
+   Section 16 — Glossary Flashcard
+   ========================================================================== */
+
+.glossary-flashcard {
+  margin-bottom: 24px;
+}
+
+.flashcard {
+  width: 100%;
+  max-width: 400px;
+  height: 200px;
+  margin: 0 auto;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.flashcard-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+}
+
+.flashcard.flipped .flashcard-inner {
+  transform: rotateY(180deg);
+}
+
+.flashcard-front, .flashcard-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  border-radius: var(--radius);
+  border: 2px solid var(--line);
+  text-align: center;
+}
+
+.flashcard-front {
+  background: var(--cardinal-tint);
+  color: var(--cardinal-deep);
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.flashcard-back {
+  background: var(--sage-tint);
+  color: var(--sage);
+  transform: rotateY(180deg);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   Section 17 — Skill Map
+   ========================================================================== */
+
+.skill-map {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.skill-card {
+  padding: 16px;
+  background: var(--panel);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.skill-card:hover { border-color: var(--cardinal); transform: translateY(-2px); box-shadow: var(--shadow); }
+.skill-card.selected { border-color: var(--sage); background: var(--sage-tint); }
+
+.skill-card-emoji { font-size: 1.4rem; margin-bottom: 6px; }
+.skill-card h5 { margin: 0 0 4px 0; font-family: var(--font-display); font-size: 0.95rem; color: var(--ink); }
+.skill-card p { margin: 0; font-size: 0.82rem; color: var(--ink-soft); }
+
+.skill-card-check {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  transition: all 0.2s;
+}
+
+.skill-card.selected .skill-card-check {
+  background: var(--sage);
+  border-color: var(--sage);
+  color: #fff;
+}
+
+/* ==========================================================================
+   Responsive — IMPROVED
    ========================================================================== */
 
 @media (max-width: 980px) {
@@ -1123,6 +1726,37 @@ a { color: var(--cardinal); }
 
   .section { padding: 68px 0; }
   .hero { padding-top: 84px; }
+
+  .dom-explorer { grid-template-columns: 1fr; }
+  .file-explorer { grid-template-columns: 1fr; }
+  .file-explorer-tree { max-height: 200px; overflow-y: auto; }
+
+  .prompt-checklist { grid-template-columns: 1fr !important; }
+}
+
+/* Tablet breakpoint */
+@media (max-width: 768px) {
+  .stack-flow-anim { flex-direction: column; }
+  .stack-flow-arrow { transform: rotate(90deg); }
+
+  .skill-map { grid-template-columns: repeat(2, 1fr); }
+
+  .route-input-row { flex-direction: column; }
+  .route-input-row select,
+  .route-input-row input { border-radius: var(--radius-sm) !important; border: 1px solid var(--line) !important; }
+
+  .flashcard { max-width: 340px; height: 180px; }
+
+  /* Touch-friendly targets */
+  .quiz-option,
+  .btn-secondary,
+  .ac-sim-choice,
+  .stack-arrow-btn,
+  .debug-line,
+  .fe-item,
+  .skill-card { min-height: 44px; }
+
+  .autocomplete-sim-choices { gap: 6px; }
 }
 
 @media (max-width: 560px) {
@@ -1131,10 +1765,19 @@ a { color: var(--cardinal); }
   .hero-title { max-width: 100%; }
   .fetch-diagram { flex-direction: column; }
   .fetch-track { display: none; }
-}
 
-.sandbox-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  .skill-map { grid-template-columns: 1fr; }
+  
+  .stack-item { padding: 12px 14px; gap: 10px; }
+  .stack-emoji { font-size: 1.2rem; }
+
+  .dom-preview { font-size: 0.78rem; }
+
+  .flashcard { max-width: 280px; height: 160px; }
+  .flashcard-front { font-size: 1.1rem; }
+  .flashcard-back { font-size: 0.88rem; }
+
+  /* Better SVG scaling on very small screens */
+  .journey-svg-mini { overflow: visible; }
+  .hero-journey { padding: 12px 6px; }
 }

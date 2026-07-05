@@ -102,12 +102,17 @@ def ask_huggingface(messages_history):
         )
 
     # Check the HTTP status code
-    if response.status_code == 401:
-        raise Exception("Invalid Hugging Face API key. Please check your .env file.")
-    elif response.status_code == 503:
-        raise Exception("The AI model is still loading on the server. Please try again in a few seconds.")
-    elif response.status_code != 200:
-        raise Exception(f"Hugging Face API returned error status: {response.status_code}")
+    if response.status_code != 200:
+        error_body = response.text[:500]  # Get the response body for debugging
+        print(f"🔍 [Debug] Full API error response: {error_body}")
+        if response.status_code == 401:
+            raise Exception("Invalid Hugging Face API key. Please check your .env file.")
+        elif response.status_code == 403:
+            raise Exception(f"Access forbidden (403). Details: {error_body}")
+        elif response.status_code == 503:
+            raise Exception("The AI model is still loading on the server. Please try again in a few seconds.")
+        else:
+            raise Exception(f"Hugging Face API returned error status: {response.status_code}. Details: {error_body}")
 
     try:
         data = response.json()
