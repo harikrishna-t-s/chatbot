@@ -1328,4 +1328,420 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  /* ------------------------------------------------------------------
+     25. CLIENT-SERVER REQUEST-RESPONSE SIMULATOR (Section 05)
+  ------------------------------------------------------------------ */
+  const csBtnMenu = document.getElementById("csBtnMenu");
+  const csBtnSubmit = document.getElementById("csBtnSubmit");
+  const csPacket = document.getElementById("csPacket");
+  const csVisualizerStatus = document.getElementById("csVisualizerStatus");
+
+  let csAnimating = false;
+
+  function runCsSimulation(method, path, responseText, processText) {
+    if (csAnimating) return;
+    csAnimating = true;
+
+    csBtnMenu.disabled = true;
+    csBtnSubmit.disabled = true;
+
+    // Reset packet state
+    csPacket.classList.remove("sending", "returning");
+    csPacket.textContent = `${method} ${path}`;
+    csPacket.style.opacity = "0";
+
+    // Start sending
+    csVisualizerStatus.textContent = `Status: Sending Request (${method} ${path}) to Server...`;
+    void csPacket.offsetWidth; // force reflow
+    csPacket.classList.add("sending");
+    csPacket.style.opacity = "1";
+
+    // Arrives at server (1.5s)
+    setTimeout(function() {
+      csVisualizerStatus.textContent = `Status: Server processing request... [${processText}]`;
+      csPacket.classList.remove("sending");
+      csPacket.style.opacity = "0";
+      
+      // Wait for server processing, then prepare response packet (1.2s)
+      setTimeout(function() {
+        csPacket.textContent = responseText;
+        csPacket.classList.add("returning");
+        csPacket.style.opacity = "1";
+        csVisualizerStatus.textContent = `Status: Server returning Response (${responseText})...`;
+
+        // Arrives back at client (1.5s)
+        setTimeout(function() {
+          csPacket.classList.remove("returning");
+          csPacket.style.opacity = "0";
+          csVisualizerStatus.textContent = `Status: Client rendered response data successfully! (Completed conversation loop)`;
+          csBtnMenu.disabled = false;
+          csBtnSubmit.disabled = false;
+          csAnimating = false;
+        }, 1500);
+
+      }, 1200);
+
+    }, 1500);
+  }
+
+  if (csBtnMenu && csBtnSubmit) {
+    csBtnMenu.addEventListener("click", function() {
+      runCsSimulation("GET", "/menu", "200 OK (Burger, Pizza, Ice Cream)", "Kitchen looking up items in pantry");
+    });
+    csBtnSubmit.addEventListener("click", function() {
+      runCsSimulation("POST", "/order", "201 Created (Order #41)", "Kitchen cooking Pizza! 🍕");
+    });
+  }
+
+  /* ------------------------------------------------------------------
+     26. UI/UX QUALITY OPTIMIZER SANDBOX (Section 06)
+  ------------------------------------------------------------------ */
+  const uxContrast = document.getElementById("uxContrast");
+  const uxSpacing = document.getElementById("uxSpacing");
+  const uxFeedback = document.getElementById("uxFeedback");
+  const uxTypography = document.getElementById("uxTypography");
+
+  const uiuxMockCard = document.getElementById("uiuxMockCard");
+  const uiuxMockTitle = document.getElementById("uiuxMockTitle");
+  const uiuxMockDesc = document.getElementById("uiuxMockDesc");
+  const uiuxMockInput = document.getElementById("uiuxMockInput");
+  const uiuxMockButton = document.getElementById("uiuxMockButton");
+  const uiuxMockFeedback = document.getElementById("uiuxMockFeedback");
+
+  function updateUiuxOptimizer() {
+    if (!uiuxMockCard) return;
+
+    // Contrast
+    if (uxContrast.checked) {
+      uiuxMockCard.style.backgroundColor = "#FFFFFF";
+      uiuxMockCard.style.color = "var(--ink)";
+      uiuxMockTitle.style.color = "var(--cardinal-deep)";
+      uiuxMockDesc.style.color = "var(--ink-soft)";
+      uiuxMockInput.style.borderColor = "var(--line)";
+      uiuxMockInput.style.backgroundColor = "var(--paper)";
+      uiuxMockInput.style.color = "var(--ink)";
+      uiuxMockButton.style.backgroundColor = "var(--cardinal)";
+      uiuxMockButton.style.color = "#FFFFFF";
+    } else {
+      uiuxMockCard.style.backgroundColor = "#e0e0e0";
+      uiuxMockCard.style.color = "#a0a0a0"; // poor contrast
+      uiuxMockTitle.style.color = "#a0a0a0";
+      uiuxMockDesc.style.color = "#c0c0c0";
+      uiuxMockInput.style.borderColor = "#c0c0c0";
+      uiuxMockInput.style.backgroundColor = "#d8d8d8";
+      uiuxMockInput.style.color = "#a0a0a0";
+      uiuxMockButton.style.backgroundColor = "#cccccc";
+      uiuxMockButton.style.color = "#e8e8e8";
+    }
+
+    // Spacing & Corners
+    if (uxSpacing.checked) {
+      uiuxMockCard.style.padding = "24px";
+      uiuxMockCard.style.borderRadius = "var(--radius)";
+      uiuxMockCard.style.boxShadow = "var(--shadow)";
+      uiuxMockInput.style.padding = "10px 14px";
+      uiuxMockInput.style.borderRadius = "var(--radius-sm)";
+      uiuxMockButton.style.padding = "10px 20px";
+      uiuxMockButton.style.borderRadius = "var(--radius-sm)";
+    } else {
+      uiuxMockCard.style.padding = "8px";
+      uiuxMockCard.style.borderRadius = "0";
+      uiuxMockCard.style.boxShadow = "none";
+      uiuxMockInput.style.padding = "2px";
+      uiuxMockInput.style.borderRadius = "0";
+      uiuxMockButton.style.padding = "2px 4px";
+      uiuxMockButton.style.borderRadius = "0";
+    }
+
+    // Typography
+    if (uxTypography.checked) {
+      uiuxMockCard.style.fontFamily = "var(--font-body)";
+      uiuxMockTitle.style.fontFamily = "var(--font-display)";
+      uiuxMockTitle.style.fontSize = "1.3rem";
+      uiuxMockTitle.style.fontWeight = "600";
+      uiuxMockDesc.style.fontSize = "0.95rem";
+      uiuxMockInput.style.fontFamily = "var(--font-body)";
+      uiuxMockButton.style.fontFamily = "var(--font-body)";
+      uiuxMockButton.style.fontWeight = "600";
+    } else {
+      uiuxMockCard.style.fontFamily = '"Times New Roman", Times, serif';
+      uiuxMockTitle.style.fontFamily = '"Times New Roman", Times, serif';
+      uiuxMockTitle.style.fontSize = "1.1rem";
+      uiuxMockTitle.style.fontWeight = "bold";
+      uiuxMockDesc.style.fontSize = "0.8rem";
+      uiuxMockInput.style.fontFamily = '"Times New Roman", Times, serif';
+      uiuxMockButton.style.fontFamily = '"Times New Roman", Times, serif';
+      uiuxMockButton.style.fontWeight = "normal";
+    }
+
+    // Hover & Transitions
+    if (uxFeedback.checked) {
+      uiuxMockButton.style.transition = "all 0.2s ease";
+      uiuxMockCard.style.transition = "all 0.3s ease";
+    } else {
+      uiuxMockButton.style.transition = "none";
+      uiuxMockCard.style.transition = "none";
+    }
+  }
+
+  if (uxContrast) {
+    [uxContrast, uxSpacing, uxFeedback, uxTypography].forEach(cb => {
+      cb.addEventListener("change", updateUiuxOptimizer);
+    });
+    updateUiuxOptimizer(); // Initialize
+  }
+
+  if (uiuxMockButton) {
+    uiuxMockButton.addEventListener("click", function() {
+      if (uxFeedback.checked) {
+        uiuxMockButton.disabled = true;
+        const oldText = uiuxMockButton.textContent;
+        uiuxMockButton.textContent = "Loading...";
+        uiuxMockFeedback.textContent = "";
+        
+        setTimeout(function() {
+          uiuxMockButton.disabled = false;
+          uiuxMockButton.textContent = oldText;
+          uiuxMockFeedback.textContent = "✓ Successfully subscribed! (Clear, immediate visual feedback)";
+          uiuxMockFeedback.style.color = "var(--sage)";
+        }, 1000);
+      } else {
+        uiuxMockFeedback.textContent = "Subscribed.";
+        uiuxMockFeedback.style.color = "initial";
+      }
+    });
+  }
+
+  /* ------------------------------------------------------------------
+     27. INTERACTIVE DATABASE SIMULATOR (Section 07)
+  ------------------------------------------------------------------ */
+  const dbInputName = document.getElementById("dbInputName");
+  const dbBtnInsert = document.getElementById("dbBtnInsert");
+  const dbConsole = document.getElementById("dbConsole");
+  const dbTable = document.getElementById("dbTable");
+
+  let mockDbIdCounter = 2; // admin (1), instructor (2)
+
+  if (dbBtnInsert && dbInputName && dbConsole && dbTable) {
+    dbBtnInsert.addEventListener("click", function() {
+      const name = dbInputName.value.trim().toLowerCase();
+      if (!name) {
+        dbConsole.textContent = "ERROR: Cannot insert empty name.\nType a name and try again.";
+        return;
+      }
+
+      mockDbIdCounter++;
+      const currentId = mockDbIdCounter;
+
+      // 1. Log query construction
+      dbConsole.textContent = `
+-- Constructing SQL Query...
+INSERT INTO users (username, role)
+VALUES ('${name}', 'student');
+
+-- Executing Query on Database...
+-- ID ${currentId} assigned automatically (AUTOINCREMENT)
+QUERY OK, 1 row affected (0.04 sec)
+      `.trim();
+
+      // 2. Append row to Table
+      const tbody = dbTable.querySelector("tbody");
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${currentId}</td>
+        <td>${name}</td>
+        <td>student</td>
+      `;
+      tr.style.backgroundColor = "var(--sage-tint)";
+      tr.style.transition = "background-color 0.8s";
+      tbody.appendChild(tr);
+
+      setTimeout(function() {
+        tr.style.backgroundColor = "transparent";
+      }, 800);
+
+      dbInputName.value = ""; // clear input
+    });
+  }
+
+  /* ------------------------------------------------------------------
+     28. FRAMEWORKS EXPLORER TABS & SIMULATION RUNNER (Section 08)
+  ------------------------------------------------------------------ */
+  const frameworkTabBtns = document.querySelectorAll(".framework-tab-btn");
+  const frameworkPanes = document.querySelectorAll(".framework-pane");
+
+  frameworkTabBtns.forEach(btn => {
+    btn.addEventListener("click", function() {
+      const tabName = btn.getAttribute("data-tab");
+      
+      // Toggle tab header active class
+      frameworkTabBtns.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      // Toggle tab panes active class
+      frameworkPanes.forEach(pane => {
+        if (pane.id === `pane-${tabName}`) {
+          pane.classList.add("active");
+        } else {
+          pane.classList.remove("active");
+        }
+      });
+    });
+  });
+
+  // Interactive Code view mapping inside folders
+  const frameworkCodes = {
+    "react-app": {
+      header: "src/App.js",
+      code: `import React, { useState } from 'react';\n\nfunction ChatBot() {\n  const [messages, setMessages] = useState([]);\n  \n  return (\n    <div className="chat">\n      <h4>RoboBuddy UI</h4>\n      <button onClick={() => setMessages([...messages, 'Hello'])}>\n        Add Message\n      </button>\n      <ul>\n        {messages.map((m, i) => <li key={i}>{m}</li>)}\n      </ul>\n    </div>\n  );\n}\n\nexport default ChatBot;`
+    },
+    "react-index": {
+      header: "src/index.js",
+      code: `import React from 'react';\nimport ReactDOM from 'react-dom/client';\nimport App from './App';\n\nconst root = ReactDOM.createRoot(document.getElementById('root'));\nroot.render(<App />);`
+    },
+    "next-page": {
+      header: "app/page.js",
+      code: `// Next.js Page Component (Server Component by default)\nexport default function HomePage() {\n  return (\n    <main style={{ padding: 24 }}>\n      <h1>Welcome to my Next.js App</h1>\n      <p>Built with React + SSR!</p>\n    </main>\n  );\n}`
+    },
+    "next-layout": {
+      header: "app/layout.js",
+      code: `export const metadata = {\n  title: 'Next.js App',\n  description: 'Full stack React application',\n};\n\nexport default function RootLayout({ children }) {\n  return (\n    <html lang="en">\n      <body>{children}</body>\n    </html>\n  );\n}`
+    },
+    "fastapi-main": {
+      header: "main.py",
+      code: `from fastapi import FastAPI\nfrom pydantic import BaseModel\n\napp = FastAPI()\n\nclass Msg(BaseModel):\n    text: str\n\n@app.post("/chat")\ndef get_reply(message: Msg):\n    return {"reply": f"Received: {message.text}"}`
+    },
+    "fastapi-schemas": {
+      header: "schemas.py",
+      code: `from pydantic import BaseModel\n\nclass User(BaseModel):\n    id: int\n    username: str\n    role: str\n\nclass UserCreate(BaseModel):\n    username: str\n    password: str`
+    },
+    "django-views": {
+      header: "chat_app/views.py",
+      code: `from django.http import JsonResponse\nfrom django.views.decorators.csrf import csrf_exempt\nimport json\n\n@csrf_exempt\ndef reply_view(request):\n    if request.method == "POST":\n        data = json.loads(request.body)\n        return JsonResponse({"reply": f"Django received: {data.get('message')}"})`
+    },
+    "django-models": {
+      header: "chat_app/models.py",
+      code: `from django.db import models\n\nclass ChatMessage(models.Model):\n    user = models.CharField(max_value=100)\n    content = models.TextField()\n    timestamp = models.DateTimeField(auto_now_add=True)\n\n    def __str__(self):\n        return f"{self.user}: {self.content[:20]}"`
+    }
+  };
+
+  // Bind clicks for files in each framework folder tree
+  const folderBoxes = document.querySelectorAll(".framework-folder-box");
+  folderBoxes.forEach(box => {
+    box.addEventListener("click", function(e) {
+      const fileEl = e.target.closest(".file");
+      if (!fileEl) return;
+
+      const codeKey = fileEl.getAttribute("data-code");
+      if (!codeKey || !frameworkCodes[codeKey]) return;
+
+      // Deactivate other files in the same folder box
+      box.querySelectorAll(".file").forEach(f => f.classList.remove("active"));
+      fileEl.classList.add("active");
+
+      // Find the code block elements in the parent tab panel
+      const tabPane = box.closest(".framework-pane");
+      const codeHeader = tabPane.querySelector(".code-box-header");
+      const codeBlock = tabPane.querySelector("pre code");
+
+      codeHeader.textContent = frameworkCodes[codeKey].header;
+      codeBlock.textContent = frameworkCodes[codeKey].code;
+      
+      // Re-trigger syntax highlighting manually on the updated code block
+      let text = codeBlock.innerHTML;
+      
+      let comments = [];
+      let strings = [];
+      
+      text = text.replace(/(["'])(?:(?=(\\?))\2.)*?\1/g, function (match) {
+        strings.push(match);
+        return `___STRING_${strings.length - 1}___`;
+      });
+      
+      text = text.replace(/(\/\/[^\n]*|\#[^\n]*)/g, function (match) {
+        comments.push(match);
+        return `___COMMENT_${comments.length - 1}___`;
+      });
+      
+      text = text.replace(/\b(const|let|async|await|function|return|import|from|def|if|elif|else|try|except|raise|class|with|as)\b/g, '<span class="code-keyword">$1</span>');
+      text = text.replace(/\b(\d+(\.\d+)?)\b/g, '<span class="code-number">$1</span>');
+      
+      text = text.replace(/___STRING_(\d+)___/g, function (match, index) {
+        let str = strings[parseInt(index)];
+        return `<span class="code-string">${str}</span>`;
+      });
+      
+      text = text.replace(/___COMMENT_(\d+)___/g, function (match, index) {
+        let comment = comments[parseInt(index)];
+        return `<span class="code-comment">${comment}</span>`;
+      });
+      
+      codeBlock.innerHTML = text;
+    });
+  });
+
+  // Simulated run button events
+  const runBtns = document.querySelectorAll(".run-framework-btn");
+  runBtns.forEach(btn => {
+    btn.addEventListener("click", function() {
+      const frameworkName = btn.getAttribute("data-framework");
+      const terminalId = `terminal-${frameworkName}`;
+      const terminalEl = document.getElementById(terminalId);
+      if (!terminalEl) return;
+
+      btn.disabled = true;
+      btn.textContent = "Booting...";
+      
+      let logs = "";
+      if (frameworkName === "react") {
+        logs = `
+$ npm run start --verbose
+[react-scripts] Compiled successfully!
+[react-scripts] You can view my-react-app in browser.
+[react-scripts] Local:            http://localhost:3000
+[react-scripts] 
+[browser-simulator] Rendered Component: <ChatBot />
+[browser-simulator] Output: [ RoboBuddy UI ] [Add Message] (0 messages rendered)
+        `.trim();
+      } else if (frameworkName === "nextjs") {
+        logs = `
+$ npm run dev
+▶ Next.js 14.2.0
+▲ Ready in 950ms (http://localhost:3000)
+▲ Compiling /page ...
+▲ Compiled /page in 450ms (382 modules)
+▲ [server-rendering] Rendered HomePage server component!
+        `.trim();
+      } else if (frameworkName === "fastapi") {
+        logs = `
+$ uvicorn main:app --reload
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     Started parent process [28491]
+INFO:     Started server process [28492]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+        `.trim();
+      } else if (frameworkName === "django") {
+        logs = `
+$ python manage.py runserver
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+July 06, 2026 - 21:19:00
+Django version 5.0, using settings 'config.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+        `.trim();
+      }
+
+      terminalEl.textContent = logs;
+
+      setTimeout(function() {
+        btn.disabled = false;
+        btn.textContent = `Run ${frameworkName.charAt(0).toUpperCase() + frameworkName.slice(1)} Simulator`;
+      }, 1500);
+    });
+  });
+
 });

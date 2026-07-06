@@ -490,9 +490,99 @@
       <div class="container">
         <p class="eyebrow">05 — Building blocks of the web</p>
         <h2>How does a website actually work?</h2>
+        
+        <!-- Opening Hook Box -->
+        <div class="hook-card">
+          <h3 style="margin-top: 0; color: var(--cardinal-deep); font-size: 1.25rem;">🤔 How many websites do you interact with daily?</h3>
+          <p style="margin-bottom: 0; font-size: 0.98rem; line-height: 1.6;">
+            Think about it: social media, search engines, streaming sites, school portals. We use them constantly, but how do they function? 
+            Here is the core rule that makes it simple: <strong>"Everything you see on the screen is frontend, and everything that happens when you click 'submit' or 'login' is backend."</strong> 
+            This single framing is the secret to understanding the entire web.
+          </p>
+        </div>
+
         <p class="lead">
           Every website you've ever visited — including the one you built today — is made
-          of three layers, and they map perfectly onto building a house.
+          of layers that map perfectly onto building and operating a house (or running a restaurant).
+        </p>
+
+        <!-- What is Web Development & Client-Server Model -->
+        <h3 class="sub-heading" style="margin-top: 30px;">What is Web Development?</h3>
+        <p>
+          At its heart, web development is the creation of applications that run over the internet using the <strong>Client-Server Model</strong>.
+          It isn't magic; it is a structured conversation:
+        </p>
+        <ul style="margin-bottom: 20px;">
+          <li><strong>The Client (Browser):</strong> The device or program you use (like Chrome, Safari, or a phone app) that sends a <strong>Request</strong>.</li>
+          <li><strong>The Server:</strong> A computer somewhere in the world that processes that request and sends a <strong>Response</strong> back (like HTML, images, or data).</li>
+        </ul>
+
+        <!-- Client-Server Simulator Sandbox -->
+        <div class="sandbox-container" style="margin: 30px 0; padding: 24px; background: var(--card-bg); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow);">
+          <h3 style="margin-top: 0; font-family: var(--font-display); color: var(--cardinal-deep); font-size: clamp(1.2rem, 1.0rem + 0.8vw, 1.45rem);">
+            📡 Interactive Client-Server Request-Response Simulator</h3>
+          <p style="font-size: 0.95rem; color: var(--ink-soft); margin-bottom: 18px;">
+            Simulate the communication loop. Click a button to send a request from the client browser and watch the packet travel to the server and return with a response!
+          </p>
+          
+          <div style="display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap;">
+            <button class="btn-secondary" id="csBtnMenu" style="font-size: 0.85rem; padding: 8px 14px; cursor: pointer;">GET /menu (Fetch Restaurant Menu)</button>
+            <button class="btn-secondary" id="csBtnSubmit" style="font-size: 0.85rem; padding: 8px 14px; cursor: pointer;">POST /order (Submit Order)</button>
+          </div>
+
+          <div class="cs-visualizer">
+            <div class="cs-node">
+              <div class="cs-node-icon">💻</div>
+              <strong style="font-size: 0.85rem; color: var(--ink);">Client (Browser)</strong>
+            </div>
+            
+            <div class="cs-wire-container">
+              <div class="cs-packet-traveler" id="csPacket">GET /menu</div>
+            </div>
+
+            <div class="cs-node">
+              <div class="cs-node-icon">🖥️</div>
+              <strong style="font-size: 0.85rem; color: var(--ink);">Server (Kitchen)</strong>
+            </div>
+          </div>
+          <p id="csVisualizerStatus" style="margin-top: 14px; font-family: var(--font-mono); font-size: 0.85rem; color: var(--ink-soft); text-align: center; min-height: 1.5em;">
+            Status: Idle. Click a request button above to start.
+          </p>
+        </div>
+
+        <h3 class="sub-heading">Frontend vs. Backend: The Restaurant Analogy</h3>
+        <p>
+          To understand who does what, developers use a classic restaurant analogy:
+        </p>
+
+        <div class="trio-diagram" style="margin-bottom: 30px;">
+          <div class="trio-item">
+            <div class="trio-swatch trio-html" style="background: var(--cardinal); color: #fff;">Dining Room</div>
+            <h4>Frontend</h4>
+            <p><strong>The dining area</strong>. The chairs, the lighting, the menus, and the waiters. It is everything the customer (user) sees, touches, and interacts with directly.</p>
+          </div>
+          <div class="trio-item">
+            <div class="trio-swatch trio-css" style="background: var(--sage); color: #fff;">The Kitchen</div>
+            <h4>Backend</h4>
+            <p><strong>The kitchen</strong>. The stoves, the pantry, and the cooks. It stays hidden behind closed doors. It does the heavy lifting: storing data, authenticating users, and processing requests.</p>
+          </div>
+          <div class="trio-item">
+            <div class="trio-swatch trio-js" style="background: var(--gold); color: #fff;">Both Rooms</div>
+            <h4>Full-Stack</h4>
+            <p><strong>Full-Stack</strong> refers to developers who are comfortable working in both rooms — writing browser code for the dining room and server logic for the kitchen.</p>
+          </div>
+        </div>
+
+        <!-- Basics of Web Design -->
+        <h3 class="sub-heading">What is Web Design? (The Blueprint)</h3>
+        <p>
+          Before a single line of code is written for either the frontend or backend, a website must be <strong>designed</strong>.
+          Web design is the process of planning, conceptualizing, and organizing content online. It answers:
+          <em>"Where does this button go? What fonts make this readable? How do we guide the user's attention?"</em>
+          A developer without a design is like a builder trying to build a house without a blueprint.
+        </p>
+        <p style="margin-bottom: 30px;">
+          Web design centers around **UI (User Interface)** and **UX (User Experience)**. It is a distinct discipline from web development, focusing on usability, aesthetic structure, and psychology rather than servers and scripts.
         </p>
 
         <div class="trio-diagram">
@@ -519,9 +609,7 @@
         <p>
           In your project, these three layers live in exactly the files you'd expect:
           <code>templates/index.html</code> is the structure, <code>static/style.css</code>
-          is the style, and <code>static/script.js</code> is the behavior. Your browser
-          (Chrome, Safari, Firefox — whichever you used) reads all three and paints the
-          result on your screen.
+          is the style, and <code>static/script.js</code> is the behavior.
         </p>
 
         <div class="callout">
@@ -583,10 +671,106 @@
         <p class="eyebrow">06 — The part you can touch</p>
         <h2>Frontend: everything that happens in the browser</h2>
         <p class="lead">
-          "Frontend" just means: whatever runs on <em>your</em> device, inside your browser.
-          Let's name the pieces you actually interacted with.
+          "Frontend" just means: whatever runs on <em>your</em> device, inside your browser. It is built using HTML, CSS, and JavaScript. But how do we build good frontend experiences? We must design them first.
         </p>
 
+        <!-- Web Designing Basics, UI/UX, Design Tools -->
+        <h3 class="sub-heading">Web Designing & UI/UX</h3>
+        <p>
+          Creating a website starts with visual styling and architecture. As a web designer, you need to understand the difference between <strong>UI (User Interface)</strong> and <strong>UX (User Experience)</strong>:
+        </p>
+        
+        <div class="callout">
+          <p><strong>A helpful one-liner:</strong> <em>"UI is the paint, UX is the plan."</em> UI focuses on how beautiful, clear, and visually appealing the elements are. UX focuses on how easy, logical, and satisfying it is to use the interface.</p>
+        </div>
+
+        <table class="ui-ux-matrix">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>User Interface (UI)</th>
+              <th>User Experience (UX)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Focus</strong></td>
+              <td>Visual aesthetics, typography, color palettes, spacing.</td>
+              <td>Usability, user flows, speed, clarity, accessibility.</td>
+            </tr>
+            <tr>
+              <td><strong>Key Question</strong></td>
+              <td>"Does this layout look clean, professional, and matching?"</td>
+              <td>"Can the user easily complete their goal without getting confused?"</td>
+            </tr>
+            <tr>
+              <td><strong>Deliverable</strong></td>
+              <td>High-fidelity mockups, asset designs, animations.</td>
+              <td>User surveys, wireframes, flowcharts, interaction plans.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 class="sub-heading">Essential Web Design Tools</h3>
+        <p>
+          Modern designers do not jump directly to writing CSS. They use specialized software to draft and test designs:
+        </p>
+        <ul style="margin-bottom: 25px;">
+          <li><strong><a href="https://www.figma.com/" target="_blank" rel="noopener noreferrer">Figma</a>:</strong> The industry standard for digital design. It is a powerful, collaborative vector graphics editor and prototyping tool used by professional design teams to create layout drafts, design systems, and clickable high-fidelity prototypes.</li>
+          <li><strong><a href="https://www.canva.com/" target="_blank" rel="noopener noreferrer">Canva</a>:</strong> A fast, simple graphic design platform that is great for beginners needing templates, posters, brand logos, or rapid visual elements.</li>
+        </ul>
+
+        <!-- Low-fi vs High-fi wireframes -->
+        <h3 class="sub-heading">The Design Process: Wireframing</h3>
+        <p>
+          Before committing to high-fidelity visuals in Figma or CSS, designers create <strong>low-fidelity wireframes</strong>. A wireframe is a simple layout sketch (often drawn in black and white with boxes and placeholders) to decide placement before focusing on colors and typography.
+        </p>
+
+        <div class="wireframe-comparison-grid" style="margin-bottom: 30px;">
+          <div class="wf-box wf-low-fi">
+            <span class="wf-box-title">Low-Fidelity Wireframe (The Plan)</span>
+            <div class="wf-low-fi-img">Image Placeholder</div>
+            <div style="height: 12px; background: #ccc; margin-bottom: 8px; width: 60%;"></div>
+            <div style="height: 24px; background: #ddd; margin-bottom: 12px; width: 100%;"></div>
+            <button class="wf-low-fi-btn" disabled>Submit Button</button>
+          </div>
+          <div class="wf-box wf-high-fi">
+            <span class="wf-box-title" style="color: var(--cardinal-deep);">High-Fidelity Mockup (The Paint)</span>
+            <div class="wf-high-fi-img">🤖 RoboBuddy v1</div>
+            <p style="font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 10px; line-height: 1.4;">Our assistant is ready to converse with you today.</p>
+            <button class="wf-high-fi-btn" style="width: 100%; border: none;">Send Message →</button>
+          </div>
+        </div>
+
+        <!-- UI/UX Optimizer Sandbox -->
+        <div class="sandbox-container" style="margin: 30px 0; padding: 24px; background: var(--card-bg); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow);">
+          <h3 style="margin-top: 0; font-family: var(--font-display); color: var(--cardinal-deep); font-size: clamp(1.2rem, 1.0rem + 0.8vw, 1.45rem);">
+            🎨 Interactive UI/UX Quality Optimizer</h3>
+          <p style="font-size: 0.95rem; color: var(--ink-soft); margin-bottom: 18px;">
+            See how applying basic design rules (contrast, spacing, size, and feedback loops) transforms a bad interface into a premium, accessible user experience. Toggle the design improvements below!
+          </p>
+
+          <div class="uiux-sandbox-inner">
+            <div class="uiux-control-panel">
+              <label style="cursor: pointer; display: flex; align-items: center; gap: 4px;"><input type="checkbox" id="uxContrast" checked style="accent-color: var(--cardinal);"> Contrast</label>
+              <label style="cursor: pointer; display: flex; align-items: center; gap: 4px;"><input type="checkbox" id="uxSpacing" checked style="accent-color: var(--cardinal);"> Spacing & Corners</label>
+              <label style="cursor: pointer; display: flex; align-items: center; gap: 4px;"><input type="checkbox" id="uxFeedback" checked style="accent-color: var(--cardinal);"> Interactions</label>
+              <label style="cursor: pointer; display: flex; align-items: center; gap: 4px;"><input type="checkbox" id="uxTypography" checked style="accent-color: var(--cardinal);"> Typography</label>
+            </div>
+
+            <div id="uiuxMockCard" class="uiux-mock-card">
+              <h4 id="uiuxMockTitle" style="margin-top:0;">Sign Up Newsletter</h4>
+              <p id="uiuxMockDesc">Get tech summaries delivered to your desktop.</p>
+              <div style="display: flex; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; align-items: stretch;">
+                <input type="email" id="uiuxMockInput" value="student@university.edu" placeholder="Enter email" style="outline: none;">
+                <button id="uiuxMockButton" style="cursor: pointer;">Subscribe</button>
+              </div>
+              <p id="uiuxMockFeedback" style="margin: 0; font-size: 0.78rem; font-weight: 600; min-height: 1.2em;"></p>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="sub-heading" style="margin-top: 35px;">Core Frontend Concepts</h3>
         <div class="card-grid two">
           <div class="card">
             <h3>The DOM</h3>
@@ -710,6 +894,98 @@
           waiting to be asked for something.
         </p>
 
+        <h3 class="sub-heading">What is Backend Development?</h3>
+        <p>
+          Backend development refers to building the server-side logic that powers a website.
+          It has three primary responsibilities:
+        </p>
+        <ol style="margin-bottom: 25px;">
+          <li><strong>Business Logic:</strong> Processing input, making calculations, running algorithms (like generating AI responses).</li>
+          <li><strong>Data Persistence:</strong> Communicating with databases to save, fetch, and query information.</li>
+          <li><strong>Authentication & Security:</strong> Verifying credentials, managing sessions, and protecting private API keys.</li>
+        </ol>
+
+        <!-- Demystifying 5-line Flask app -->
+        <h3 class="sub-heading">A Literal 5-Line Flask App</h3>
+        <p>
+          Before looking at our chatbot route, here is the simplest possible web server you can write in Python using Flask.
+          It does one thing: returns "Hello World" when you visit it. This demystifies the backend — it is just a script waiting for a URL hit:
+        </p>
+        
+        <div class="code-block" data-lang="Python — simple_app.py" style="margin-bottom: 25px;">
+          <button class="copy-btn" data-copy-target="code-simple-flask">Copy</button>
+          <pre id="code-simple-flask"><code>from flask import Flask
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "Hello World"
+
+if __name__ == "__main__":
+    app.run()</code></pre>
+        </div>
+
+        <h3 class="sub-heading">Database Concepts: Where Data Lives</h3>
+        <p>
+          Right now, your chatbot has short-term memory (session history). If you close the terminal, it forgets everything. 
+          To make data persist forever, backends connect to a <strong>Database</strong>. 
+          A database is a dedicated program optimized for storing and retrieving structured data.
+        </p>
+        <ul style="margin-bottom: 25px;">
+          <li><strong>SQL Databases (Relational):</strong> Store data in clean tables with rows and columns (like Excel sheets). Examples: SQLite (great for starters), PostgreSQL (industry standard). They use SQL (Structured Query Language) to talk.</li>
+          <li><strong>NoSQL Databases (Non-Relational):</strong> Store data as flexible collections of documents (similar to JSON). Examples: MongoDB, Firebase.</li>
+        </ul>
+
+        <!-- Database Simulator Sandbox -->
+        <div class="sandbox-container" style="margin: 30px 0; padding: 24px; background: var(--card-bg); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow);">
+          <h3 style="margin-top: 0; font-family: var(--font-display); color: var(--cardinal-deep); font-size: clamp(1.2rem, 1.0rem + 0.8vw, 1.45rem);">
+            🗄️ Interactive Database Simulator</h3>
+          <p style="font-size: 0.95rem; color: var(--ink-soft); margin-bottom: 18px;">
+            Input a name below to add a student user to our mock SQL database. Watch the backend construct the SQL command and update the data table live!
+          </p>
+
+          <div class="db-sandbox-inner">
+            <div class="db-input-row">
+              <input type="text" id="dbInputName" placeholder="Enter student name (e.g. Alice)" maxlength="20" style="outline: none;">
+              <button class="btn-primary" id="dbBtnInsert" style="padding: 10px 18px; font-size: 0.88rem; cursor: pointer;">Insert Into DB</button>
+            </div>
+
+            <div class="db-workspace">
+              <div class="db-panel-box">
+                <span class="db-panel-title">SQL Command Console</span>
+                <div class="db-console-log" id="dbConsole">-- Console Idle --</div>
+              </div>
+              <div class="db-panel-box">
+                <span class="db-panel-title">Database Table: users</span>
+                <div style="overflow-x: auto; flex: 1;">
+                  <table class="db-table-mock" id="dbTable">
+                    <thead>
+                      <tr>
+                        <th>id</th>
+                        <th>username</th>
+                        <th>role</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1</td>
+                        <td>admin</td>
+                        <td>administrator</td>
+                      </tr>
+                      <tr>
+                        <td>2</td>
+                        <td>instructor</td>
+                        <td>teacher</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="sub-heading" style="margin-top: 35px;">Chatbot Backend Logic</h3>
         <div class="term-stack">
           <div class="term-block">
             <h4>Server</h4>
@@ -746,7 +1022,7 @@
           </div>
         </div>
 
-        <div class="code-block" data-lang="Python — app.py">
+        <div class="code-block" data-lang="Python — app.py" style="margin-top: 25px;">
           <button class="copy-btn" data-copy-target="code-route">Copy</button>
           <pre id="code-route"><code>@app.route("/chat", methods=["POST"])
 def chat():
@@ -779,7 +1055,7 @@ def chat():
               </select>
               <input type="text" id="routeInput" value="/" placeholder="/chat"
                 style="flex: 1; padding: 10px 14px; border: 1px solid var(--line); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-family: var(--font-mono); font-size: 0.95rem; background: var(--paper); color: var(--ink); outline: none;">
-              <button class="btn-primary" id="routeSendBtn" style="padding: 10px 20px; font-size: 0.88rem;">Send
+              <button class="btn-primary" id="routeSendBtn" style="padding: 10px 20px; font-size: 0.88rem; cursor: pointer;">Send
                 →</button>
             </div>
             <div id="routeResponse" class="route-response"
@@ -839,7 +1115,7 @@ const data = await response.json();
 // data.reply now holds the AI's answer</code></pre>
         </div>
 
-        <p>
+        <p style="margin-bottom: 35px;">
           Notice the word <code>await</code>. Talking to a server takes time — maybe a
           fraction of a second, maybe a few seconds if the AI is thinking. <code>await</code>
           tells JavaScript "pause this function here and wait for the answer before
@@ -847,6 +1123,244 @@ const data = await response.json();
           typing indicator (three bouncing dots) while you wait — it's the frontend being
           honest with you that a request is still in flight.
         </p>
+
+        <!-- ============================================================
+           FRAMEWORKS — JUST AN INTRO
+           ============================================================ -->
+        <h3 class="sub-heading">Moving Beyond the Basics: Web Frameworks</h3>
+        <p>
+          Once you know the fundamentals of HTML, CSS, JavaScript, Python, and Flask, you are ready to see what professional developers actually use in the real world. 
+          Instead of building everything from scratch, engineers use <strong>Frameworks</strong> — curated toolkits that provide pre-made components, layouts, routers, and structural patterns.
+        </p>
+
+        <!-- Framework Explorer Sandbox -->
+        <div class="framework-explorer-container">
+          <div class="framework-tabs-header">
+            <button class="framework-tab-btn active" data-tab="react">React</button>
+            <button class="framework-tab-btn" data-tab="nextjs">Next.js</button>
+            <button class="framework-tab-btn" data-tab="fastapi">FastAPI</button>
+            <button class="framework-tab-btn" data-tab="django">Django</button>
+          </div>
+          
+          <div class="framework-tab-content">
+            <!-- React Tab -->
+            <div class="framework-pane active" id="pane-react">
+              <div style="background: var(--cardinal-tint); border-left: 4px solid var(--cardinal); padding: 12px 16px; border-radius: 4px; font-size: 0.95rem; line-height: 1.45; color: var(--cardinal-deep); margin-bottom: 18px;">
+                <strong>React (Frontend Component UI):</strong> Developed by Meta, React is the world's most widely used client-side UI library. It splits webpages into self-contained, reusable <strong>components</strong> (like buttons, search bars, or chat bubbles) that automatically update when state changes.
+              </div>
+              <div class="framework-layout-grid">
+                <div class="framework-folder-box">
+                  <div class="folder-item folder">📂 my-react-app</div>
+                  <div class="folder-indent-1 folder-item folder">📂 public</div>
+                  <div class="folder-indent-1 folder-item folder">📂 src</div>
+                  <div class="folder-indent-2 folder-item folder">📂 components</div>
+                  <div class="folder-indent-2 folder-item file active" data-code="react-app">📄 App.js</div>
+                  <div class="folder-indent-2 folder-item file" data-code="react-index">📄 index.js</div>
+                  <div class="folder-indent-1 folder-item file">📄 package.json</div>
+                </div>
+                <div class="framework-code-box">
+                  <div class="code-box-header" id="reactCodeHeader">src/App.js</div>
+                  <pre class="code-box-pre"><code id="reactCodeBlock">import React, { useState } from 'react';
+
+function ChatBot() {
+  const [messages, setMessages] = useState([]);
+  
+  return (
+    &lt;div className="chat"&gt;
+      &lt;h4&gt;RoboBuddy UI&lt;/h4&gt;
+      &lt;button onClick={() =&gt; setMessages([...messages, 'Hello'])}&gt;
+        Add Message
+      &lt;/button&gt;
+      &lt;ul&gt;
+        {messages.map((m, i) =&gt; &lt;li key={i}&gt;{m}&lt;/li&gt;)}
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default ChatBot;</code></pre>
+                </div>
+              </div>
+              <div class="framework-run-container">
+                <button class="btn-primary run-framework-btn" style="cursor: pointer; align-self: flex-start; font-size: 0.88rem;" data-framework="react">Run React Simulator</button>
+                <div class="run-terminal" id="terminal-react">$ npm run start --verbose</div>
+              </div>
+            </div>
+
+            <!-- Next.js Tab -->
+            <div class="framework-pane" id="pane-nextjs">
+              <div style="background: var(--cardinal-tint); border-left: 4px solid var(--cardinal); padding: 12px 16px; border-radius: 4px; font-size: 0.95rem; line-height: 1.45; color: var(--cardinal-deep); margin-bottom: 18px;">
+                <strong>Next.js (Full-Stack Framework):</strong> Built on top of React, Next.js adds full-stack capabilities out-of-the-box: file-based routing, API routes, and Server-Side Rendering (SSR). It is the modern standard for writing complex React web applications.
+              </div>
+              <div class="framework-layout-grid">
+                <div class="framework-folder-box">
+                  <div class="folder-item folder">📂 my-nextjs-project</div>
+                  <div class="folder-indent-1 folder-item folder">📂 app</div>
+                  <div class="folder-indent-2 folder-item folder">📂 api</div>
+                  <div class="folder-indent-2 folder-item file active" data-code="next-page">📄 page.js</div>
+                  <div class="folder-indent-2 folder-item file" data-code="next-layout">📄 layout.js</div>
+                  <div class="folder-indent-1 folder-item file">📄 next.config.js</div>
+                  <div class="folder-indent-1 folder-item file">📄 package.json</div>
+                </div>
+                <div class="framework-code-box">
+                  <div class="code-box-header" id="nextCodeHeader">app/page.js</div>
+                  <pre class="code-box-pre"><code id="nextCodeBlock">// Next.js Page Component (Server Component by default)
+export default function HomePage() {
+  return (
+    &lt;main style={{ padding: 24 }}&gt;
+      &lt;h1&gt;Welcome to my Next.js App&lt;/h1&gt;
+      &lt;p&gt;Built with React + SSR!&lt;/p&gt;
+    &lt;/main&gt;
+  );
+}</code></pre>
+                </div>
+              </div>
+              <div class="framework-run-container">
+                <button class="btn-primary run-framework-btn" style="cursor: pointer; align-self: flex-start; font-size: 0.88rem;" data-framework="nextjs">Run Next.js Simulator</button>
+                <div class="run-terminal" id="terminal-nextjs">$ npm run dev</div>
+              </div>
+            </div>
+
+            <!-- FastAPI Tab -->
+            <div class="framework-pane" id="pane-fastapi">
+              <div style="background: var(--cardinal-tint); border-left: 4px solid var(--cardinal); padding: 12px 16px; border-radius: 4px; font-size: 0.95rem; line-height: 1.45; color: var(--cardinal-deep); margin-bottom: 18px;">
+                <strong>FastAPI (Modern Python APIs):</strong> A modern, high-performance web framework for building APIs with Python. It relies on standard Python type hints to generate automatic interactive Swagger documentation, and it is extremely popular for machine learning deployments.
+              </div>
+              <div class="framework-layout-grid">
+                <div class="framework-folder-box">
+                  <div class="folder-item folder">📂 my-fastapi-app</div>
+                  <div class="folder-indent-1 folder-item file active" data-code="fastapi-main">📄 main.py</div>
+                  <div class="folder-indent-1 folder-item file" data-code="fastapi-schemas">📄 schemas.py</div>
+                  <div class="folder-indent-1 folder-item file">📄 requirements.txt</div>
+                </div>
+                <div class="framework-code-box">
+                  <div class="code-box-header" id="fastapiCodeHeader">main.py</div>
+                  <pre class="code-box-pre"><code id="fastapiCodeBlock">from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+class Msg(BaseModel):
+    text: str
+
+@app.post("/chat")
+def get_reply(message: Msg):
+    return {"reply": f"Received: {message.text}"}</code></pre>
+                </div>
+              </div>
+              <div class="framework-run-container">
+                <button class="btn-primary run-framework-btn" style="cursor: pointer; align-self: flex-start; font-size: 0.88rem;" data-framework="fastapi">Run FastAPI Simulator</button>
+                <div class="run-terminal" id="terminal-fastapi">$ uvicorn main:app --reload</div>
+              </div>
+            </div>
+
+            <!-- Django Tab -->
+            <div class="framework-pane" id="pane-django">
+              <div style="background: var(--cardinal-tint); border-left: 4px solid var(--cardinal); padding: 12px 16px; border-radius: 4px; font-size: 0.95rem; line-height: 1.45; color: var(--cardinal-deep); margin-bottom: 18px;">
+                <strong>Django (Batteries-Included Python):</strong> A comprehensive, opinionated Python framework designed to build secure, robust applications fast. It includes a built-in admin dashboard, database ORM, and user auth system out of the box.
+              </div>
+              <div class="framework-layout-grid">
+                <div class="framework-folder-box">
+                  <div class="folder-item folder">📂 my_django_site</div>
+                  <div class="folder-indent-1 folder-item folder">📂 config</div>
+                  <div class="folder-indent-2 folder-item file">📄 settings.py</div>
+                  <div class="folder-indent-2 folder-item file">📄 urls.py</div>
+                  <div class="folder-indent-1 folder-item folder">📂 chat_app</div>
+                  <div class="folder-indent-2 folder-item file active" data-code="django-views">📄 views.py</div>
+                  <div class="folder-indent-2 folder-item file">📄 models.py</div>
+                  <div class="folder-indent-1 folder-item file">📄 manage.py</div>
+                </div>
+                <div class="framework-code-box">
+                  <div class="code-box-header" id="djangoCodeHeader">chat_app/views.py</div>
+                  <pre class="code-box-pre"><code id="djangoCodeBlock">from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+
+@csrf_exempt
+def reply_view(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        return JsonResponse({"reply": f"Django received: {data.get('message')}"})</code></pre>
+                </div>
+              </div>
+              <div class="framework-run-container">
+                <button class="btn-primary run-framework-btn" style="cursor: pointer; align-self: flex-start; font-size: 0.88rem;" data-framework="django">Run Django Simulator</button>
+                <div class="run-terminal" id="terminal-django">$ python manage.py runserver</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+           VIBECODING / AI DEV TOOLS
+           ============================================================ -->
+        <h3 class="sub-heading" style="margin-top: 35px;">Vibecoding & AI Dev Tools</h3>
+        <p>
+          The rise of artificial intelligence has introduced a new style of building: <strong>Vibecoding</strong>. 
+          Vibecoding means describing what you want in plain English, and letting agentic AI assistants write and patch the code directly. 
+          While these tools make development exponentially faster, they <strong>do not replace</strong> understanding the basics. A beginner who does not know HTML, CSS, or JS will hit a wall when trying to debug, customize, or audit an AI's output.
+        </p>
+
+        <div class="ai-tools-group">
+          <strong style="font-size: 0.95rem; color: var(--ink-soft); display: block; border-bottom: 1px solid var(--line); padding-bottom: 6px; margin-bottom: 12px;">Frontend-Focused Visual Generators</strong>
+          <p style="font-size: 0.88rem; color: var(--ink-soft); margin-bottom: 12px;">Generate component markup, pages, and interactive UI views visually from textual prompts:</p>
+          <div class="ai-tools-list">
+            <a href="https://v0.dev/" target="_blank" rel="noopener noreferrer" class="ai-tool-card">
+              <h4>v0 by Vercel</h4>
+              <p>Generates structured React components and CSS styling on demand, utilizing TailwindCSS.</p>
+            </a>
+            <a href="https://lovable.dev/" target="_blank" rel="noopener noreferrer" class="ai-tool-card">
+              <h4>Lovable</h4>
+              <p>A full-featured visual editor that writes code and lets you construct frontend modules interactively.</p>
+            </a>
+            <a href="https://bolt.new/" target="_blank" rel="noopener noreferrer" class="ai-tool-card">
+              <h4>bolt.new</h4>
+              <p>Creates, runs, builds, and deploys full stack web applications directly inside a sandboxed web browser.</p>
+            </a>
+          </div>
+        </div>
+
+        <div class="ai-tools-group" style="margin-top: 30px;">
+          <strong style="font-size: 0.95rem; color: var(--ink-soft); display: block; border-bottom: 1px solid var(--line); padding-bottom: 6px; margin-bottom: 12px;">Full-Stack & Agentic Coding Assistants</strong>
+          <p style="font-size: 0.88rem; color: var(--ink-soft); margin-bottom: 12px;">Autonomous software agents that read, write, build, and refactor code directly across files:</p>
+          <div class="ai-tools-list">
+            <div class="ai-tool-card" style="cursor: default;">
+              <h4 style="color: var(--ink); border: none;">Claude Code <span style="font-size: 0.72rem; background: var(--panel); padding: 2px 6px; border-radius: 4px; font-family: var(--font-mono); text-transform: none;">Terminal</span></h4>
+              <p>Anthropic's command-line tool that acts as an autonomous agent in your local git repository to edit code, execute tests, and find bugs.</p>
+            </div>
+            <a href="https://www.cursor.com/" target="_blank" rel="noopener noreferrer" class="ai-tool-card">
+              <h4>Cursor</h4>
+              <p>An AI-first code editor (forked from VS Code) designed for deep integration with LLMs to edit blocks, chat with repositories, and autocomplete syntax.</p>
+            </a>
+            <a href="https://replit.com/" target="_blank" rel="noopener noreferrer" class="ai-tool-card">
+              <h4>Replit Agent</h4>
+              <p>An autonomous agent that helps design, package, and deploy complete applications from scratch right in the cloud.</p>
+            </a>
+            <a href="https://codeium.com/windsurf" target="_blank" rel="noopener noreferrer" class="ai-tool-card">
+              <h4>Windsurf</h4>
+              <p>An IDE focused on collaborative flow, blending agentic automation with an interactive sidebar command structure.</p>
+            </a>
+          </div>
+        </div>
+
+        <div class="ai-tools-group" style="margin-top: 30px;">
+          <strong style="font-size: 0.95rem; color: var(--ink-soft); display: block; border-bottom: 1px solid var(--line); padding-bottom: 6px; margin-bottom: 12px;">General Logic & Copilots</strong>
+          <p style="font-size: 0.88rem; color: var(--ink-soft); margin-bottom: 12px;">Assistants to help write individual lines, explain algorithms, and write tests:</p>
+          <div class="ai-tools-list">
+            <a href="https://github.com/features/copilot" target="_blank" rel="noopener noreferrer" class="ai-tool-card">
+              <h4>GitHub Copilot</h4>
+              <p>Standard inline code autocomplete and sidebar logic explainer used in VS Code.</p>
+            </a>
+            <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" class="ai-tool-card">
+              <h4>ChatGPT</h4>
+              <p>OpenAI's foundational model, useful for quick boilerplate snippets and explaining backend logic.</p>
+            </a>
+            <a href="https://claude.ai/" target="_blank" rel="noopener noreferrer" class="ai-tool-card">
+              <h4>Claude</h4>
+              <p>Anthropic's LLM, renowned for code generation and explaining complex concepts.</p>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
 
