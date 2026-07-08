@@ -286,44 +286,44 @@ document.addEventListener("DOMContentLoaded", function () {
   function applySyntaxHighlighting() {
     document.querySelectorAll("pre code").forEach(function (codeBlock) {
       let text = codeBlock.innerHTML;
-      
+
       let comments = [];
       let strings = [];
-      
+
       // Extract strings first (so we don't treat keywords inside strings as tokens)
       text = text.replace(/(["'])(?:(?=(\\?))\2.)*?\1/g, function (match) {
         strings.push(match);
         return `___STRING_${strings.length - 1}___`;
       });
-      
+
       // Extract comments (Python # and JS //)
       text = text.replace(/(\/\/[^\n]*|\#[^\n]*)/g, function (match) {
         comments.push(match);
         return `___COMMENT_${comments.length - 1}___`;
       });
-      
+
       // Highlight keywords on clean structural code
       text = text.replace(/\b(const|let|async|await|function|return|import|from|def|if|elif|else|try|except|raise|class|with|as)\b/g, '<span class="code-keyword">$1</span>');
-      
+
       // Highlight numbers
       text = text.replace(/\b(\d+(\.\d+)?)\b/g, '<span class="code-number">$1</span>');
-      
+
       // Restore strings, wrapping in class
       text = text.replace(/___STRING_(\d+)___/g, function (match, index) {
         let str = strings[parseInt(index)];
         return `<span class="code-string">${str}</span>`;
       });
-      
+
       // Restore comments, wrapping in class
       text = text.replace(/___COMMENT_(\d+)___/g, function (match, index) {
         let comment = comments[parseInt(index)];
         return `<span class="code-comment">${comment}</span>`;
       });
-      
+
       codeBlock.innerHTML = text;
     });
   }
-  
+
   applySyntaxHighlighting();
 
 
@@ -347,16 +347,16 @@ document.addEventListener("DOMContentLoaded", function () {
       const prompt = sandboxPrompt.value;
       const temp = parseFloat(sandboxTemp.value);
       const maxTokens = parseInt(sandboxMaxTokens.value);
-      
+
       tempValue.textContent = temp.toFixed(1);
       maxTokensValue.textContent = maxTokens;
-      
+
       // Temperature description helper
       if (temp === 0.0) tempHelper.textContent = "Strict & identical every run";
       else if (temp <= 0.3) tempHelper.textContent = "Highly predictable & repetitive";
       else if (temp <= 0.7) tempHelper.textContent = "Balanced & natural (project default)";
       else tempHelper.textContent = "Creative & occasionally unfocused";
-      
+
       // Token visualization (words & spaces alternate background highlights)
       sandboxTokens.innerHTML = "";
       if (prompt.trim() === "") {
@@ -365,7 +365,7 @@ document.addEventListener("DOMContentLoaded", function () {
       } else {
         const tokens = prompt.match(/\s+|\w+|[^\w\s]+/g) || [];
         tokenCount.textContent = tokens.length;
-        
+
         tokens.forEach(function (token, index) {
           const span = document.createElement("span");
           span.textContent = token;
@@ -373,7 +373,7 @@ document.addEventListener("DOMContentLoaded", function () {
           span.style.borderRadius = "3.5px";
           span.style.fontSize = "0.85rem";
           span.style.margin = "1px";
-          
+
           if (index % 2 === 0) {
             span.style.backgroundColor = "var(--cardinal-tint)";
             span.style.color = "var(--cardinal-deep)";
@@ -384,7 +384,7 @@ document.addEventListener("DOMContentLoaded", function () {
           sandboxTokens.appendChild(span);
         });
       }
-      
+
       // Live JSON payload preview matching OpenAI specs
       const payload = {
         model: "HuggingFaceH4/zephyr-7b-beta",
@@ -394,10 +394,10 @@ document.addEventListener("DOMContentLoaded", function () {
         max_tokens: maxTokens,
         temperature: temp
       };
-      
+
       sandboxPayload.textContent = JSON.stringify(payload, null, 2);
     }
-    
+
     sandboxPrompt.addEventListener("input", updateSandbox);
     sandboxTemp.addEventListener("input", updateSandbox);
     sandboxMaxTokens.addEventListener("input", updateSandbox);
@@ -418,16 +418,16 @@ document.addEventListener("DOMContentLoaded", function () {
     function updateBitsFromInput() {
       const char = bitLetterInput.value;
       if (char.length === 0) return;
-      
+
       const decimal = char.charCodeAt(0);
       bitDecimal.textContent = decimal;
-      
+
       const binary = decimal.toString(2).padStart(8, '0');
-      
+
       bitButtons.forEach(function (btn) {
         const index = parseInt(btn.getAttribute("data-index"));
         btn.textContent = binary[7 - index];
-        
+
         // Highlight active bits (1s) to make them stand out
         if (binary[7 - index] === "1") {
           btn.style.backgroundColor = "var(--cardinal)";
@@ -458,7 +458,7 @@ document.addEventListener("DOMContentLoaded", function () {
       btn.addEventListener("click", function () {
         const val = btn.textContent === "0" ? "1" : "0";
         btn.textContent = val;
-        
+
         if (val === "1") {
           btn.style.backgroundColor = "var(--cardinal)";
           btn.style.color = "#ffffff";
@@ -502,9 +502,9 @@ document.addEventListener("DOMContentLoaded", function () {
         houseCardContainer.innerHTML = `<div style="color: var(--ink-soft); font-style: italic; font-size: 0.9rem; text-align: center; width: 100%;">No HTML (No structure exists!)</div>`;
         return;
       }
-      
+
       houseCardContainer.innerHTML = rawHtmlTemplate;
-      
+
       const card = document.getElementById("houseTargetCard");
       const title = document.getElementById("houseCardTitle");
       const text = document.getElementById("houseCardText");
@@ -519,17 +519,17 @@ document.addEventListener("DOMContentLoaded", function () {
         card.style.boxShadow = "var(--shadow)";
         card.style.fontFamily = "var(--font-body)";
         card.style.transition = "all 0.3s ease";
-        
+
         title.style.margin = "0 0 6px 0";
         title.style.color = "var(--cardinal-deep)";
         title.style.fontFamily = "var(--font-display)";
         title.style.fontSize = "1.2rem";
         title.style.fontWeight = "600";
-        
+
         text.style.margin = "0 0 14px 0";
         text.style.color = "var(--ink-soft)";
         text.style.fontSize = "0.9rem";
-        
+
         btn.style.backgroundColor = "var(--cardinal)";
         btn.style.color = "#ffffff";
         btn.style.border = "none";
@@ -545,17 +545,17 @@ document.addEventListener("DOMContentLoaded", function () {
         card.style.padding = "0";
         card.style.boxShadow = "none";
         card.style.fontFamily = "Times New Roman, serif";
-        
+
         title.style.margin = "1em 0";
         title.style.color = "black";
         title.style.fontFamily = "Times New Roman, serif";
         title.style.fontSize = "1.17em";
         title.style.fontWeight = "bold";
-        
+
         text.style.margin = "1em 0";
         text.style.color = "black";
         text.style.fontSize = "1rem";
-        
+
         btn.style.backgroundColor = "initial";
         btn.style.color = "initial";
         btn.style.border = "2px solid rgb(118, 118, 118)";
@@ -571,12 +571,12 @@ document.addEventListener("DOMContentLoaded", function () {
           if (!houseJs.checked) {
             return;
           }
-          
+
           if (houseCss.checked) {
             card.style.backgroundColor = "var(--gold-tint)";
             const origTitle = title.textContent;
             title.textContent = "🔔 Ding Dong!";
-            
+
             setTimeout(function () {
               card.style.backgroundColor = "#FFFFFF";
               title.textContent = origTitle;
@@ -611,15 +611,15 @@ document.addEventListener("DOMContentLoaded", function () {
       btn.addEventListener("click", function () {
         const food = btn.getAttribute("data-food");
         const itemText = food.split(" ")[1];
-        
+
         apiMenuBtns.forEach(b => b.disabled = true);
         clientPlate.textContent = "🍽️ Waiting...";
-        
+
         apiWaiter.style.display = "block";
         apiWaiter.style.left = "0%";
         apiWaiter.style.transform = "scaleX(1)";
         apiWaiter.textContent = "🏃‍♂️";
-        
+
         waiterBubble.style.display = "block";
         waiterBubble.style.left = "0%";
         waiterBubble.textContent = `GET /request?item=${itemText}`;
@@ -655,7 +655,7 @@ document.addEventListener("DOMContentLoaded", function () {
           apiWaiter.style.display = "none";
           waiterBubble.style.display = "none";
           kitchenStatus.textContent = "Idle";
-          
+
           apiMenuBtns.forEach(b => b.disabled = false);
         }, 3800);
       });
@@ -782,26 +782,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (acSimOutput && acSimChoices) {
     const acTree = {
-      _start: { text: "The best way to learn programming is", choices: [
-        { word: "by", prob: "42%", next: "by" },
-        { word: "to", prob: "35%", next: "to" },
-        { word: "through", prob: "23%", next: "through" }
-      ]},
-      by: { choices: [
-        { word: "building", prob: "55%", next: "by_building" },
-        { word: "practicing", prob: "30%", next: "by_practicing" },
-        { word: "reading", prob: "15%", next: "by_reading" }
-      ]},
-      to: { choices: [
-        { word: "start", prob: "48%", next: "to_start" },
-        { word: "write", prob: "32%", next: "to_write" },
-        { word: "practice", prob: "20%", next: "to_practice" }
-      ]},
-      through: { choices: [
-        { word: "hands-on", prob: "50%", next: "through_handson" },
-        { word: "real", prob: "30%", next: "through_real" },
-        { word: "consistent", prob: "20%", next: "through_consistent" }
-      ]},
+      _start: {
+        text: "The best way to learn programming is", choices: [
+          { word: "by", prob: "42%", next: "by" },
+          { word: "to", prob: "35%", next: "to" },
+          { word: "through", prob: "23%", next: "through" }
+        ]
+      },
+      by: {
+        choices: [
+          { word: "building", prob: "55%", next: "by_building" },
+          { word: "practicing", prob: "30%", next: "by_practicing" },
+          { word: "reading", prob: "15%", next: "by_reading" }
+        ]
+      },
+      to: {
+        choices: [
+          { word: "start", prob: "48%", next: "to_start" },
+          { word: "write", prob: "32%", next: "to_write" },
+          { word: "practice", prob: "20%", next: "to_practice" }
+        ]
+      },
+      through: {
+        choices: [
+          { word: "hands-on", prob: "50%", next: "through_handson" },
+          { word: "real", prob: "30%", next: "through_real" },
+          { word: "consistent", prob: "20%", next: "through_consistent" }
+        ]
+      },
       by_building: { choices: [{ word: "real projects.", prob: "65%", next: "_end" }, { word: "small apps.", prob: "35%", next: "_end" }] },
       by_practicing: { choices: [{ word: "every day.", prob: "60%", next: "_end" }, { word: "with purpose.", prob: "40%", next: "_end" }] },
       by_reading: { choices: [{ word: "code examples.", prob: "55%", next: "_end" }, { word: "documentation.", prob: "45%", next: "_end" }] },
@@ -1286,7 +1294,7 @@ document.addEventListener("DOMContentLoaded", function () {
       card.className = "skill-card";
       card.setAttribute("data-skill", skill.id);
       card.innerHTML = '<div class="skill-card-check"></div><div class="skill-card-emoji">' + skill.emoji + '</div><h5>' + skill.name + '</h5><p>' + skill.desc + '</p><p style="margin-top: 6px; font-size: 0.75rem; color: var(--ink-faint);">⏱ ' + skill.time + '</p>';
-      
+
       card.addEventListener("click", function () {
         if (selectedSkills.has(skill.id)) {
           selectedSkills.delete(skill.id);
@@ -1357,20 +1365,20 @@ document.addEventListener("DOMContentLoaded", function () {
     csPacket.style.opacity = "1";
 
     // Arrives at server (1.5s)
-    setTimeout(function() {
+    setTimeout(function () {
       csVisualizerStatus.textContent = `Status: Server processing request... [${processText}]`;
       csPacket.classList.remove("sending");
       csPacket.style.opacity = "0";
-      
+
       // Wait for server processing, then prepare response packet (1.2s)
-      setTimeout(function() {
+      setTimeout(function () {
         csPacket.textContent = responseText;
         csPacket.classList.add("returning");
         csPacket.style.opacity = "1";
         csVisualizerStatus.textContent = `Status: Server returning Response (${responseText})...`;
 
         // Arrives back at client (1.5s)
-        setTimeout(function() {
+        setTimeout(function () {
           csPacket.classList.remove("returning");
           csPacket.style.opacity = "0";
           csVisualizerStatus.textContent = `Status: Client rendered response data successfully! (Completed conversation loop)`;
@@ -1385,10 +1393,10 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   if (csBtnMenu && csBtnSubmit) {
-    csBtnMenu.addEventListener("click", function() {
+    csBtnMenu.addEventListener("click", function () {
       runCsSimulation("GET", "/menu", "200 OK (Burger, Pizza, Ice Cream)", "Kitchen looking up items in pantry");
     });
-    csBtnSubmit.addEventListener("click", function() {
+    csBtnSubmit.addEventListener("click", function () {
       runCsSimulation("POST", "/order", "201 Created (Order #41)", "Kitchen cooking Pizza! 🍕");
     });
   }
@@ -1492,14 +1500,14 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   if (uiuxMockButton) {
-    uiuxMockButton.addEventListener("click", function() {
+    uiuxMockButton.addEventListener("click", function () {
       if (uxFeedback.checked) {
         uiuxMockButton.disabled = true;
         const oldText = uiuxMockButton.textContent;
         uiuxMockButton.textContent = "Loading...";
         uiuxMockFeedback.textContent = "";
-        
-        setTimeout(function() {
+
+        setTimeout(function () {
           uiuxMockButton.disabled = false;
           uiuxMockButton.textContent = oldText;
           uiuxMockFeedback.textContent = "✓ Successfully subscribed! (Clear, immediate visual feedback)";
@@ -1523,7 +1531,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let mockDbIdCounter = 2; // admin (1), instructor (2)
 
   if (dbBtnInsert && dbInputName && dbConsole && dbTable) {
-    dbBtnInsert.addEventListener("click", function() {
+    dbBtnInsert.addEventListener("click", function () {
       const name = dbInputName.value.trim().toLowerCase();
       if (!name) {
         dbConsole.textContent = "ERROR: Cannot insert empty name.\nType a name and try again.";
@@ -1556,7 +1564,7 @@ QUERY OK, 1 row affected (0.04 sec)
       tr.style.transition = "background-color 0.8s";
       tbody.appendChild(tr);
 
-      setTimeout(function() {
+      setTimeout(function () {
         tr.style.backgroundColor = "transparent";
       }, 800);
 
@@ -1571,9 +1579,9 @@ QUERY OK, 1 row affected (0.04 sec)
   const frameworkPanes = document.querySelectorAll(".framework-pane");
 
   frameworkTabBtns.forEach(btn => {
-    btn.addEventListener("click", function() {
+    btn.addEventListener("click", function () {
       const tabName = btn.getAttribute("data-tab");
-      
+
       // Toggle tab header active class
       frameworkTabBtns.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
@@ -1628,7 +1636,7 @@ QUERY OK, 1 row affected (0.04 sec)
   // Bind clicks for files in each framework folder tree
   const folderBoxes = document.querySelectorAll(".framework-folder-box");
   folderBoxes.forEach(box => {
-    box.addEventListener("click", function(e) {
+    box.addEventListener("click", function (e) {
       const fileEl = e.target.closest(".file");
       if (!fileEl) return;
 
@@ -1646,36 +1654,36 @@ QUERY OK, 1 row affected (0.04 sec)
 
       codeHeader.textContent = frameworkCodes[codeKey].header;
       codeBlock.textContent = frameworkCodes[codeKey].code;
-      
+
       // Re-trigger syntax highlighting manually on the updated code block
       let text = codeBlock.innerHTML;
-      
+
       let comments = [];
       let strings = [];
-      
+
       text = text.replace(/(["'])(?:(?=(\\?))\2.)*?\1/g, function (match) {
         strings.push(match);
         return `___STRING_${strings.length - 1}___`;
       });
-      
+
       text = text.replace(/(\/\/[^\n]*|\#[^\n]*)/g, function (match) {
         comments.push(match);
         return `___COMMENT_${comments.length - 1}___`;
       });
-      
+
       text = text.replace(/\b(const|let|async|await|function|return|import|from|def|if|elif|else|try|except|raise|class|with|as)\b/g, '<span class="code-keyword">$1</span>');
       text = text.replace(/\b(\d+(\.\d+)?)\b/g, '<span class="code-number">$1</span>');
-      
+
       text = text.replace(/___STRING_(\d+)___/g, function (match, index) {
         let str = strings[parseInt(index)];
         return `<span class="code-string">${str}</span>`;
       });
-      
+
       text = text.replace(/___COMMENT_(\d+)___/g, function (match, index) {
         let comment = comments[parseInt(index)];
         return `<span class="code-comment">${comment}</span>`;
       });
-      
+
       codeBlock.innerHTML = text;
     });
   });
@@ -1683,7 +1691,7 @@ QUERY OK, 1 row affected (0.04 sec)
   // Simulated run button events
   const runBtns = document.querySelectorAll(".run-framework-btn");
   runBtns.forEach(btn => {
-    btn.addEventListener("click", function() {
+    btn.addEventListener("click", function () {
       const frameworkName = btn.getAttribute("data-framework");
       const terminalId = `terminal-${frameworkName}`;
       const terminalEl = document.getElementById(terminalId);
@@ -1691,57 +1699,11 @@ QUERY OK, 1 row affected (0.04 sec)
 
       btn.disabled = true;
       btn.textContent = "Booting...";
-      
+
       let logs = "";
-      if (frameworkName === "react") {
-        logs = `
-$ npm run start --verbose
-[react-scripts] Compiled successfully!
-[react-scripts] You can view my-react-app in browser.
-[react-scripts] Local:            http://localhost:3000
-[react-scripts] 
-[browser-simulator] Rendered Component: <ChatBot />
-[browser-simulator] Output: [ RoboBuddy UI ] [Add Message] (0 messages rendered)
-        `.trim();
-      } else if (frameworkName === "nextjs") {
-        logs = `
-$ npm run dev
-▶ Next.js 14.2.0
-▲ Ready in 950ms (http://localhost:3000)
-▲ Compiling /page ...
-▲ Compiled /page in 450ms (382 modules)
-▲ [server-rendering] Rendered HomePage server component!
-        `.trim();
-      } else if (frameworkName === "fastapi") {
-        logs = `
-$ uvicorn main:app --reload
-INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
-INFO:     Started parent process [28491]
-INFO:     Started server process [28492]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-        `.trim();
-      } else if (frameworkName === "django") {
-        logs = `
-$ python manage.py runserver
-Watching for file changes with StatReloader
-Performing system checks...
 
-System check identified no issues (0 silenced).
-July 06, 2026 - 21:19:00
-Django version 5.0, using settings 'config.settings'
-Starting development server at http://127.0.0.1:8000/
-Quit the server with CONTROL-C.
-        `.trim();
-      }
-
-      terminalEl.textContent = logs;
-
-      setTimeout(function() {
-        btn.disabled = false;
-        btn.textContent = `Run ${frameworkName.charAt(0).toUpperCase() + frameworkName.slice(1)} Simulator`;
-      }, 1500);
+      // you can add more logic here...
     });
   });
 
-});
+}); // end DOMContentLoaded

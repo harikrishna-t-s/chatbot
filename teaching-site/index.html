@@ -16,6 +16,7 @@
     href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
     rel="stylesheet">
 
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="style.css" />
 </head>
 
@@ -68,6 +69,13 @@
         <li><a href="#glossary" data-toc>Glossary</a></li>
         <li><a href="#whats-next" data-toc>What's next?</a></li>
       </ol>
+      <div style="margin-top:20px; padding-top:16px; border-top:1px solid var(--panel-line);">
+        <a href="ai-webdev.html" style="display:flex; align-items:center; gap:8px; padding:10px 12px; background:var(--cardinal); color:#fff; border-radius:var(--radius-sm); text-decoration:none; font-size:0.82rem; font-weight:700;" onmouseover="this.style.background='var(--cardinal-deep)'" onmouseout="this.style.background='var(--cardinal)'">
+          <span>⚡</span>
+          <span>AI for Web Dev →</span>
+        </a>
+        <p style="font-size:0.72rem; color:var(--ink-faint); margin:8px 0 0 0; line-height:1.4;">Build a live website using AI — a separate beginner session.</p>
+      </div>
     </div>
   </nav>
 
@@ -1292,77 +1300,92 @@ def reply_view(request):
         </div>
 
         <!-- ============================================================
-           VIBECODING / AI DEV TOOLS
+           VIBECODING / AI DEV TOOLS — upgraded to 3-category layout
            ============================================================ -->
-        <h3 class="sub-heading" style="margin-top: 35px;">Vibecoding & AI Dev Tools</h3>
+        <h3 class="sub-heading" style="margin-top: 35px;">Vibecoding &amp; AI Dev Tools</h3>
         <p>
-          The rise of artificial intelligence has introduced a new style of building: <strong>Vibecoding</strong>. 
-          Vibecoding means describing what you want in plain English, and letting agentic AI assistants write and patch the code directly. 
-          While these tools make development exponentially faster, they <strong>do not replace</strong> understanding the basics. A beginner who does not know HTML, CSS, or JS will hit a wall when trying to debug, customize, or audit an AI's output.
+          The rise of AI has introduced a new style of building: <strong>Vibecoding</strong> — describing what you want in plain English and letting agentic AI assistants write the code.
+          While these tools make development exponentially faster, they <strong>do not replace</strong> understanding the basics. AI web-dev tools fall into three clear categories:
         </p>
 
         <div class="ai-tools-group">
-          <strong style="font-size: 0.95rem; color: var(--ink-soft); display: block; border-bottom: 1px solid var(--line); padding-bottom: 6px; margin-bottom: 12px;">Frontend-Focused Visual Generators</strong>
-          <p style="font-size: 0.88rem; color: var(--ink-soft); margin-bottom: 12px;">Generate component markup, pages, and interactive UI views visually from textual prompts:</p>
+          <strong style="font-size: 0.95rem; color: var(--ink-soft); display: block; border-bottom: 1px solid var(--line); padding-bottom: 6px; margin-bottom: 12px;">
+            <span style="display:inline-block; background:var(--cardinal); color:#fff; font-size:0.7rem; padding:2px 7px; border-radius:4px; font-family:var(--font-mono); margin-right:6px;">A</span>
+            Chat Assistants — think, plan, write code piece by piece
+          </strong>
           <div class="ai-tools-list">
-            <a href="https://v0.dev/" target="_blank" rel="noopener noreferrer" class="ai-tool-card">
-              <h4>v0 by Vercel</h4>
-              <p>Generates structured React components and CSS styling on demand, utilizing TailwindCSS.</p>
-            </a>
-            <a href="https://lovable.dev/" target="_blank" rel="noopener noreferrer" class="ai-tool-card">
-              <h4>Lovable</h4>
-              <p>A full-featured visual editor that writes code and lets you construct frontend modules interactively.</p>
-            </a>
-            <a href="https://bolt.new/" target="_blank" rel="noopener noreferrer" class="ai-tool-card">
-              <h4>bolt.new</h4>
-              <p>Creates, runs, builds, and deploys full stack web applications directly inside a sandboxed web browser.</p>
-            </a>
-          </div>
-        </div>
-
-        <div class="ai-tools-group" style="margin-top: 30px;">
-          <strong style="font-size: 0.95rem; color: var(--ink-soft); display: block; border-bottom: 1px solid var(--line); padding-bottom: 6px; margin-bottom: 12px;">Full-Stack & Agentic Coding Assistants</strong>
-          <p style="font-size: 0.88rem; color: var(--ink-soft); margin-bottom: 12px;">Autonomous software agents that read, write, build, and refactor code directly across files:</p>
-          <div class="ai-tools-list">
-            <div class="ai-tool-card" style="cursor: default;">
-              <h4 style="color: var(--ink); border: none;">Claude Code <span style="font-size: 0.72rem; background: var(--panel); padding: 2px 6px; border-radius: 4px; font-family: var(--font-mono); text-transform: none;">Terminal</span></h4>
-              <p>Anthropic's command-line tool that acts as an autonomous agent in your local git repository to edit code, execute tests, and find bugs.</p>
-            </div>
-            <a href="https://www.cursor.com/" target="_blank" rel="noopener noreferrer" class="ai-tool-card">
-              <h4>Cursor</h4>
-              <p>An AI-first code editor (forked from VS Code) designed for deep integration with LLMs to edit blocks, chat with repositories, and autocomplete syntax.</p>
-            </a>
-            <a href="https://replit.com/" target="_blank" rel="noopener noreferrer" class="ai-tool-card">
-              <h4>Replit Agent</h4>
-              <p>An autonomous agent that helps design, package, and deploy complete applications from scratch right in the cloud.</p>
-            </a>
-            <a href="https://codeium.com/windsurf" target="_blank" rel="noopener noreferrer" class="ai-tool-card">
-              <h4>Windsurf</h4>
-              <p>An IDE focused on collaborative flow, blending agentic automation with an interactive sidebar command structure.</p>
-            </a>
-          </div>
-        </div>
-
-        <div class="ai-tools-group" style="margin-top: 30px;">
-          <strong style="font-size: 0.95rem; color: var(--ink-soft); display: block; border-bottom: 1px solid var(--line); padding-bottom: 6px; margin-bottom: 12px;">General Logic & Copilots</strong>
-          <p style="font-size: 0.88rem; color: var(--ink-soft); margin-bottom: 12px;">Assistants to help write individual lines, explain algorithms, and write tests:</p>
-          <div class="ai-tools-list">
-            <a href="https://github.com/features/copilot" target="_blank" rel="noopener noreferrer" class="ai-tool-card">
-              <h4>GitHub Copilot</h4>
-              <p>Standard inline code autocomplete and sidebar logic explainer used in VS Code.</p>
+            <a href="https://claude.ai/" target="_blank" rel="noopener noreferrer" class="ai-tool-card">
+              <h4>Claude</h4>
+              <p>Best for reasoning, explaining code, planning architecture, and writing full files. Use to <em>plan</em>, explain errors, and write specific code.</p>
             </a>
             <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" class="ai-tool-card">
               <h4>ChatGPT</h4>
-              <p>OpenAI's foundational model, useful for quick boilerplate snippets and explaining backend logic.</p>
-            </a>
-            <a href="https://claude.ai/" target="_blank" rel="noopener noreferrer" class="ai-tool-card">
-              <h4>Claude</h4>
-              <p>Anthropic's LLM, renowned for code generation and explaining complex concepts.</p>
+              <p>General-purpose coding help. Great for quick questions, boilerplate snippets, and explaining backend logic.</p>
             </a>
           </div>
         </div>
+
+        <div class="ai-tools-group" style="margin-top: 24px;">
+          <strong style="font-size: 0.95rem; color: var(--ink-soft); display: block; border-bottom: 1px solid var(--line); padding-bottom: 6px; margin-bottom: 12px;">
+            <span style="display:inline-block; background:var(--sage); color:#fff; font-size:0.7rem; padding:2px 7px; border-radius:4px; font-family:var(--font-mono); margin-right:6px;">B</span>
+            Coding Agents / IDEs — you see the code, AI writes &amp; edits it
+          </strong>
+          <div class="ai-tools-list">
+            <a href="https://claude.com/claude-code" target="_blank" rel="noopener noreferrer" class="ai-tool-card">
+              <h4>Claude Code <span style="font-size: 0.72rem; background: var(--panel); padding: 2px 6px; border-radius: 4px; font-family: var(--font-mono); text-transform: none;">Terminal</span></h4>
+              <p>Agentic coding assistant in your terminal or VS Code. Builds and ships full projects autonomously.</p>
+            </a>
+            <a href="https://www.cursor.com/" target="_blank" rel="noopener noreferrer" class="ai-tool-card">
+              <h4>Cursor</h4>
+              <p>AI-first code editor built on VS Code. Chat with your codebase and autocomplete entire functions.</p>
+            </a>
+            <a href="https://codeium.com/windsurf" target="_blank" rel="noopener noreferrer" class="ai-tool-card">
+              <h4>Windsurf</h4>
+              <p>Agentic IDE that understands your whole project and terminal — great for complex multi-file changes.</p>
+            </a>
+            <a href="https://github.com/features/copilot" target="_blank" rel="noopener noreferrer" class="ai-tool-card">
+              <h4>GitHub Copilot</h4>
+              <p>Autocomplete-style suggestions inside VS Code — the "spellcheck" of coding.</p>
+            </a>
+          </div>
+        </div>
+
+        <div class="ai-tools-group" style="margin-top: 24px;">
+          <strong style="font-size: 0.95rem; color: var(--ink-soft); display: block; border-bottom: 1px solid var(--line); padding-bottom: 6px; margin-bottom: 12px;">
+            <span style="display:inline-block; background:var(--gold); color:#fff; font-size:0.7rem; padding:2px 7px; border-radius:4px; font-family:var(--font-mono); margin-right:6px;">C</span>
+            Prompt-to-App Builders — no code visible, best for absolute beginners
+          </strong>
+          <div class="ai-tools-list">
+            <a href="https://lovable.dev/" target="_blank" rel="noopener noreferrer" class="ai-tool-card" style="border-color:var(--gold); background:var(--gold-tint);">
+              <h4>Lovable ⭐</h4>
+              <p>Describe your app → get a working full-stack app with a database. Fastest path from idea to deployed site.</p>
+            </a>
+            <a href="https://bolt.new/" target="_blank" rel="noopener noreferrer" class="ai-tool-card" style="border-color:var(--gold); background:var(--gold-tint);">
+              <h4>Bolt.new ⭐</h4>
+              <p>Prompt-to-code in the browser. Generates real exportable code — great for live session demos.</p>
+            </a>
+            <a href="https://v0.dev/" target="_blank" rel="noopener noreferrer" class="ai-tool-card">
+              <h4>v0 by Vercel</h4>
+              <p>Turns prompts into clean React/Next.js UI components with Tailwind CSS.</p>
+            </a>
+            <a href="https://replit.com/" target="_blank" rel="noopener noreferrer" class="ai-tool-card">
+              <h4>Replit Agent</h4>
+              <p>Build and deploy apps with an AI agent — all in the browser, no local setup required.</p>
+            </a>
+          </div>
+        </div>
+
+        <!-- Link to dedicated AI for Web Dev page -->
+        <div style="margin-top: 28px; padding: 20px 24px; background: linear-gradient(135deg, var(--cardinal-tint), var(--gold-tint)); border: 1.5px solid var(--cardinal); border-radius: var(--radius); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <strong style="display:block; font-size:1rem; color:var(--cardinal-deep); font-family:var(--font-display);">⚡ Want the full AI for Web Dev session?</strong>
+            <span style="font-size:0.88rem; color:var(--ink-soft);">A dedicated page covers all 9 modules: CLEAR prompting, debugging, deployment checklist, and more.</span>
+          </div>
+          <a href="ai-webdev.html" style="display:inline-flex; align-items:center; gap:8px; padding:11px 20px; background:var(--cardinal); color:#fff; border-radius:var(--radius-sm); text-decoration:none; font-weight:700; font-size:0.9rem; white-space:nowrap; flex-shrink:0;">Open Part 2 →</a>
+        </div>
       </div>
     </section>
+
 
     <!-- ============================================================
        09 — WHAT IS AN API
@@ -2352,6 +2375,21 @@ def reply_view(request):
             <h4 style="font-family: var(--font-display); color: var(--cardinal-deep); margin-bottom: 10px;">📋 Your
               Learning Path:</h4>
             <div id="skillPathList" style="display: flex; flex-direction: column; gap: 8px;"></div>
+          </div>
+        </div>
+
+        <!-- Part 2 CTA -->
+        <div style="margin: 36px 0; padding: 28px 32px; background: linear-gradient(135deg, #1a0f0f 0%, #2a1010 50%, #1a1508 100%); border-radius: var(--radius); border: 1px solid var(--cardinal); position: relative; overflow: hidden;">
+          <div style="position:absolute; top:-30px; right:-30px; width:120px; height:120px; background:var(--cardinal); opacity:0.08; border-radius:50%;"></div>
+          <p style="margin:0 0 6px; font-family:var(--font-mono); font-size:0.78rem; color:var(--cardinal); letter-spacing:0.08em; text-transform:uppercase;">Part Two</p>
+          <h3 style="margin:0 0 10px; font-family:var(--font-display); color:#FAF7F1; font-size:clamp(1.3rem, 1rem + 1vw, 1.7rem);">AI for Web Development — From Zero to a Live Website</h3>
+          <p style="margin:0 0 20px; color:#a09282; font-size:0.95rem; line-height:1.6; max-width:520px;">A dedicated beginner session covering: the 3 AI tool categories, the <strong style="color:#e8dfc8;">CLEAR prompting framework</strong>, debugging loops, UI/UX principles, and a step-by-step deployment checklist to ship your first live site.</p>
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <a href="ai-webdev.html" style="display:inline-flex; align-items:center; gap:8px; padding:12px 22px; background:var(--cardinal); color:#fff; border-radius:var(--radius-sm); text-decoration:none; font-weight:700; font-size:0.92rem;">
+              Start Part 2
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="ai-webdev.html#resources" style="display:inline-flex; align-items:center; gap:8px; padding:12px 22px; background:transparent; color:#a09282; border:1px solid #3a2a2a; border-radius:var(--radius-sm); text-decoration:none; font-weight:600; font-size:0.88rem;">Browse all AI tools →</a>
           </div>
         </div>
 
