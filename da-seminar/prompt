@@ -1,0 +1,396 @@
+- generate the prompt for a website based on the following constraints:
+i want to develop a website as a part of a seminar session for my classmates
+the seminar is conducted as an internal assesment for the subject "Data Analytics", so prepare the website keeping in mind that the topic are playing a cruitial role for the students to understand data analytics better and i want to teach them with the help of examples, data set snap-shots, graphs, etc to improve the learning.
+i want the tech stack to be html, css and js
+use the following prompt and use it as the desired content for the session:
+```
+You are an expert Professor of Statistics, Data Analytics, and Data Science with over 25 years of teaching experience. Your task is to create a comprehensive, university-level learning resource that will be used as the primary study material for a seminar presentation conducted as part of an Internal Assessment for the subject "Data Analytics."
+
+The audience consists of undergraduate engineering students who have basic knowledge of probability but are beginners in Probability Distributions and Hypothesis Testing. The goal is not merely to define concepts, but to help students understand the intuition, mathematical foundation, real-world applications, and importance of each topic in Data Analytics.
+
+==================================================================
+SEMINAR CONTEXT
+==================================================================
+
+This seminar is part of an Internal Assessment.
+
+Another student has already covered the following topics before my presentation:
+
+• Introduction to Probability
+• Basic Terminologies
+• Sample Space and Events
+• Probability Formula
+• Addition Rule of Probability
+• Multiplication Rule of Probability
+• Conditional Probability
+• Independent and Dependent Events
+• Bayes' Theorem
+
+Assume that students already understand these concepts.
+
+Begin my seminar with a brief recap (2–3 minutes) that connects Probability Calculus to Probability Distributions before moving into the main content.
+
+The seminar duration is approximately 40–45 minutes.
+
+The entire seminar should always maintain a Data Analytics perspective rather than a pure Mathematics or Statistics perspective.
+
+For every concept, answer the following questions:
+
+1. What is it?
+2. Why is it important?
+3. Why do Data Analysts use it?
+4. How is it used in real-world datasets?
+5. Where is it applied in industry?
+6. How does it connect to Machine Learning, AI, Business Analytics, Data Science, and Decision Making?
+
+==================================================================
+TOPICS TO COVER
+==================================================================
+
+PART 1 – Probability Distributions
+
+• Introduction to Random Variables
+• Types of Random Variables
+• Discrete Probability Distribution
+• Continuous Probability Distribution
+
+PART 2 – Hypothesis Testing
+
+• Introduction to Hypothesis Testing
+• Null Hypothesis
+• Alternative Hypothesis
+• Chi-Square Test
+
+==================================================================
+CONTENT REQUIREMENTS
+==================================================================
+
+Generate a COMPLETE teaching guide instead of presentation notes.
+
+The content should be detailed enough that a student can study directly from it without needing additional resources.
+
+For EVERY topic include:
+
+• Formal definition
+• Simple explanation
+• Intuition behind the concept
+• Mathematical explanation (without unnecessary complexity)
+• Important terminologies
+• Why the concept exists
+• Real-life analogy
+• Data Analytics perspective
+• Industry applications
+• Advantages
+• Limitations
+• Common mistakes students make
+• Frequently asked interview questions
+• Practical tips
+• Summary
+
+==================================================================
+REAL-WORLD EXAMPLES
+==================================================================
+
+Every topic should contain numerous practical examples from domains such as:
+
+• Netflix
+• Amazon
+• Google
+• Flipkart
+• Swiggy
+• Zomato
+• Uber
+• Ola
+• Healthcare
+• Finance
+• Banking
+• Manufacturing
+• IoT
+• Social Media
+• Cybersecurity
+• E-commerce
+• Education
+• Agriculture
+• Weather Forecasting
+• Sports Analytics
+
+Do not rely only on coin tosses and dice. Use realistic business examples throughout.
+
+==================================================================
+DATASETS
+==================================================================
+
+For every major concept include realistic datasets such as:
+
+Student Marks
+
+Customer Purchases
+
+Employee Salary
+
+Product Sales
+
+Website Visitors
+
+Hospital Patients
+
+Temperature Records
+
+Rainfall Data
+
+Stock Prices
+
+Customer Complaints
+
+Delivery Times
+
+Online Orders
+
+Loan Approvals
+
+Employee Attendance
+
+Survey Responses
+
+Generate sample datasets as tables wherever appropriate.
+
+==================================================================
+VISUALS
+==================================================================
+
+For every topic suggest diagrams that should appear in the presentation.
+
+Examples include:
+
+Flowcharts
+
+Mind Maps
+
+Concept Maps
+
+Bar Graphs
+
+Pie Charts
+
+Bell Curves
+
+Probability Distribution Graphs
+
+Comparison Tables
+
+Infographics
+
+Decision Trees
+
+Business Workflow Diagrams
+
+Data Analytics Pipeline
+
+Sampling Illustration
+
+Chi-Square Contingency Tables
+
+Confusion Matrix (only if useful)
+
+Explain exactly what each diagram should contain.
+
+==================================================================
+INTERACTIVE CLASSROOM ACTIVITIES
+==================================================================
+
+For every major topic include:
+
+• Small classroom activity
+• Think-Pair-Share questions
+• Poll questions
+• Dataset interpretation exercise
+• Quick quizzes
+• MCQs
+• True/False questions
+• Practical analytical problems
+
+These activities should keep students engaged.
+
+==================================================================
+HYPOTHESIS TESTING SECTION
+==================================================================
+
+Cover:
+
+• Why hypothesis testing exists
+• Population vs Sample
+• Statistical inference
+• Decision making using sample data
+• Significance level
+• p-value (conceptual explanation)
+• Type I Error
+• Type II Error
+• Null Hypothesis
+• Alternative Hypothesis
+• Steps involved in hypothesis testing
+• Decision making process
+• Interpretation of results
+
+Do not overemphasize mathematical derivations.
+
+Focus on understanding and interpretation.
+
+==================================================================
+CHI-SQUARE TEST
+==================================================================
+
+Explain:
+
+• Introduction
+• Why it is used
+• Categorical data
+• Contingency table
+• Expected frequency
+• Observed frequency
+• Formula
+• Step-by-step worked example
+• Interpretation
+• Real survey example
+• Data Analytics applications
+• Business applications
+• Healthcare applications
+• Marketing applications
+
+Provide one complete solved numerical example.
+
+==================================================================
+COMPARISON TABLES
+==================================================================
+
+Include comparison tables for:
+
+Random Variable vs Variable
+
+Discrete vs Continuous
+
+Discrete Distribution vs Continuous Distribution
+
+Population vs Sample
+
+Null vs Alternative Hypothesis
+
+Probability vs Probability Distribution
+
+Hypothesis Testing vs Machine Learning Prediction
+
+==================================================================
+INDUSTRY APPLICATIONS
+==================================================================
+
+For every topic explain how companies like:
+
+Google
+
+Microsoft
+
+Amazon
+
+Netflix
+
+Meta
+
+Uber
+
+Tesla
+
+Apple
+
+OpenAI
+
+NVIDIA
+
+use these statistical concepts in practice.
+
+==================================================================
+CONNECTION TO DATA ANALYTICS
+==================================================================
+
+Throughout the document repeatedly connect the concepts to:
+
+Exploratory Data Analysis (EDA)
+
+Machine Learning
+
+Artificial Intelligence
+
+Predictive Analytics
+
+Business Intelligence
+
+Business Decision Making
+
+Statistical Modeling
+
+Data Visualization
+
+Data Cleaning
+
+Data Collection
+
+Customer Analytics
+
+A/B Testing
+
+Recommendation Systems
+
+Quality Control
+
+Fraud Detection
+
+==================================================================
+SEMINAR STRUCTURE
+==================================================================
+
+Organize the output into:
+
+1. Opening Hook
+2. Motivation
+3. Connection with Previous Seminar
+4. Topic-wise Teaching Content
+5. Practical Examples
+6. Activities
+7. Summary after every topic
+8. End-of-session Revision
+9. Final Mind Map
+10. Key Takeaways
+11. Frequently Asked Questions
+12. Important Interview Questions
+13. Final Conclusion
+
+==================================================================
+OUTPUT STYLE
+==================================================================
+
+The content should read like a premium university textbook combined with a classroom teaching guide.
+
+It should be:
+
+• Highly engaging
+• Conceptual
+• Beginner-friendly
+• Technically accurate
+• Rich in examples
+• Rich in diagrams (described in text)
+• Rich in datasets
+• Rich in classroom interactions
+• Rich in business applications
+• Rich in Data Analytics use cases
+
+Avoid unnecessary mathematical proofs.
+
+Focus on intuition, visualization, practical understanding, and real-world applications.
+
+The final output should be comprehensive enough to serve as a complete seminar handbook for both the presenter and the audience.
+```
+
+i want the website to contain my part of topics
+use the previosly uploaded css file's styling for this website
+i will be using the website as a source for the presentation purpose
+i want the website to include - examples, questions with answers as another example
+generate the code for html, css and js
+include a lot of content for me to explain - i will be going in a good depth

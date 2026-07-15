@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A deep dive into the statistical engines that power decision-making at Google, Netflix, and Amazon. Learn Probability, Distributions, and Hypothesis Testing.">
+    <title>Data Analytics Seminar | Probability & Hypothesis Testing</title>
+    <!-- Premium Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Progress Bar -->
+    <div class="progress-track">
+        <div class="progress-fill" id="progressBar"></div>
+    </div>
+
+    <!-- Sticky Navigation (Sidebar) -->
+    <nav class="toc">
+        <div class="toc-inner">
+            <div class="toc-brand">
+                <span class="toc-brand-mark">◈</span> Analytics Seminar
+            </div>
+            <ul class="toc-list" id="tocList">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#roadmap">Seminar Roadmap</a></li>
+                <li><a href="#recap">The Foundation (Recap)</a></li>
+                                <li><a href="#bayes-theorem">Bayes' Theorem</a></li>
+                <li><a href="#random-variables">Random Variables</a></li>
+                <li><a href="#types-rv">Discrete vs Continuous</a></li>
+                <li><a href="#distributions">Probability Distributions</a></li>
+                <li><a href="#hypothesis-intro">Hypothesis Testing</a></li>
+                <li><a href="#null-alt">Null vs Alternative</a></li>
+                                <li><a href="#z-t-tests">Z-Test vs T-Test</a></li>
+                <li><a href="#chi-square">Chi-Square Test</a></li>
+                                <li><a href="#ab-testing">A/B Testing Lab</a></li>
+                <li><a href="#interactive-lab">Interactive Lab</a></li>
+                <li><a href="#interview">Interview Prep</a></li>
+                                <li><a href="#summary">Mind Map & Summary</a></li>
+                <li><a href="#resources">Further Resources</a></li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation Toggle -->
+    <button class="toc-toggle" id="menuToggle" aria-expanded="false" aria-controls="tocList">
+        <span class="toc-toggle-icon">☰</span> Menu
+    </button>
+
+    <main class="page">
+        <!-- Section: Hero -->
+        <section id="home" class="section hero">
+            <div class="container">
+                <span class="eyebrow">Internal Assessment | Engineering Seminar</span>
+                <h1 class="hero-title">Data Analytics: <em>Distributions</em> & Hypothesis Testing</h1>
+                <p class="lead">A deep dive into the statistical engines that power decision-making at Google, Netflix, and Amazon.</p>
+                
+                <div class="hero-journey">
+                    <div class="card-grid two">
+                        <div class="info-block">
+                            <h4>Presenter Information</h4>
+                            <p>Department of Computer Science & Engineering</p>
+                            <p>Duration: 45 Minutes</p>
+                        </div>
+                        <div class="info-block">
+                            <h4>Seminar Objectives</h4>
+                            <ul class="tick-list">
+                                <li>Master Random Variable classification</li>
+                                <li>Identify Distribution patterns in Big Data</li>
+                                <li>Execute Statistical Inference via Chi-Square</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <a href="#roadmap" class="btn-primary">Start Seminar <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 10H15M15 10L11 6M15 10L11 14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </div>
+        </section>
+
+        <!-- Section: Roadmap -->
+        <section id="roadmap" class="section section-soft">
+            <div class="container">
+                <span class="eyebrow">The Path Ahead</span>
+                <h2>Seminar Roadmap</h2>
+                <ul class="process-list">
+                    <li>
+                        <h4>01. The Bridge</h4>
+                        <p>Recapping basic probability and transitioning to Random Variables.</p>
+                    </li>
+                    <li>
+                        <h4>02. The Distribution Layer</h4>
+                        <p>Understanding Discrete and Continuous patterns in real-world datasets.</p>
+                    </li>
+                    <li>
+                        <h4>03. The Inference Layer</h4>
+                        <p>Introduction to Hypothesis Testing and Null/Alternative frameworks.</p>
+                    </li>
+                    <li>
+                        <h4>04. The Analytical Engine</h4>
+                        <p>Deep dive into the Chi-Square Test for categorical data.</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section: Recap -->
+        <section id="recap" class="section">
+            <div class="container">
+                <span class="eyebrow">Quick Review</span>
+                <h2>The Foundation</h2>
+                <p class="lead">Before we model complex data, we must remember the rules of the game.</p>
+                
+                <div class="card-grid three">
+                    <div class="card">
+                        <div class="trio-swatch trio-html">Axioms</div>
+                        <p>Probability always ranges from 0 to 1.</p>
+                    </div>
+                    <div class="card">
+                        <div class="trio-swatch trio-css">Bayes</div>
+                        <p>Updating beliefs based on new evidence—the core of AI.</p>
+                    </div>
+                    <div class="card">
+                        <div class="trio-swatch trio-js">Events</div>
+                        <p>Distinguishing between Independent and Dependent outcomes.</p>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <p><strong>Transition:</strong> In basic probability, we look at single events. In <strong>Data Analytics</strong>, we look at "Random Variables"—mapping these events to numbers so we can build models.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Section: Bayes Theorem -->
+        <section id="bayes-theorem" class="section section-soft">
+            <div class="container">
+                <span class="eyebrow">Advanced Probability</span>
+                <h2>Bayes' Theorem & Conditional Probability</h2>
+                <p class="lead">How do we update our beliefs when we encounter new evidence? This is the foundation of modern Machine Learning.</p>
+                
+                <div class="code-block" data-lang="The Formula">
+                    <pre><code>P(A|B) = [P(B|A) * P(A)] / P(B)</code></pre>
+                </div>
+                
+                <div class="card-grid two">
+                    <div class="info-block">
+                        <h4>Real-World Application: Spam Filters</h4>
+                        <p>If an email contains the word "Lottery" (Event B), what is the probability that the email is Spam (Event A)? Bayes' theorem calculates this by looking at how often the word "Lottery" appears in known spam emails.</p>
+                    </div>
+                    <div class="info-block">
+                        <h4>Medical Testing Paradox</h4>
+                        <p>Even if a disease test is 99% accurate, if the disease is extremely rare (low prior probability P(A)), a positive result might still mean you most likely don't have the disease. Bayes reveals these unintuitive truths.</p>
+                    </div>
+                </div>
+                <h4 class="sub-heading" style="margin-top: 40px;">Real-World Examples</h4>
+                <div class="card-grid three">
+                    <div class="card">
+                        <div class="trio-swatch trio-html">Spam Filtering</div>
+                        <p>Given an email contains 'Lottery', calculate the updated probability it is spam based on past data.</p>
+                    </div>
+                    <div class="card">
+                        <div class="trio-swatch trio-css">Medical Testing</div>
+                        <p>Updating the probability a patient actually has a disease after receiving a positive test result.</p>
+                    </div>
+                    <div class="card">
+                        <div class="trio-swatch trio-js">Weather Forecasting</div>
+                        <p>Adjusting the baseline chance of rain today based on the new evidence of dark clouds forming.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Random Variables -->
+        <section id="random-variables" class="section">
+            <div class="container">
+                <span class="eyebrow">Part 01: Mapping Reality</span>
+                <h2>Introduction to Random Variables</h2>
+                
+                <div class="card-grid two">
+                    <div class="info-text">
+                        <h3>What is it?</h3>
+                        <p>A Random Variable (X) is a mathematical function that maps the outcomes of a random process to real numbers.</p>
+                        <h3>Why do analysts care?</h3>
+                        <p>Computers can't "calculate" on events like <em>"Customer Churned"</em> or <em>"Rainy Day."</em> We map these to 1 or 0 so we can perform regression, clustering, and forecasting.</p>
+                    </div>
+                    <div class="diagram-frame">
+                        <div class="diagram-label">Analogy: The Uber Ride</div>
+                        <p style="font-size: 0.9rem; color: var(--ink-soft)">The "Event" is a ride from Point A to B. The "Random Variable" could be the <strong>Wait Time</strong>, the <strong>Fare</strong>, or the <strong>Driver Rating</strong>.</p>
+                        <div class="ac-suggestions">
+                            <span class="ac-chip">Wait Time (X)</span>
+                            <span class="ac-chip ac-chip-best">Numeric Output</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Types of RV -->
+        <section id="types-rv" class="section section-soft">
+            <div class="container">
+                <span class="eyebrow">Categorization</span>
+                <h2>Discrete vs. Continuous</h2>
+                
+                <div class="pro-con-grid">
+                    <div class="pro-con pro">
+                        <h4>Discrete Variables</h4>
+                        <p>Countable values. No "in-between" exists.</p>
+                        <ul class="tick-list">
+                            <li>Number of Netflix subscribers.</li>
+                            <li>App crashes per day.</li>
+                            <li>Inventory stock count.</li>
+                        </ul>
+                    </div>
+                    <div class="pro-con con">
+                        <h4>Continuous Variables</h4>
+                        <p>Measurable values. Infinite precision.</p>
+                        <ul class="tick-list">
+                            <li>Server response time (ms).</li>
+                            <li>Employee salary.</li>
+                            <li>Temperature in a data center.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="checkpoint">
+                    <div class="checkpoint-head">
+                        <span class="checkpoint-badge">Concept Check</span>
+                        <p>Is the "Price of Bitcoin" a discrete or continuous variable?</p>
+                    </div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-correct="false" data-feedback="Actually, it is Continuous. Even though we see 2 decimals, in theory, it represents a fractional value of a currency.">Discrete</button>
+                        <button class="quiz-option" data-correct="true" data-feedback="Correct! Currency and financial metrics are treated as Continuous because they represent a scale of value.">Continuous</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <h4 class="sub-heading" style="margin-top: 40px;">Real-World Examples</h4>
+                <div class="card-grid three">
+                    <div class="card">
+                        <div class="trio-swatch trio-html">E-commerce Platforms</div>
+                        <p>Discrete: Number of items in a shopping cart. Continuous: The total checkout price.</p>
+                    </div>
+                    <div class="card">
+                        <div class="trio-swatch trio-css">Server Infrastructure</div>
+                        <p>Discrete: Number of concurrent users logged in. Continuous: Server CPU Temperature.</p>
+                    </div>
+                    <div class="card">
+                        <div class="trio-swatch trio-js">Healthcare Tech</div>
+                        <p>Discrete: Daily steps tracked by a smartwatch. Continuous: Blood pressure readings.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Distributions -->
+        <section id="distributions" class="section">
+            <div class="container">
+                <span class="eyebrow">The Heart of Data</span>
+                <h2>Probability Distributions</h2>
+                <p>A distribution tells us <strong>how</strong> the values of a random variable are spread out. It answers: <em>"Which outcomes are most likely?"</em></p>
+
+                <div class="trio-diagram">
+                    <div class="trio-item">
+                        <div class="trio-swatch trio-html">Normal</div>
+                        <h4>The Bell Curve</h4>
+                        <p>Human heights, IQ, and error rates.</p>
+                    </div>
+                    <div class="trio-item">
+                        <div class="trio-swatch trio-css">Binomial</div>
+                        <h4>Success/Failure</h4>
+                        <p>A/B testing: Click vs. No Click.</p>
+                    </div>
+                    <div class="trio-item">
+                        <div class="trio-swatch trio-js">Poisson</div>
+                        <h4>Events in Time</h4>
+                        <p>Orders arriving at Zomato per hour.</p>
+                    </div>
+                </div>
+
+                
+                <h4 class="sub-heading" style="margin-top: 40px;">More Key Distributions</h4>
+                <div class="card-grid two">
+                    <div class="card">
+                        <div class="trio-swatch trio-html" style="background: var(--ink-faint); color: #fff;">Uniform</div>
+                        <h4>The "Fair" Distribution</h4>
+                        <p>Every outcome has an equal chance. Example: Rolling a fair 6-sided die, or generating a random number between 0 and 1.</p>
+                    </div>
+                    <div class="card">
+                        <div class="trio-swatch trio-css" style="background: var(--cardinal); color: #fff;">Exponential</div>
+                        <h4>Time Between Events</h4>
+                        <p>Models the time elapsed between events in a Poisson process. Example: How long until the next server failure, or the next customer arrival.</p>
+                    </div>
+                </div>
+
+                <!-- Custom SVG Visualization -->
+                <div class="diagram-frame">
+                    <div class="diagram-label">Live Visualization: Normal Distribution</div>
+                    <svg viewBox="0 0 400 200" class="journey-svg">
+                        <path d="M10 180 Q 200 20 390 180" stroke="var(--cardinal)" stroke-width="3" fill="var(--cardinal-tint)" />
+                        <line x1="200" y1="20" x2="200" y2="180" stroke="var(--ink-faint)" stroke-dasharray="4" />
+                        <text x="210" y="50" font-family="var(--font-mono)" font-size="12">Mean (μ)</text>
+                    </svg>
+                    <p class="section-note">In Data Analytics, the <strong>Standard Deviation (σ)</strong> determines the width of the curve, representing volatility.</p>
+                </div>
+                <h4 class="sub-heading" style="margin-top: 40px;">Real-World Examples</h4>
+                <div class="card-grid three">
+                    <div class="card">
+                        <div class="trio-swatch trio-html">Normal</div>
+                        <p>Analyzing standardized test scores (like SAT/GRE) or heights of a population.</p>
+                    </div>
+                    <div class="card">
+                        <div class="trio-swatch trio-css">Binomial</div>
+                        <p>Measuring Click-Through Rates (CTR) where a user either clicks (Success) or doesn't (Failure).</p>
+                    </div>
+                    <div class="card">
+                        <div class="trio-swatch trio-js">Poisson</div>
+                        <p>Predicting the number of customer support tickets a call center will receive in the next hour.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Hypothesis Testing -->
+        <section id="hypothesis-intro" class="section section-soft">
+            <div class="container">
+                <span class="eyebrow">Part 02: Decision Science</span>
+                <h2>Hypothesis Testing</h2>
+                <p class="lead">How analysts turn "hunches" into scientific facts.</p>
+
+                <div class="analogy-panel">
+                    <div class="analogy-row">
+                        <div class="analogy-tag">The Problem</div>
+                        <p>A Marketing Manager claims a new "Dark Mode" UI increases user session time. Is this <strong>luck</strong> or <strong>real effect</strong>?</p>
+                    </div>
+                    <div class="analogy-row">
+                        <div class="analogy-tag">The Solution</div>
+                        <p>We use Hypothesis Testing to calculate the probability that the result happened by chance.</p>
+                    </div>
+                </div>
+
+                <div class="term-stack">
+                    <div class="term-block">
+                        <h4>P-Value</h4>
+                        <p>The "Evidence Score." If P < 0.05, the result is statistically significant.</p>
+                    </div>
+                    <div class="term-block">
+                        <h4>Significance Level (α)</h4>
+                        <p>The threshold for risk. Usually set at 5% (0.05).</p>
+                    </div>
+                </div>
+                <div class="term-stack" style="margin-top: 20px;">
+                    <div class="term-block">
+                        <h4>Type I Error (False Positive)</h4>
+                        <p>Rejecting the Null Hypothesis when it is actually true (e.g., Convicting an innocent person).</p>
+                    </div>
+                    <div class="term-block">
+                        <h4>Type II Error (False Negative)</h4>
+                        <p>Failing to reject the Null Hypothesis when it is actually false (e.g., Letting a guilty person go free).</p>
+                    </div>
+                </div>
+                <h4 class="sub-heading" style="margin-top: 40px;">Real-World Examples</h4>
+                <div class="card-grid three">
+                    <div class="card">
+                        <div class="trio-swatch trio-html">Marketing Conversion</div>
+                        <p>Testing if a new ad campaign significantly increases the conversion rate compared to the old one.</p>
+                    </div>
+                    <div class="card">
+                        <div class="trio-swatch trio-css">Clinical Trials</div>
+                        <p>Determining if a new vaccine reduces infection rates significantly compared to a placebo.</p>
+                    </div>
+                    <div class="card">
+                        <div class="trio-swatch trio-js">UX Design</div>
+                        <p>Checking if a new navigation bar reduces the average time-to-checkout for users.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Null vs Alt -->
+        <section id="null-alt" class="section">
+            <div class="container">
+                <span class="eyebrow">The Legal Framework of Statistics</span>
+                <h2>Null (H₀) vs. Alternative (H₁)</h2>
+                
+                <table class="ui-ux-matrix">
+                    <thead>
+                        <tr>
+                            <th>Hypothesis</th>
+                            <th>Status Quo</th>
+                            <th>Real-World Example (Amazon)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Null (H₀)</strong></td>
+                            <td>"Nothing changed."</td>
+                            <td>The new checkout button does <strong>not</strong> improve sales.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Alternative (H₁)</strong></td>
+                            <td>"There is an effect."</td>
+                            <td>The new checkout button <strong>increases</strong> sales.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="callout callout-gold">
+                    <p><strong>Analyst Tip:</strong> We never "prove" the Alternative. We only find enough evidence to "Reject the Null."</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Section: Z-Test and T-Test -->
+        <section id="z-t-tests" class="section section-soft">
+            <div class="container">
+                <span class="eyebrow">Continuous Inference</span>
+                <h2>Z-Test vs. T-Test</h2>
+                <p class="lead">Before jumping to categorical data (Chi-Square), how do we compare averages?</p>
+                
+                <div class="pro-con-grid">
+                    <div class="pro-con pro">
+                        <h4>T-Test (Most Common)</h4>
+                        <p>Used when comparing the <strong>means</strong> of two groups, especially when the sample size is small (n < 30) or the population standard deviation is unknown.</p>
+                        <ul class="tick-list">
+                            <li>Is the average salary of Data Scientists different from Data Engineers?</li>
+                            <li>Does a new drug lower blood pressure more than a placebo?</li>
+                        </ul>
+                    </div>
+                    <div class="pro-con con">
+                        <h4>Z-Test</h4>
+                        <p>Used for comparing means when the sample size is large (n > 30) AND the population standard deviation is known.</p>
+                        <ul class="tick-list">
+                            <li>Quality control in manufacturing where historical population variance is established.</li>
+                        </ul>
+                    </div>
+                </div>
+                <h4 class="sub-heading" style="margin-top: 40px;">Real-World Examples</h4>
+                <div class="card-grid three">
+                    <div class="card">
+                        <div class="trio-swatch trio-html">Z-Test: Manufacturing</div>
+                        <p>Checking the average weight of millions of produced screws (population variance is known).</p>
+                    </div>
+                    <div class="card">
+                        <div class="trio-swatch trio-css">T-Test: Education</div>
+                        <p>Testing the average test scores of 20 students taught with a new experimental method.</p>
+                    </div>
+                    <div class="card">
+                        <div class="trio-swatch trio-js">2-Sample T-Test</div>
+                        <p>Comparing the average salaries between two small engineering teams to check for parity.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Chi-Square -->
+        <section id="chi-square" class="section">
+            <div class="container">
+                <span class="eyebrow">The Categorical Engine</span>
+                <h2>The Chi-Square (χ²) Test</h2>
+                <p>Used to see if there is a significant relationship between two <strong>Categorical</strong> variables.</p>
+                
+                <div class="code-block" data-lang="The Formula">
+                    <pre><code>χ² = Σ [ (Observed - Expected)² / Expected ]</code></pre>
+                </div>
+
+                <h4 class="sub-heading">Case Study: Smartphone Preference</h4>
+                <div class="diagram-frame">
+
+                <div class="analogy-panel" style="margin-bottom: 20px;">
+                    <div class="analogy-row">
+                        <div class="analogy-tag">Step 1: Expected Values</div>
+                        <p>Calculate Expected = (Row Total × Column Total) / Grand Total.</p>
+                    </div>
+                    <div class="analogy-row">
+                        <div class="analogy-tag">Step 2: Compute Score</div>
+                        <p>Apply the formula for each cell, square the difference, and divide by the Expected value.</p>
+                    </div>
+                </div>
+                    <table class="db-table-mock">
+                        <thead>
+                            <tr>
+                                <th>Age Group</th>
+                                <th>iPhone (Obs)</th>
+                                <th>Android (Obs)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Gen Z</td>
+                                <td>85</td>
+                                <td>15</td>
+                            </tr>
+                            <tr>
+                                <td>Boomers</td>
+                                <td>40</td>
+                                <td>60</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="section-note">Chi-Square helps us determine if "Age Group" and "Phone Choice" are <strong>Independent</strong> or linked.</p>
+                <h4 class="sub-heading" style="margin-top: 40px;">Real-World Examples</h4>
+                <div class="card-grid three">
+                    <div class="card">
+                        <div class="trio-swatch trio-html">Demographics</div>
+                        <p>Is there a relationship between Age Group (Gen Z/Boomers) and Preferred Social Media (TikTok/Facebook)?</p>
+                    </div>
+                    <div class="card">
+                        <div class="trio-swatch trio-css">E-commerce</div>
+                        <p>Does the Device Type (Mobile/Desktop) affect the Payment Method chosen (Credit Card/PayPal)?</p>
+                    </div>
+                    <div class="card">
+                        <div class="trio-swatch trio-js">Education</div>
+                        <p>Is a student's Major (CS/Art) independent of their Preferred Study Environment (Library/Cafe)?</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Confidence Intervals -->
+        <section id="confidence-intervals" class="section section-soft">
+            <div class="container">
+                <span class="eyebrow">The Estimation Layer</span>
+                <h2>Confidence Intervals</h2>
+                <p class="lead">Instead of a single point estimate, we often want a range of values that likely contains the true population parameter.</p>
+                
+                <div class="card-grid two">
+                    <div class="card">
+                        <div class="trio-swatch trio-html">95% Confidence</div>
+                        <p>If we sampled the population 100 times, 95 of those intervals would contain the true mean.</p>
+                    </div>
+                    <div class="card">
+                        <div class="trio-swatch trio-css">Margin of Error</div>
+                        <p>Determines the width of the interval. A larger sample size reduces the margin of error.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Section: A/B Testing Lab -->
+        <section id="ab-testing" class="section">
+            <div class="container">
+                <span class="eyebrow">Industry Standard</span>
+                <h2>A/B Testing: The Netflix Approach</h2>
+                <p>A/B testing is the randomized experimentation process where two or more versions of a variable (web page, page element, etc.) are shown to different segments of users.</p>
+                
+                <div class="card-grid three">
+                    <div class="card">
+                        <div class="trio-swatch trio-html">1. Hypothesis</div>
+                        <p>Define the Null and Alternative. e.g., H₁: Changing the CTA color to Red increases Click-Through-Rate (CTR).</p>
+                    </div>
+                    <div class="card">
+                        <div class="trio-swatch trio-css">2. Experiment</div>
+                        <p>Randomly route 50% of traffic to Control (Blue) and 50% to Variant (Red). Collect metric logs.</p>
+                    </div>
+                    <div class="card">
+                        <div class="trio-swatch trio-js">3. Analysis</div>
+                        <p>Run a 2-proportion Z-test or Chi-Square to determine if the CTR difference is statistically significant.</p>
+                    </div>
+                </div>
+                
+                <div class="callout callout-gold">
+                    <p><strong>Guardrail Metrics:</strong> Always track secondary metrics. Your new red button might increase clicks, but it could also increase the uninstallation rate!</p>
+                </div>
+                <h4 class="sub-heading" style="margin-top: 40px;">Real-World Examples</h4>
+                <div class="card-grid three">
+                    <div class="card">
+                        <div class="trio-swatch trio-html">Pricing Page Layout</div>
+                        <p>Testing whether defaulting to the 'Annual Plan' toggle increases total revenue compared to 'Monthly'.</p>
+                    </div>
+                    <div class="card">
+                        <div class="trio-swatch trio-css">Email Marketing</div>
+                        <p>Sending 'Sale Ends Soon' to 50% of users and '20% Off Everything' to the other 50% to maximize open rates.</p>
+                    </div>
+                    <div class="card">
+                        <div class="trio-swatch trio-js">Recommendation Engine</div>
+                        <p>Routing traffic between Algorithm A and B to see which yields higher average watch-time on Netflix.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Interactive Lab -->
+        <section id="interactive-lab" class="section">
+            <div class="container">
+                <span class="eyebrow">Practical Application</span>
+                <h2>Interactive Lab: Python Implementation</h2>
+                <p>Run these calculations in your own environment to see how it works in practice.</p>
+                
+                <div class="code-block" data-lang="Python (scipy.stats)">
+                    <pre><code><span class="code-keyword">import</span> scipy.stats <span class="code-keyword">as</span> stats
+<span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
+
+<span class="code-comment"># Observed Data (Gen Z vs Boomers on Phone Choice)</span>
+observed = np.array([[<span class="code-number">85</span>, <span class="code-number">15</span>], [<span class="code-number">40</span>, <span class="code-number">60</span>]])
+
+<span class="code-comment"># Perform Chi-Square Test</span>
+chi2, p_val, dof, expected = stats.chi2_contingency(observed)
+
+<span class="code-keyword">print</span>(<span class="code-string">f"Chi-Square Score: {chi2:.2f}"</span>)
+<span class="code-keyword">print</span>(<span class="code-string">f"P-Value: {p_val:.5f}"</span>)</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Interview Prep -->
+        <section id="interview" class="section section-soft">
+            <div class="container">
+                <span class="eyebrow">Career Readiness</span>
+                <h2>Interview Questions</h2>
+                
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-trigger" aria-expanded="false">
+                            What is the difference between a Sample and a Population?
+                            <span class="accordion-chevron">▼</span>
+                        </button>
+                        <div class="accordion-panel">
+                            <p>Population is the entire group (e.g., all Google users). Sample is a subset (e.g., 1000 users we surveyed) used to make inferences about the population.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-trigger" aria-expanded="false">
+                            When should I use Chi-Square instead of a T-test?
+                            <span class="accordion-chevron">▼</span>
+                        </button>
+                        <div class="accordion-panel">
+                            <p>Use Chi-Square for categorical data (e.g., Gender, Color, Yes/No). Use T-test for comparing means of continuous data (e.g., Height, Salary).</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-trigger" aria-expanded="false">
+                            Explain the Central Limit Theorem (CLT) to a non-technical person.
+                            <span class="accordion-chevron">▼</span>
+                        </button>
+                        <div class="accordion-panel">
+                            <p>The CLT states that if you take large enough samples from a population and calculate their averages, those averages will form a Normal Distribution (a bell curve)—regardless of what the original population's distribution looked like. It’s why the bell curve is everywhere in statistics.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-trigger" aria-expanded="false">
+                            What is statistical power, and why does sample size matter?
+                            <span class="accordion-chevron">▼</span>
+                        </button>
+                        <div class="accordion-panel">
+                            <p>Statistical power is the probability of correctly rejecting a false Null Hypothesis (i.e., successfully detecting a real effect). A larger sample size increases your power because it gives you a clearer, more confident view of the data, minimizing the chance of a Type II Error.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-trigger" aria-expanded="false">
+                            Can a P-Value tell you the magnitude of an effect?
+                            <span class="accordion-chevron">▼</span>
+                        </button>
+                        <div class="accordion-panel">
+                            <p>No. A p-value only tells you whether an effect exists (statistical significance), not how large or important the effect is (practical significance). You can have a tiny p-value for a completely trivial change just because your sample size was huge. Always calculate the "Effect Size".</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Summary -->
+        <section id="summary" class="section">
+            <div class="container">
+                <div class="closing-panel">
+                    <h3>Seminar Conclusion</h3>
+                    <p>Statistics is the language of the modern world. Whether you're building LLMs at OpenAI or optimizing supply chains at Tesla, understanding Distributions and Hypothesis Testing is non-negotiable.</p>
+                    <div class="tick-list" style="margin-top: 20px; color: #D8D0C1;">
+                        <li style="color: #fff">Random Variables map reality to numbers.</li>
+                        <li style="color: #fff">Hypothesis testing mitigates risk.</li>
+                        <li style="color: #fff">Chi-Square reveals hidden patterns in groups.</li>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Resources -->
+        <section id="resources" class="section section-soft">
+            <div class="container">
+                <span class="eyebrow">Keep Learning</span>
+                <h2>Further Resources</h2>
+                <p>Expand your knowledge with these recommended textbooks and courses.</p>
+                
+                <div class="card-grid two">
+                    <div class="info-block">
+                        <h4>Recommended Books</h4>
+                        <ul class="tick-list">
+                            <li><em>"Naked Statistics"</em> by Charles Wheelan - Great for intuition.</li>
+                            <li><em>"Practical Statistics for Data Scientists"</em> by Peter Bruce - Hands-on coding examples in R/Python.</li>
+                            <li><em>"Thinking, Fast and Slow"</em> by Daniel Kahneman - Understanding human bias and probability errors.</li>
+                        </ul>
+                    </div>
+                    <div class="info-block">
+                        <h4>Online Platforms</h4>
+                        <ul class="tick-list">
+                            <li>Khan Academy - Probability & Statistics</li>
+                            <li>Coursera - Statistics with Python Specialization (UMich)</li>
+                            <li>StatQuest with Josh Starmer (YouTube)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="site-footer">
+            <p>&copy; 2024 Data Analytics Seminar | Department of Computer Science</p>
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

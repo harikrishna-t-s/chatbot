@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>AI for Web Development — From Zero to a Live Website</title>
+  <meta name="description" content="A beginner session plan covering web dev basics, the AI tool landscape, the CLEAR prompting framework, debugging, and deploying your first live website using AI." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="ai-webdev.css" />
+</head>
+
+<body>
+
+  <!-- TOP PROGRESS BAR -->
+  <div class="progress-track" aria-hidden="true">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+
+  <!-- MOBILE TOC TOGGLE -->
+  <button class="toc-toggle" id="tocToggle" aria-expanded="false" aria-controls="tocPanel">
+    <span class="toc-toggle-icon">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <path d="M2 4.5H16M2 9H16M2 13.5H16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+      </svg>
+    </span>
+    Modules
+  </button>
+
+  <!-- TABLE OF CONTENTS -->
+  <nav class="toc" id="tocPanel" aria-label="Module navigation">
+    <div class="toc-inner">
+      <div class="toc-brand">
+        <span class="toc-brand-mark">⚡</span>
+        <span>AI for Web Dev</span>
+      </div>
+      <a href="index.html" class="toc-back-link">← Back to Field Guide</a>
+      <ol class="toc-list">
+        <li><a href="#m0-kickoff" data-toc>M0 · Kickoff</a></li>
+        <li><a href="#m1-basics" data-toc>M1 · Web Dev Basics</a></li>
+        <li><a href="#m2-ai-landscape" data-toc>M2 · AI Landscape</a></li>
+        <li><a href="#m3-frontend-structure" data-toc>M3 · Frontend Structure</a></li>
+        <li><a href="#m4-backend" data-toc>M4 · Backend & Data</a></li>
+        <li><a href="#m5-prompting" data-toc>M5 · CLEAR Prompting</a></li>
+        <li><a href="#m6-debugging" data-toc>M6 · Debugging Loop</a></li>
+        <li><a href="#m7-uiux" data-toc>M7 · UI/UX Principles</a></li>
+        <li><a href="#m8-live" data-toc>M8 · Idea → Live Site</a></li>
+        <li><a href="#closing" data-toc>Closing Recap</a></li>
+        <li><a href="#resources" data-toc>Resource List</a></li>
+      </ol>
+    </div>
+  </nav>
+
+  <main class="page">
+
+    <!-- ============================================================
+       M0 — KICKOFF / HERO
+       ============================================================ -->
+    <section class="section hero" id="m0-kickoff">
+      <div class="container">
+        <p class="eyebrow">Start here · Module 0 · 5 min</p>
+        <h1 class="hero-title">From Zero Coding Knowledge to a <em>Live Website,</em> Using AI.</h1>
+        <p class="hero-sub">
+          You will not memorize syntax today. You will learn the <strong>vocabulary</strong> and
+          <strong>workflow</strong> so you can direct AI like a manager directs a team.
+        </p>
+
+        <div class="session-meta-strip">
+          <span class="meta-chip">⏱ 2.5–3 hours total</span>
+          <span class="meta-chip">👥 Complete beginners welcome</span>
+          <span class="meta-chip">🎯 Build · Deploy · Understand</span>
+        </div>
+
+        <!-- Interactive: Show-of-Hands Poll -->
+        <div class="sandbox-container" id="pollSandbox"
+          style="margin-top: 36px; padding: 24px; background: var(--card-bg); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow);">
+          <h3 style="margin-top:0; font-family:var(--font-display); color:var(--cardinal-deep); font-size:clamp(1.2rem,1rem + 0.8vw,1.45rem);">
+            🙋 Quick Show-of-Hands Poll</h3>
+          <p style="font-size:0.95rem; color:var(--ink-soft); margin-bottom:20px;">Let's calibrate the room. Click your
+            honest answer — this shapes the pace of today's session!</p>
+
+          <div class="poll-question" id="pq1">
+            <p style="font-weight:600; margin-bottom:10px;">Have you ever written a single line of code?</p>
+            <div class="poll-options">
+              <button class="poll-btn" data-qid="1" data-val="yes">✅ Yes, a little</button>
+              <button class="poll-btn" data-qid="1" data-val="no">❌ Never, not once</button>
+            </div>
+            <div class="poll-result" id="pr1" style="display:none;"></div>
+          </div>
+
+          <div class="poll-question" id="pq2" style="margin-top:20px;">
+            <p style="font-weight:600; margin-bottom:10px;">Have you used AI tools like ChatGPT before?</p>
+            <div class="poll-options">
+              <button class="poll-btn" data-qid="2" data-val="yes">✅ Yes, regularly</button>
+              <button class="poll-btn" data-qid="2" data-val="tried">🤔 Tried once or twice</button>
+              <button class="poll-btn" data-qid="2" data-val="no">❌ Never heard of them</button>
+            </div>
+            <div class="poll-result" id="pr2" style="display:none;"></div>
+          </div>
+        </div>
+
+        <!-- Session Overview -->
+        <div class="module-timeline" style="margin-top:36px;">
+          <div class="timeline-item"><span class="tl-badge">M0</span><span class="tl-label">Kickoff</span><span class="tl-time">5 min</span></div>
+          <div class="timeline-item"><span class="tl-badge">M1</span><span class="tl-label">Web Dev Basics</span><span class="tl-time">25 min</span></div>
+          <div class="timeline-item"><span class="tl-badge">M2</span><span class="tl-label">AI Landscape</span><span class="tl-time">20 min</span></div>
+          <div class="timeline-item"><span class="tl-badge">M3</span><span class="tl-label">Frontend Structure</span><span class="tl-time">15 min</span></div>
+          <div class="timeline-item"><span class="tl-badge">M4</span><span class="tl-label">Backend & Data</span><span class="tl-time">15 min</span></div>
+          <div class="timeline-item"><span class="tl-badge">M5</span><span class="tl-label">CLEAR Prompting</span><span class="tl-time">20 min</span></div>
+          <div class="timeline-item"><span class="tl-badge">M6</span><span class="tl-label">Debugging</span><span class="tl-time">15 min</span></div>
+          <div class="timeline-item"><span class="tl-badge">M7</span><span class="tl-label">UI/UX</span><span class="tl-time">15 min</span></div>
+          <div class="timeline-item"><span class="tl-badge">M8</span><span class="tl-label">Idea → Live</span><span class="tl-time">20 min</span></div>
+        </div>
+
+        <a href="#m1-basics" class="btn-primary scroll-hint" style="margin-top:32px; display:inline-flex; align-items:center; gap:8px;">
+          Begin Module 1
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============================================================
+       M1 — WEB DEVELOPMENT BASICS & TERMINOLOGY
+       ============================================================ -->
+    <section class="section section-soft" id="m1-basics">
+      <div class="container">
+        <p class="eyebrow">Module 01 — Web Dev Basics · 25 min</p>
+        <h2>The Vocabulary Every Beginner Needs</h2>
+        <p class="lead">Cover these terms simply, with a real-world analogy for each. Don't
+          panic — you only need to recognise these, not recite them from memory.</p>
+
+        <!-- Restaurant Analogy Callout -->
+        <div class="callout callout-gold" style="margin-bottom:30px;">
+          <p><strong>🍽️ The Master Analogy:</strong> A website = a restaurant.
+            <strong>HTML</strong> = the building &amp; furniture.
+            <strong>CSS</strong> = interior design.
+            <strong>JS</strong> = the staff's actions.
+            <strong>Backend</strong> = the kitchen.
+            <strong>Database</strong> = the storeroom.
+            <strong>API</strong> = the waiter between dining room and kitchen.</p>
+        </div>
+
+        <!-- Terms Table -->
+        <div style="overflow-x:auto; margin-bottom:32px;">
+          <table class="ui-ux-matrix">
+            <thead>
+              <tr>
+                <th>Term</th>
+                <th>Simple explanation</th>
+                <th>Restaurant equivalent</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>HTML</strong></td><td>The skeleton — headings, paragraphs, buttons, images</td><td>Building &amp; furniture</td></tr>
+              <tr><td><strong>CSS</strong></td><td>The styling — colors, spacing, fonts, layout</td><td>Interior design</td></tr>
+              <tr><td><strong>JavaScript (JS)</strong></td><td>The behavior — what happens when you click, scroll, type</td><td>Staff actions</td></tr>
+              <tr><td><strong>Frontend</strong></td><td>Everything the user sees and touches in the browser</td><td>The dining room</td></tr>
+              <tr><td><strong>Backend</strong></td><td>Logic, data, security — runs on a server</td><td>The kitchen</td></tr>
+              <tr><td><strong>Database</strong></td><td>Where information is stored permanently</td><td>The storeroom</td></tr>
+              <tr><td><strong>API</strong></td><td>A waiter between frontend and backend — takes requests, brings data</td><td>The waiter</td></tr>
+              <tr><td><strong>Framework</strong></td><td>A pre-built toolkit so you don't start from zero (e.g. React, Next.js)</td><td>A franchise kitchen manual</td></tr>
+              <tr><td><strong>Hosting / Deployment</strong></td><td>Putting your site on a server so anyone can visit it</td><td>Opening the restaurant to the public</td></tr>
+              <tr><td><strong>Domain name</strong></td><td>The address people type (e.g. mysite.com)</td><td>The restaurant's street address</td></tr>
+              <tr><td><strong>Git / GitHub</strong></td><td>Version-controlled storage for your code — tracks every change</td><td>The manager's daily log</td></tr>
+              <tr><td><strong>Responsive design</strong></td><td>Site adapts to phone, tablet, laptop screens automatically</td><td>Tables that rearrange for different party sizes</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Interactive: Frontend / Backend Sorter -->
+        <div class="sandbox-container" id="sorterSandbox"
+          style="padding:24px; background:var(--card-bg); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow);">
+          <h3 style="margin-top:0; font-family:var(--font-display); color:var(--cardinal-deep); font-size:clamp(1.2rem,1rem+0.8vw,1.45rem);">
+            🏷️ Frontend or Backend? — Quick Sorter</h3>
+          <p style="font-size:0.95rem; color:var(--ink-soft); margin-bottom:20px;">
+            Read each item. Guess whether it lives in the <strong>frontend</strong> (what you see) or <strong>backend</strong> (what the server does).
+            5 rapid-fire rounds!</p>
+
+          <div id="sorterCard" class="sorter-card">
+            <div class="sorter-term-display" id="sorterTermDisplay">Loading…</div>
+            <div class="sorter-actions">
+              <button class="sorter-btn sorter-front" id="sorterFrontBtn">🖥️ Frontend</button>
+              <button class="sorter-btn sorter-back" id="sorterBackBtn">⚙️ Backend</button>
+            </div>
+          </div>
+
+          <div id="sorterFeedback" class="sorter-feedback" style="display:none;"></div>
+          <div style="display:flex; gap:12px; align-items:center; margin-top:14px; flex-wrap:wrap;">
+            <span id="sorterProgress" style="font-family:var(--font-mono); font-size:0.85rem; color:var(--ink-soft);">Round 1 of 5</span>
+            <button class="btn-secondary" id="sorterResetBtn" style="display:none;">↻ Play again</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+       M2 — THE AI LANDSCAPE
+       ============================================================ -->
+    <section class="section" id="m2-ai-landscape">
+      <div class="container">
+        <p class="eyebrow">Module 02 — AI Landscape · 20 min</p>
+        <h2>The AI Tools for Web Development</h2>
+        <p class="lead">AI web-dev tools fall into three distinct categories. Knowing which category to reach for is half the battle.</p>
+
+        <!-- 3 Category Tabs -->
+        <div class="tool-cat-wrapper">
+          <div class="tool-cat-tabs" role="tablist">
+            <button class="tool-cat-tab active" data-cattab="a" role="tab" aria-selected="true" id="tab-a">
+              <span class="cat-badge cat-a">A</span> Chat Assistants
+            </button>
+            <button class="tool-cat-tab" data-cattab="b" role="tab" aria-selected="false" id="tab-b">
+              <span class="cat-badge cat-b">B</span> Coding Agents
+            </button>
+            <button class="tool-cat-tab" data-cattab="c" role="tab" aria-selected="false" id="tab-c">
+              <span class="cat-badge cat-c">C</span> Prompt-to-App
+            </button>
+          </div>
+
+          <div class="tool-cat-panes">
+            <!-- Pane A -->
+            <div class="tool-cat-pane active" id="pane-a" role="tabpanel" aria-labelledby="tab-a">
+              <div class="tool-cat-description">
+                <strong>What they do:</strong> Help you think, plan, and write code piece by piece. Use these to <em>plan</em>, <em>explain errors</em>, and <em>write specific code snippets</em>.
+              </div>
+              <div class="tool-cards-grid">
+                <a href="https://claude.ai" target="_blank" rel="noopener" class="tool-card-v2">
+                  <div class="tool-card-icon">🤖</div>
+                  <h4>Claude</h4>
+                  <p>Best for reasoning, explaining code, planning architecture, and writing full files. Exceptional at following complex instructions.</p>
+                  <span class="tool-tag">claude.ai</span>
+                </a>
+                <a href="https://chatgpt.com" target="_blank" rel="noopener" class="tool-card-v2">
+                  <div class="tool-card-icon">💬</div>
+                  <h4>ChatGPT</h4>
+                  <p>General-purpose coding help. Great for quick questions, code snippets, and explaining concepts in plain English.</p>
+                  <span class="tool-tag">chatgpt.com</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Pane B -->
+            <div class="tool-cat-pane" id="pane-b" role="tabpanel" aria-labelledby="tab-b">
+              <div class="tool-cat-description">
+                <strong>What they do:</strong> You still see the code — the AI writes and edits it inside a real project. Best once you understand what code looks like.
+              </div>
+              <div class="tool-cards-grid">
+                <a href="https://claude.com/claude-code" target="_blank" rel="noopener" class="tool-card-v2">
+                  <div class="tool-card-icon">⚡</div>
+                  <h4>Claude Code</h4>
+                  <p>Agentic coding assistant in your terminal or VS Code. Builds and ships full projects autonomously. Best for experienced beginners.</p>
+                  <span class="tool-tag">Terminal / VS Code</span>
+                </a>
+                <a href="https://cursor.com" target="_blank" rel="noopener" class="tool-card-v2">
+                  <div class="tool-card-icon">🖊️</div>
+                  <h4>Cursor</h4>
+                  <p>AI-native code editor built on VS Code. Chat with your codebase, autocomplete intelligently, and edit whole files at once.</p>
+                  <span class="tool-tag">cursor.com</span>
+                </a>
+                <a href="https://windsurf.com" target="_blank" rel="noopener" class="tool-card-v2">
+                  <div class="tool-card-icon">🌊</div>
+                  <h4>Windsurf</h4>
+                  <p>Agentic IDE that understands your whole project and terminal. Excellent for complex multi-file changes.</p>
+                  <span class="tool-tag">windsurf.com</span>
+                </a>
+                <a href="https://github.com/features/copilot" target="_blank" rel="noopener" class="tool-card-v2">
+                  <div class="tool-card-icon">🐙</div>
+                  <h4>GitHub Copilot</h4>
+                  <p>Autocomplete-style suggestions directly inside your editor. The "spellcheck" of coding — suggests the next line as you type.</p>
+                  <span class="tool-tag">github.com/copilot</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Pane C -->
+            <div class="tool-cat-pane" id="pane-c" role="tabpanel" aria-labelledby="tab-c">
+              <div class="tool-cat-description">
+                <strong>What they do:</strong> No code visible at all. Describe your app in English, get a working result. <em>Best for absolute beginners today.</em>
+              </div>
+              <div class="tool-cards-grid">
+                <a href="https://lovable.dev" target="_blank" rel="noopener" class="tool-card-v2 tool-card-recommended">
+                  <div class="tool-card-icon">💖</div>
+                  <h4>Lovable <span class="recommended-badge">★ Beginner pick</span></h4>
+                  <p>Describe your app → get a working full-stack app with database. Fastest path from idea to deployed site.</p>
+                  <span class="tool-tag">lovable.dev</span>
+                </a>
+                <a href="https://bolt.new" target="_blank" rel="noopener" class="tool-card-v2 tool-card-recommended">
+                  <div class="tool-card-icon">⚡</div>
+                  <h4>Bolt.new <span class="recommended-badge">★ Beginner pick</span></h4>
+                  <p>Prompt-to-code in the browser. Generates real, exportable code. Live demo the "wow moment" in class!</p>
+                  <span class="tool-tag">bolt.new</span>
+                </a>
+                <a href="https://v0.dev" target="_blank" rel="noopener" class="tool-card-v2">
+                  <div class="tool-card-icon">🎨</div>
+                  <h4>v0 by Vercel</h4>
+                  <p>Turns prompts and designs into clean React/Next.js UI components. Great for getting polished UI fast.</p>
+                  <span class="tool-tag">v0.dev</span>
+                </a>
+                <a href="https://replit.com" target="_blank" rel="noopener" class="tool-card-v2">
+                  <div class="tool-card-icon">🔁</div>
+                  <h4>Replit</h4>
+                  <p>Build, run, and deploy apps with an AI agent — all in the browser. No local setup required.</p>
+                  <span class="tool-tag">replit.com</span>
+                </a>
+                <a href="https://figma.com" target="_blank" rel="noopener" class="tool-card-v2">
+                  <div class="tool-card-icon">🖼️</div>
+                  <h4>Figma Make</h4>
+                  <p>Turns Figma designs or text prompts into working interactive prototypes. Design → code in one step.</p>
+                  <span class="tool-tag">figma.com</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout" style="margin-top:24px;">
+          <p><strong>🗺️ Recommended beginner path:</strong>
+            Start in <strong>Lovable</strong> or <strong>Bolt.new</strong> (fastest to a working result) →
+            learn to read the generated code with help from <strong>Claude</strong> →
+            graduate to <strong>Cursor</strong> or <strong>Claude Code</strong> once comfortable.</p>
+        </div>
+
+        <!-- Interactive: Tool Picker Quiz -->
+        <div class="sandbox-container" id="toolPickerSandbox"
+          style="margin-top:36px; padding:24px; background:var(--card-bg); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow);">
+          <h3 style="margin-top:0; font-family:var(--font-display); color:var(--cardinal-deep); font-size:clamp(1.2rem,1rem+0.8vw,1.45rem);">
+            🧭 Which AI Tool Should I Start With?</h3>
+          <p style="font-size:0.95rem; color:var(--ink-soft); margin-bottom:20px;">Answer 3 quick questions and get a personalised tool recommendation!</p>
+
+          <div id="toolPickerFlow"></div>
+          <div id="toolPickerResult" style="display:none;" class="tool-picker-result"></div>
+          <button class="btn-secondary" id="toolPickerReset" style="margin-top:14px; display:none;">↻ Start over</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+       M3 — SIMPLE FRONTEND STRUCTURE
+       ============================================================ -->
+    <section class="section section-soft" id="m3-frontend-structure">
+      <div class="container">
+        <p class="eyebrow">Module 03 — Frontend Structure · 15 min</p>
+        <h2>The Shape of Almost Every Web Project</h2>
+        <p class="lead">AI-generated code can look overwhelming. Knowing the standard folder structure removes that fear instantly.</p>
+
+        <div class="card-grid two" style="margin-bottom:32px;">
+          <div class="card">
+            <h3 style="color:var(--cardinal-deep);">Plain Path</h3>
+            <p>HTML + CSS + JavaScript. Perfect for a single simple page — no setup, open in any browser, AI tools can generate it in seconds.</p>
+            <div class="code-block" data-lang="Folder structure" style="margin-top:12px;">
+              <pre><code>my-site/
+├── index.html
+├── style.css
+└── script.js</code></pre>
+            </div>
+          </div>
+          <div class="card">
+            <h3 style="color:var(--cardinal-deep);">Modern Path ⭐</h3>
+            <p><strong>Next.js</strong> (React framework) + <strong>Tailwind CSS</strong> — what most AI builders (v0, Lovable, Bolt) generate by default. Worth knowing the names.</p>
+            <div class="code-block" data-lang="Next.js structure" style="margin-top:12px;">
+              <pre><code>my-app/
+├── app/          → pages
+├── components/   → reusable pieces
+├── public/       → images, icons
+└── package.json  → project config</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout callout-gold">
+          <p><strong>Tip:</strong> When you open AI-generated code for the first time, ignore the files you don't recognise and focus on just two things: <code>index.html</code> (or <code>page.js</code>) for content, and the CSS file for styling.</p>
+        </div>
+
+        <!-- Interactive: File Tree Guesser -->
+        <div class="sandbox-container" id="fileGuesserSandbox"
+          style="margin-top:36px; padding:24px; background:var(--card-bg); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow);">
+          <h3 style="margin-top:0; font-family:var(--font-display); color:var(--cardinal-deep); font-size:clamp(1.2rem,1rem+0.8vw,1.45rem);">
+            📁 File Tree Guesser</h3>
+          <p style="font-size:0.95rem; color:var(--ink-soft); margin-bottom:18px;">Look at the project file below. Before I explain it — what does each highlighted item do? Click your best guess!</p>
+
+          <div id="fileGuesserContent"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+       M4 — BACKEND TOOLS & DATABASES
+       ============================================================ -->
+    <section class="section" id="m4-backend">
+      <div class="container">
+        <p class="eyebrow">Module 04 — Backend & Databases · 15 min</p>
+        <h2>You Rarely Need to Build a Backend From Scratch</h2>
+        <p class="lead">Modern AI-friendly tools give you a database, authentication, and storage with zero server management. Here's the landscape.</p>
+
+        <div style="overflow-x:auto; margin-bottom:28px;">
+          <table class="ui-ux-matrix">
+            <thead>
+              <tr>
+                <th>Need</th>
+                <th>AI-friendly Tool</th>
+                <th>What you get</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Database + Auth + Storage</strong></td>
+                <td><a href="https://supabase.com" target="_blank" rel="noopener" style="color:var(--cardinal);">Supabase ⭐</a></td>
+                <td>Instant Postgres database, login/signup, file storage — all via a visual dashboard</td>
+              </tr>
+              <tr>
+                <td><strong>Alternative to Supabase</strong></td>
+                <td><a href="https://firebase.google.com" target="_blank" rel="noopener" style="color:var(--cardinal);">Firebase</a></td>
+                <td>Google's version — real-time database, auth, hosting. Well-documented.</td>
+              </tr>
+              <tr>
+                <td><strong>Custom backend logic</strong></td>
+                <td>FastAPI (Python) or Node.js/Express</td>
+                <td>Full custom backend — write your own routes and logic with AI help.</td>
+              </tr>
+              <tr>
+                <td><strong>Small backend tasks</strong></td>
+                <td>Vercel Functions, Supabase Edge Functions</td>
+                <td>Run short server-side snippets without managing any server.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout">
+          <p><strong>Simple rule of thumb:</strong> <em>"If your site just needs to save form submissions, user logins, or simple data — use <strong>Supabase</strong> or <strong>Firebase</strong>. Only go custom (FastAPI / Node) once you have specific complex logic."</em></p>
+        </div>
+
+        <!-- Interactive: Backend Recommender -->
+        <div class="sandbox-container" id="backendRecSandbox"
+          style="margin-top:36px; padding:24px; background:var(--card-bg); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow);">
+          <h3 style="margin-top:0; font-family:var(--font-display); color:var(--cardinal-deep); font-size:clamp(1.2rem,1rem+0.8vw,1.45rem);">
+            🔍 What Backend Do I Need?</h3>
+          <p style="font-size:0.95rem; color:var(--ink-soft); margin-bottom:20px;">Answer 3 questions about your project idea and get a backend recommendation.</p>
+
+          <div id="backendRecFlow"></div>
+          <div id="backendRecResult" style="display:none;" class="tool-picker-result"></div>
+          <button class="btn-secondary" id="backendRecReset" style="margin-top:14px; display:none;">↻ Start over</button>
+        </div>
+
+        <!-- Live Supabase Table Teaser -->
+        <div style="margin-top:36px; padding:20px; background:var(--sage-tint); border:1px solid var(--sage); border-radius:var(--radius);">
+          <h3 style="margin:0 0 10px 0; font-family:var(--font-display); font-size:1.15rem; color:var(--sage);">💡 Think About It</h3>
+          <p style="margin-bottom:12px; font-size:0.98rem;">If you had a Supabase table like this — what real feature could you build?</p>
+          <div style="overflow-x:auto;">
+            <table class="db-table-mock" style="width:100%; max-width:480px;">
+              <thead><tr><th>id</th><th>name</th><th>message</th><th>created_at</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>Alice</td><td>This session is amazing!</td><td>2026-07-08</td></tr>
+                <tr><td>2</td><td>Bob</td><td>I built my first app 🎉</td><td>2026-07-08</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="tableIdeaInputRow" style="display:flex; gap:10px; margin-top:14px; flex-wrap:wrap;">
+            <input type="text" id="tableIdeaInput" placeholder="I could build a… (e.g. guestbook, event list, comment section)" style="flex:1; min-width:200px; padding:10px 14px; border:1px solid var(--sage); border-radius:var(--radius-sm); font-family:var(--font-body); font-size:0.9rem; background:var(--card-bg); color:var(--ink); outline:none;">
+            <button class="btn-primary" id="tableIdeaBtn" style="padding:10px 18px; font-size:0.88rem;">Add idea</button>
+          </div>
+          <div id="tableIdeasList" style="margin-top:10px; display:flex; flex-wrap:wrap; gap:8px;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+       M5 — PROMPTING BETTER: THE CLEAR FRAMEWORK
+       ============================================================ -->
+    <section class="section section-soft" id="m5-prompting">
+      <div class="container">
+        <p class="eyebrow">Module 05 — CLEAR Prompting · 20 min</p>
+        <h2>How to Talk to AI — The CLEAR Framework</h2>
+        <p class="lead">This is often the most valuable part of the session. The difference between a useless and a perfect AI response is almost always the quality of the prompt.</p>
+
+        <!-- CLEAR Acronym Cards -->
+        <div class="clear-grid">
+          <div class="clear-card">
+            <div class="clear-letter">C</div>
+            <h4>Context</h4>
+            <p>Tell the AI what project you're working on, what stack it uses, and what already exists. "I'm building a Next.js portfolio site" is vastly better than nothing.</p>
+          </div>
+          <div class="clear-card">
+            <div class="clear-letter">L</div>
+            <h4>Language / Level</h4>
+            <p>Say you're a beginner. Ask it to <em>explain</em>, not just output code. "I'm new to CSS — please explain the change you make."</p>
+          </div>
+          <div class="clear-card">
+            <div class="clear-letter">E</div>
+            <h4>Exact Ask</h4>
+            <p>One specific outcome per prompt, not five vague ones. "Fix only the mobile spacing" is specific. "Make it better" is not.</p>
+          </div>
+          <div class="clear-card">
+            <div class="clear-letter">A</div>
+            <h4>Ask for Alternatives</h4>
+            <p>"Give me 2 ways to do this" when you're unsure which approach to take. Options help you understand trade-offs.</p>
+          </div>
+          <div class="clear-card">
+            <div class="clear-letter">R</div>
+            <h4>Review &amp; Refine</h4>
+            <p>Never accept the first output blindly. Ask "what did you just do and why?" after every response.</p>
+          </div>
+        </div>
+
+        <!-- Good vs Bad Prompts -->
+        <h3 class="sub-heading" style="margin-top:36px;">Good vs. Bad Prompts — Side by Side</h3>
+
+        <div class="prompt-pair-grid">
+          <div class="prompt-pair">
+            <div class="prompt-bad">
+              <span class="prompt-label">❌ Vague</span>
+              <p>"Make my website better"</p>
+            </div>
+            <div class="prompt-arrow">→</div>
+            <div class="prompt-good">
+              <span class="prompt-label">✅ CLEAR</span>
+              <p>"My navbar overlaps my hero text on mobile screens under 400px width. Here's my code [paste]. Fix <strong>only</strong> the mobile spacing, don't change anything else, and explain the CSS change you made."</p>
+            </div>
+          </div>
+
+          <div class="prompt-pair">
+            <div class="prompt-bad">
+              <span class="prompt-label">❌ Vague</span>
+              <p>"Add login"</p>
+            </div>
+            <div class="prompt-arrow">→</div>
+            <div class="prompt-good">
+              <span class="prompt-label">✅ CLEAR</span>
+              <p>"Add email/password signup and login using Supabase Auth to my Next.js app. Show me exactly which files to create and where to put my Supabase keys safely — not hardcoded."</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Extra Tips -->
+        <div class="callout callout-gold" style="margin-top:28px;">
+          <p><strong>Bonus prompting tips:</strong></p>
+          <ul style="margin:8px 0 0 0; padding-left:20px; font-size:0.95rem; line-height:1.8;">
+            <li>Paste the <em>actual error message</em>, don't paraphrase it</li>
+            <li>Ask AI to work in small steps: "do only step 1, wait for me to confirm"</li>
+            <li>Ask "what could go wrong with this approach?" before big decisions</li>
+            <li>Keep one conversation per feature — consistent context = better results</li>
+          </ul>
+        </div>
+
+        <!-- Interactive: Live CLEAR Scorer -->
+        <div class="sandbox-container" id="clearScorerSandbox"
+          style="margin-top:36px; padding:24px; background:var(--card-bg); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow);">
+          <h3 style="margin-top:0; font-family:var(--font-display); color:var(--cardinal-deep); font-size:clamp(1.2rem,1rem+0.8vw,1.45rem);">
+            📊 Live CLEAR Prompt Scorer</h3>
+          <p style="font-size:0.95rem; color:var(--ink-soft); margin-bottom:18px;">
+            Type a prompt below and see it scored across all 5 CLEAR dimensions in real time. Try improving it and watch the score climb!</p>
+
+          <textarea id="clearPromptInput"
+            style="width:100%; height:90px; padding:14px; border:1px solid var(--line); border-radius:var(--radius-sm); font-family:var(--font-body); font-size:0.95rem; resize:vertical; outline:none; background:var(--paper); color:var(--ink); margin-bottom:18px;"
+            placeholder="Type your prompt here… e.g. 'Make a chatbot'">Make a chatbot</textarea>
+
+          <div class="clear-score-display">
+            <div class="clear-score-total">
+              <span id="clearTotalScore">1</span><span class="clear-score-max">/5</span>
+              <div style="font-size:0.8rem; color:var(--ink-soft); margin-top:4px;">CLEAR Score</div>
+            </div>
+            <div class="clear-indicators" id="clearIndicators">
+              <!-- filled by JS -->
+            </div>
+          </div>
+
+          <div id="clearTips" class="clear-tips-list" style="margin-top:14px;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+       M6 — ERROR HANDLING & DEBUGGING
+       ============================================================ -->
+    <section class="section" id="m6-debugging">
+      <div class="container">
+        <p class="eyebrow">Module 06 — Debugging · 15 min</p>
+        <h2>Don't Panic. Read the Error.</h2>
+        <p class="lead">Most people panic at errors. After this module, you'll feel calm — because you have a loop to follow.</p>
+
+        <!-- 6-step loop -->
+        <ol class="process-list">
+          <li>
+            <h4>Don't panic — read the error message first</h4>
+            <p>It usually tells you the file name and line number. That alone narrows the problem to one place in the code.</p>
+          </li>
+          <li>
+            <h4>Open browser DevTools (F12 → Console tab)</h4>
+            <p>Right-click anywhere → Inspect → Console. Red text = JavaScript errors. This is your live error feed.</p>
+          </li>
+          <li>
+            <h4>Copy the exact error text</h4>
+            <p>Don't paraphrase it. Copy it character-for-character, along with the relevant 5–10 lines of code around the problem.</p>
+          </li>
+          <li>
+            <h4>Give it to your AI tool with context</h4>
+            <p>Paste: "I got this error: [error]. Here's the code: [code]. What does this mean and what's the simplest fix?"</p>
+          </li>
+          <li>
+            <h4>Change ONE thing at a time</h4>
+            <p>Don't let AI rewrite everything when only one line is broken. Targeted fixes are easier to understand and reverse.</p>
+          </li>
+          <li>
+            <h4>Verify the fix makes sense</h4>
+            <p>Ask the AI to explain what it changed and why. If it can't explain it clearly, don't trust the fix blindly.</p>
+          </li>
+        </ol>
+
+        <!-- Common Errors Table -->
+        <h3 class="sub-heading" style="margin-top:32px;">Common Beginner Errors Decoded</h3>
+        <div style="overflow-x:auto; margin-bottom:28px;">
+          <table class="ui-ux-matrix">
+            <thead>
+              <tr><th>Error message</th><th>What it really means</th><th>Where to look</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>404 Not Found</code></td><td>The URL/file path you requested doesn't exist</td><td>Check spelling in the URL or file name</td></tr>
+              <tr><td><code>undefined is not a function</code></td><td>You called something that doesn't exist — usually a typo or missing import</td><td>Check the variable name and where it's imported</td></tr>
+              <tr><td><code>CORS error</code></td><td>Frontend and backend are on different domains/ports and blocking each other</td><td>Add CORS headers to the backend response</td></tr>
+              <tr><td><code>Failed to fetch</code></td><td>The API endpoint isn't running, or the URL is wrong</td><td>Check the backend is running and the URL matches exactly</td></tr>
+              <tr><td><code>SyntaxError: Unexpected token</code></td><td>A typo broke the structure of your code (missing bracket, comma, quote)</td><td>Look at the line number in the error</td></tr>
+              <tr><td><code>401 Unauthorized</code></td><td>Missing or invalid API key / auth token</td><td>Check your .env file and API key header</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Interactive: Error Decoder -->
+        <div class="sandbox-container" id="errorDecoderSandbox"
+          style="padding:24px; background:var(--card-bg); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow);">
+          <h3 style="margin-top:0; font-family:var(--font-display); color:var(--cardinal-deep); font-size:clamp(1.2rem,1rem+0.8vw,1.45rem);">
+            🔎 Error Decoder</h3>
+          <p style="font-size:0.95rem; color:var(--ink-soft); margin-bottom:18px;">Select a common error from the dropdown to get a plain-English explanation, where to look, and a copy-paste prompt to give Claude/ChatGPT.</p>
+
+          <select id="errorSelect"
+            style="width:100%; padding:12px 16px; border:1px solid var(--line); border-radius:var(--radius-sm); font-family:var(--font-body); font-size:0.95rem; background:var(--paper); color:var(--ink); outline:none; margin-bottom:18px; cursor:pointer;">
+            <option value="">— Choose an error —</option>
+            <option value="404">404 Not Found</option>
+            <option value="undefined">undefined is not a function</option>
+            <option value="cors">CORS error</option>
+            <option value="fetch">Failed to fetch</option>
+            <option value="syntax">SyntaxError: Unexpected token</option>
+            <option value="401">401 Unauthorized</option>
+          </select>
+
+          <div id="errorDecoderResult" style="display:none;" class="error-result-box"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+       M7 — UI/UX PRINCIPLES
+       ============================================================ -->
+    <section class="section section-soft" id="m7-uiux">
+      <div class="container">
+        <p class="eyebrow">Module 07 — UI/UX · 15 min</p>
+        <h2>Designing for Real Users — 6 Principles</h2>
+        <p class="lead">Keep this practical, not theoretical. A user should never look at your site and wonder "what do I click?"</p>
+
+        <div class="card-grid three" style="margin-bottom:32px;">
+          <div class="card">
+            <div class="card-icon">🎯</div>
+            <h3>Clarity over Cleverness</h3>
+            <p>A user should never wonder "what do I click?" If a button needs an instruction manual, redesign the button.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">🔄</div>
+            <h3>Consistency</h3>
+            <p>Same button style/color = same type of action everywhere. Don't make users re-learn your interface mid-session.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">💬</div>
+            <h3>Feedback</h3>
+            <p>Every click/tap should visibly respond. Loading spinners, color changes, confirmation messages — users need to know something happened.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">⬜</div>
+            <h3>Whitespace</h3>
+            <p>Breathing room improves readability. Don't cram content. Whitespace is not wasted space — it guides the eye.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">📱</div>
+            <h3>Mobile-First</h3>
+            <p>Design for the small screen first. Most users are on phones. Then scale up, not down.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">♿</div>
+            <h3>Accessibility</h3>
+            <p>16px+ body text, high color contrast, alt text on images. Not optional — it's what makes your site usable for everyone.</p>
+          </div>
+        </div>
+
+        <h3 class="sub-heading">AI Tools That Help with UI/UX</h3>
+        <div class="card-grid three" style="margin-bottom:32px;">
+          <a href="https://v0.dev" target="_blank" rel="noopener" class="card" style="text-decoration:none; color:inherit;">
+            <h3>v0.dev</h3>
+            <p>Generate clean, accessible UI components from a text prompt. Outputs real React + Tailwind code.</p>
+          </a>
+          <a href="https://figma.com" target="_blank" rel="noopener" class="card" style="text-decoration:none; color:inherit;">
+            <h3>Figma + Make</h3>
+            <p>Design mockups visually, then turn them into working prototypes with Figma Make.</p>
+          </a>
+          <a href="https://uizard.io" target="_blank" rel="noopener" class="card" style="text-decoration:none; color:inherit;">
+            <h3>Uizard</h3>
+            <p>Sketch-to-design AI — draw a rough wireframe, get a polished mockup. Great for rapid ideation.</p>
+          </a>
+        </div>
+
+        <!-- Interactive: Form Quality Vote -->
+        <div class="sandbox-container" id="formVoteSandbox"
+          style="padding:24px; background:var(--card-bg); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow);">
+          <h3 style="margin-top:0; font-family:var(--font-display); color:var(--cardinal-deep); font-size:clamp(1.2rem,1rem+0.8vw,1.45rem);">
+            🗳️ Which form would you trust?</h3>
+          <p style="font-size:0.95rem; color:var(--ink-soft); margin-bottom:20px;">
+            Look at these two sign-up forms. Vote for the one you'd trust more — then I'll explain <em>why</em> your instinct is right.</p>
+
+          <div class="form-vote-grid">
+            <!-- Cluttered Form -->
+            <div class="form-vote-box" id="formVoteA">
+              <div class="form-vote-label">Form A</div>
+              <div class="form-cluttered">
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:4px; margin-bottom:4px;">
+                  <input type="text" placeholder="First" disabled style="padding:4px; font-size:0.7rem; border:1px solid #ccc; background:#f5f5f5;">
+                  <input type="text" placeholder="Last" disabled style="padding:4px; font-size:0.7rem; border:1px solid #ccc; background:#f5f5f5;">
+                </div>
+                <input type="text" placeholder="Username" disabled style="width:100%; padding:4px; font-size:0.7rem; border:1px solid #ccc; margin-bottom:4px; background:#f5f5f5;">
+                <input type="text" placeholder="Email address" disabled style="width:100%; padding:4px; font-size:0.7rem; border:1px solid #ccc; margin-bottom:4px; background:#f5f5f5;">
+                <input type="text" placeholder="Phone number" disabled style="width:100%; padding:4px; font-size:0.7rem; border:1px solid #ccc; margin-bottom:4px; background:#f5f5f5;">
+                <input type="text" placeholder="Date of birth (mm/dd/yyyy)" disabled style="width:100%; padding:4px; font-size:0.7rem; border:1px solid #ccc; margin-bottom:4px; background:#f5f5f5;">
+                <input type="text" placeholder="Password" disabled style="width:100%; padding:4px; font-size:0.7rem; border:1px solid #ccc; margin-bottom:4px; background:#f5f5f5;">
+                <input type="text" placeholder="Confirm password" disabled style="width:100%; padding:4px; font-size:0.7rem; border:1px solid #ccc; margin-bottom:4px; background:#f5f5f5;">
+                <input type="text" placeholder="Security question" disabled style="width:100%; padding:4px; font-size:0.7rem; border:1px solid #ccc; margin-bottom:6px; background:#f5f5f5;">
+                <button disabled style="width:100%; padding:5px; background:#999; color:#fff; border:none; font-size:0.7rem; cursor:not-allowed;">SUBMIT FORM DATA</button>
+              </div>
+              <button class="form-vote-btn" id="voteFormA">👆 I'd pick this one</button>
+            </div>
+
+            <!-- Clean Form -->
+            <div class="form-vote-box" id="formVoteB">
+              <div class="form-vote-label">Form B</div>
+              <div class="form-clean">
+                <label style="display:block; font-size:0.78rem; font-weight:600; color:#444; margin-bottom:4px;">Email</label>
+                <input type="email" placeholder="you@example.com" disabled style="width:100%; padding:8px 12px; font-size:0.85rem; border:1.5px solid #ddd; border-radius:6px; margin-bottom:14px; background:#fafafa;">
+                <label style="display:block; font-size:0.78rem; font-weight:600; color:#444; margin-bottom:4px;">Password</label>
+                <input type="password" placeholder="••••••••" disabled style="width:100%; padding:8px 12px; font-size:0.85rem; border:1.5px solid #ddd; border-radius:6px; margin-bottom:16px; background:#fafafa;">
+                <button disabled style="width:100%; padding:10px; background:var(--cardinal); color:#fff; border:none; border-radius:8px; font-weight:600; font-size:0.9rem; cursor:not-allowed;">Create Account →</button>
+                <p style="font-size:0.7rem; color:#888; margin:8px 0 0 0; text-align:center;">We'll never share your email.</p>
+              </div>
+              <button class="form-vote-btn" id="voteFormB">👆 I'd pick this one</button>
+            </div>
+          </div>
+
+          <div id="formVoteResult" style="display:none;" class="form-vote-result-box"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+       M8 — THE FULL PATH: IDEA TO LIVE WEBSITE
+       ============================================================ -->
+    <section class="section" id="m8-live">
+      <div class="container">
+        <p class="eyebrow">Module 08 — Idea → Live Website · 20 min</p>
+        <h2>The Full Path from Idea to Live on the Internet</h2>
+        <p class="lead">Walk through this as one continuous story. Every step corresponds to a real action you'll take. Tick them off as we go!</p>
+
+        <!-- 10-Step Visual Pipeline -->
+        <div class="deploy-pipeline">
+          <div class="deploy-step">
+            <div class="deploy-num">1</div>
+            <div class="deploy-content">
+              <h4>Define the idea in one sentence</h4>
+              <p>e.g. "A one-page portfolio for a photographer with a gallery and contact form."</p>
+            </div>
+          </div>
+          <div class="deploy-step">
+            <div class="deploy-num">2</div>
+            <div class="deploy-content">
+              <h4>Plan with an AI chat assistant first</h4>
+              <p>Ask Claude or ChatGPT to break the idea into pages, features, and rough sections — <em>before</em> touching any builder tool.</p>
+            </div>
+          </div>
+          <div class="deploy-step">
+            <div class="deploy-num">3</div>
+            <div class="deploy-content">
+              <h4>Generate the frontend</h4>
+              <p>Use Lovable, Bolt.new, or v0 with a clear prompt describing pages, sections, and style/mood.</p>
+            </div>
+          </div>
+          <div class="deploy-step">
+            <div class="deploy-num">4</div>
+            <div class="deploy-content">
+              <h4>Review the generated structure</h4>
+              <p>Open the file tree, ask AI to explain what each part does. Don't just accept it — understand it.</p>
+            </div>
+          </div>
+          <div class="deploy-step">
+            <div class="deploy-num">5</div>
+            <div class="deploy-content">
+              <h4>Add backend / database if needed</h4>
+              <p>Connect Supabase or Firebase for forms, auth, or stored data. Follow their "quickstart" docs with AI's help.</p>
+            </div>
+          </div>
+          <div class="deploy-step">
+            <div class="deploy-num">6</div>
+            <div class="deploy-content">
+              <h4>Test locally</h4>
+              <p>Click through every button and form. Break things on purpose. What happens when you submit an empty form?</p>
+            </div>
+          </div>
+          <div class="deploy-step">
+            <div class="deploy-num">7</div>
+            <div class="deploy-content">
+              <h4>Debug with the Module 6 loop</h4>
+              <p>Something broke? Read the error, paste it into Claude with context, fix one thing at a time.</p>
+            </div>
+          </div>
+          <div class="deploy-step">
+            <div class="deploy-num">8</div>
+            <div class="deploy-content">
+              <h4>Polish UI/UX</h4>
+              <p>Apply the 6 Module 7 principles. Ask AI: "Is this mobile-responsive? Is the contrast accessible?"</p>
+            </div>
+          </div>
+          <div class="deploy-step">
+            <div class="deploy-num">9</div>
+            <div class="deploy-content">
+              <h4>Deploy to Vercel or Netlify</h4>
+              <p>Push to <a href="https://vercel.com" target="_blank" rel="noopener" style="color:var(--cardinal);">Vercel</a> or <a href="https://netlify.com" target="_blank" rel="noopener" style="color:var(--cardinal);">Netlify</a> for a <strong>free live link in minutes</strong>. Connect a custom domain if desired.</p>
+            </div>
+          </div>
+          <div class="deploy-step">
+            <div class="deploy-num">10</div>
+            <div class="deploy-content">
+              <h4>Share and gather feedback</h4>
+              <p>Send the live link to 2–3 real people. Note what confuses them. Iterate. That's the full loop.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive: Deployment Checklist -->
+        <div class="sandbox-container" id="deployCheckSandbox"
+          style="margin-top:36px; padding:24px; background:var(--card-bg); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); position:relative; overflow:hidden;">
+          <h3 style="margin-top:0; font-family:var(--font-display); color:var(--cardinal-deep); font-size:clamp(1.2rem,1rem+0.8vw,1.45rem);">
+            ✅ Capstone Deployment Checklist</h3>
+          <p style="font-size:0.95rem; color:var(--ink-soft); margin-bottom:20px;">
+            Check off each step as you complete it. Reach 100% to ship your first live website! 🚀</p>
+
+          <div class="checklist-progress-bar">
+            <div class="checklist-progress-fill" id="checklistProgressFill" style="width:0%;"></div>
+          </div>
+          <p style="font-family:var(--font-mono); font-size:0.85rem; color:var(--ink-soft); margin-bottom:18px;">
+            <span id="checklistCount">0</span> / 10 steps complete</p>
+
+          <div class="deploy-checklist" id="deployChecklist">
+            <label class="checklist-item"><input type="checkbox" data-step="1"> <span>💡 I can describe my website idea in one sentence</span></label>
+            <label class="checklist-item"><input type="checkbox" data-step="2"> <span>🤖 I asked Claude/ChatGPT to plan the features and pages</span></label>
+            <label class="checklist-item"><input type="checkbox" data-step="3"> <span>⚡ I opened Lovable/Bolt.new and typed my first prompt</span></label>
+            <label class="checklist-item"><input type="checkbox" data-step="4"> <span>📁 I explored the generated file structure and understand it</span></label>
+            <label class="checklist-item"><input type="checkbox" data-step="5"> <span>🗄️ I connected a database (Supabase/Firebase) or confirmed I don't need one</span></label>
+            <label class="checklist-item"><input type="checkbox" data-step="6"> <span>🧪 I tested every button and form locally</span></label>
+            <label class="checklist-item"><input type="checkbox" data-step="7"> <span>🐛 I fixed at least one bug using the debugging loop</span></label>
+            <label class="checklist-item"><input type="checkbox" data-step="8"> <span>🎨 I checked mobile responsiveness and color contrast</span></label>
+            <label class="checklist-item"><input type="checkbox" data-step="9"> <span>🚀 I deployed to Vercel or Netlify and have a live URL</span></label>
+            <label class="checklist-item"><input type="checkbox" data-step="10"> <span>📨 I shared the live link with at least one real person</span></label>
+          </div>
+
+          <div id="deployCompleteMsg" style="display:none;" class="deploy-complete-msg">
+            🎉 You shipped it! Your first website is live on the internet.
+          </div>
+          <div id="confettiContainer" class="confetti-container" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+       CLOSING RECAP
+       ============================================================ -->
+    <section class="section section-soft" id="closing">
+      <div class="container">
+        <p class="eyebrow">Closing · 5 min</p>
+        <h2>The Full Arc, in One Flow</h2>
+        <p class="lead">This is everything you learned today, collapsed to a single line you can carry with you.</p>
+
+        <div class="recap-flow">
+          <div class="recap-node"><span class="recap-icon">💡</span>Idea</div>
+          <div class="recap-arrow">→</div>
+          <div class="recap-node"><span class="recap-icon">🤖</span>Plan with AI</div>
+          <div class="recap-arrow">→</div>
+          <div class="recap-node"><span class="recap-icon">⚡</span>Build (AI builder)</div>
+          <div class="recap-arrow">→</div>
+          <div class="recap-node"><span class="recap-icon">🗄️</span>Connect data</div>
+          <div class="recap-arrow">→</div>
+          <div class="recap-node"><span class="recap-icon">🐛</span>Debug</div>
+          <div class="recap-arrow">→</div>
+          <div class="recap-node"><span class="recap-icon">🎨</span>Polish UX</div>
+          <div class="recap-arrow">→</div>
+          <div class="recap-node"><span class="recap-icon">🚀</span>Deploy</div>
+          <div class="recap-arrow">→</div>
+          <div class="recap-node"><span class="recap-icon">📨</span>Share</div>
+        </div>
+
+        <!-- Interactive: Idea Board -->
+        <div class="sandbox-container" id="ideaBoardSandbox"
+          style="margin-top:36px; padding:24px; background:var(--card-bg); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow);">
+          <h3 style="margin-top:0; font-family:var(--font-display); color:var(--cardinal-deep); font-size:clamp(1.2rem,1rem+0.8vw,1.45rem);">
+            💭 What Will You Build?</h3>
+          <p style="font-size:0.95rem; color:var(--ink-soft); margin-bottom:18px;">
+            Type one website idea you want to try building — and add it to the idea board. End the session on momentum!</p>
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px;">
+            <input type="text" id="ideaInput" placeholder="e.g. A recipe app for my family's favourite dishes…"
+              style="flex:1; min-width:200px; padding:12px 16px; border:1px solid var(--line); border-radius:var(--radius-sm); font-family:var(--font-body); font-size:0.95rem; background:var(--paper); color:var(--ink); outline:none;">
+            <button class="btn-primary" id="ideaAddBtn" style="padding:12px 22px; font-size:0.9rem;">Add to board 📌</button>
+          </div>
+
+          <div id="ideaBoard" class="idea-board" style="min-height:80px;"></div>
+          <p id="ideaBoardEmpty" style="color:var(--ink-faint); font-style:italic; font-size:0.9rem; margin:12px 0 0 0;">The board is empty — be the first to add an idea!</p>
+        </div>
+
+        <div class="closing-panel" style="margin-top:36px;">
+          <h3>One last thing</h3>
+          <p>You now have the vocabulary, the toolbox, and the workflow. The only missing ingredient is a project to build. Go find one. The internet was built by curious people who figured things out as they went.</p>
+          <div style="margin-top:16px; display:flex; gap:12px; flex-wrap:wrap;">
+            <a href="index.html" class="btn-secondary">← Back to the Field Guide</a>
+            <a href="#resources" class="btn-primary scroll-hint">See all resources →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+       RESOURCE LIST
+       ============================================================ -->
+    <section class="section" id="resources">
+      <div class="container">
+        <p class="eyebrow">Take-Home · Reference</p>
+        <h2>Resource List — Every Tool from Today</h2>
+        <p class="lead">Bookmark this page. These links cover every tool mentioned in the session. Prices and free tiers change fast — always check the site before the session.</p>
+
+        <div class="resource-section">
+          <div class="resource-section-label">
+            <span class="cat-badge cat-a">A</span> Chat Assistants
+          </div>
+          <div class="resource-grid">
+            <a href="https://claude.ai" target="_blank" rel="noopener" class="resource-card">
+              <div class="rc-name">Claude</div>
+              <div class="rc-url">claude.ai</div>
+              <div class="rc-desc">Best reasoning, planning, and code generation. Start here.</div>
+            </a>
+            <a href="https://chatgpt.com" target="_blank" rel="noopener" class="resource-card">
+              <div class="rc-name">ChatGPT</div>
+              <div class="rc-url">chatgpt.com</div>
+              <div class="rc-desc">General-purpose coding help and quick explanations.</div>
+            </a>
+          </div>
+        </div>
+
+        <div class="resource-section">
+          <div class="resource-section-label">
+            <span class="cat-badge cat-b">B</span> Coding Agents / IDEs
+          </div>
+          <div class="resource-grid">
+            <a href="https://claude.com/claude-code" target="_blank" rel="noopener" class="resource-card">
+              <div class="rc-name">Claude Code</div>
+              <div class="rc-url">claude.com/claude-code</div>
+              <div class="rc-desc">Terminal / VS Code agentic coding assistant.</div>
+            </a>
+            <a href="https://cursor.com" target="_blank" rel="noopener" class="resource-card">
+              <div class="rc-name">Cursor</div>
+              <div class="rc-url">cursor.com</div>
+              <div class="rc-desc">AI-native VS Code fork with deep LLM integration.</div>
+            </a>
+            <a href="https://windsurf.com" target="_blank" rel="noopener" class="resource-card">
+              <div class="rc-name">Windsurf</div>
+              <div class="rc-url">windsurf.com</div>
+              <div class="rc-desc">Agentic IDE that understands your whole project.</div>
+            </a>
+            <a href="https://github.com/features/copilot" target="_blank" rel="noopener" class="resource-card">
+              <div class="rc-name">GitHub Copilot</div>
+              <div class="rc-url">github.com/copilot</div>
+              <div class="rc-desc">Autocomplete and inline suggestions in VS Code.</div>
+            </a>
+          </div>
+        </div>
+
+        <div class="resource-section">
+          <div class="resource-section-label">
+            <span class="cat-badge cat-c">C</span> Prompt-to-App Builders
+          </div>
+          <div class="resource-grid">
+            <a href="https://lovable.dev" target="_blank" rel="noopener" class="resource-card resource-card-highlight">
+              <div class="rc-name">Lovable ⭐</div>
+              <div class="rc-url">lovable.dev</div>
+              <div class="rc-desc">Describe your app → full-stack app with database. Best beginner start.</div>
+            </a>
+            <a href="https://bolt.new" target="_blank" rel="noopener" class="resource-card resource-card-highlight">
+              <div class="rc-name">Bolt.new ⭐</div>
+              <div class="rc-url">bolt.new</div>
+              <div class="rc-desc">Prompt-to-code in the browser. Great live demo tool.</div>
+            </a>
+            <a href="https://v0.dev" target="_blank" rel="noopener" class="resource-card">
+              <div class="rc-name">v0 by Vercel</div>
+              <div class="rc-url">v0.dev</div>
+              <div class="rc-desc">Turns prompts into React/Next.js UI components.</div>
+            </a>
+            <a href="https://replit.com" target="_blank" rel="noopener" class="resource-card">
+              <div class="rc-name">Replit</div>
+              <div class="rc-url">replit.com</div>
+              <div class="rc-desc">Build and deploy in the browser. No local setup.</div>
+            </a>
+            <a href="https://figma.com" target="_blank" rel="noopener" class="resource-card">
+              <div class="rc-name">Figma Make</div>
+              <div class="rc-url">figma.com</div>
+              <div class="rc-desc">Design mockups → working prototypes.</div>
+            </a>
+          </div>
+        </div>
+
+        <div class="resource-section">
+          <div class="resource-section-label">🗄️ Backend & Databases</div>
+          <div class="resource-grid">
+            <a href="https://supabase.com" target="_blank" rel="noopener" class="resource-card resource-card-highlight">
+              <div class="rc-name">Supabase ⭐</div>
+              <div class="rc-url">supabase.com</div>
+              <div class="rc-desc">Postgres database, auth, and storage. Best for beginners.</div>
+            </a>
+            <a href="https://firebase.google.com" target="_blank" rel="noopener" class="resource-card">
+              <div class="rc-name">Firebase</div>
+              <div class="rc-url">firebase.google.com</div>
+              <div class="rc-desc">Google's BaaS — real-time database, auth, hosting.</div>
+            </a>
+          </div>
+        </div>
+
+        <div class="resource-section">
+          <div class="resource-section-label">🚀 Deployment</div>
+          <div class="resource-grid">
+            <a href="https://vercel.com" target="_blank" rel="noopener" class="resource-card resource-card-highlight">
+              <div class="rc-name">Vercel ⭐</div>
+              <div class="rc-url">vercel.com</div>
+              <div class="rc-desc">Free hosting for Next.js and static sites. Instant deploy from GitHub.</div>
+            </a>
+            <a href="https://netlify.com" target="_blank" rel="noopener" class="resource-card">
+              <div class="rc-name">Netlify</div>
+              <div class="rc-url">netlify.com</div>
+              <div class="rc-desc">Free hosting for any static site. Drag-and-drop deploy option.</div>
+            </a>
+          </div>
+        </div>
+
+        <div class="resource-section">
+          <div class="resource-section-label">🎨 UI/UX Design</div>
+          <div class="resource-grid">
+            <a href="https://uizard.io" target="_blank" rel="noopener" class="resource-card">
+              <div class="rc-name">Uizard</div>
+              <div class="rc-url">uizard.io</div>
+              <div class="rc-desc">Sketch → polished design mockup with AI.</div>
+            </a>
+          </div>
+        </div>
+
+        <div class="callout callout-gold" style="margin-top:32px;">
+          <p><strong>⚠️ Note:</strong> This space moves fast. Always double-check pricing and free-tier limits on each site before your session — they shift often.</p>
+        </div>
+
+        <div style="text-align:center; margin-top:36px; padding:32px; background:var(--panel); border-radius:var(--radius); border:1px solid var(--line);">
+          <p style="font-size:1.1rem; font-family:var(--font-display); color:var(--cardinal-deep); margin-bottom:16px;">
+            Ready to explore how the chatbot was built?
+          </p>
+          <a href="index.html" class="btn-primary" style="display:inline-flex; align-items:center; gap:8px;">
+            Visit the Field Guide
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <p>AI for Web Development — Session plan for complete beginners. Part of the <a href="index.html" style="color:var(--cardinal);">Field Guide</a> series.</p>
+    </footer>
+
+  </main>
+
+  <script src="ai-webdev.js"></script>
+</body>
+
+</html>
